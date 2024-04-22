@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "1Z65yjCdwaS8/jFbZZqLuh5YxC/7ikKzjl3zEZUPXoqJYvEBAIeSIcZh8Q2beU1r4/UWOM/rYd5grzHBbvVmeA==",
+  "success": true,
+  "projectFilePath": "/home/mehdi/My Projects/Asset Manager/Asset Manager.csproj",
+  "expectedPackageFiles": [
+    "/home/mehdi/.nuget/packages/godot.sourcegenerators/4.2.1/godot.sourcegenerators.4.2.1.nupkg.sha512",
+    "/home/mehdi/.nuget/packages/godotsharp/4.2.1/godotsharp.4.2.1.nupkg.sha512",
+    "/home/mehdi/.nuget/packages/godotsharpeditor/4.2.1/godotsharpeditor.4.2.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,3 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1713781220
+::res://::1713783386
 icon.svg::CompressedTexture2D::7210404106983166849::1713781217::1713781220::1::::<><>::
+main.tscn::PackedScene::1949837644738589930::1713783367::0::1::::<><>::res://TestGetFiles.cs
+TestGetFiles.cs::CSharpScript::-1::1713783365::0::1::::<>RichTextLabel<>::
