@@ -1,2 +1,9 @@
+Label
+TextEdit
+VBoxContainer
+AspectRatioContainer
+Container
+Control
 RichTextLabel
+TabContainer
 ColorRect
