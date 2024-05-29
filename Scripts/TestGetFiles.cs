@@ -13,12 +13,12 @@ public partial class TestGetFiles : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		DirContents(rootPath);
+		// DirContents(rootPath);
 		
-		foreach ( string s in itemsDict.Keys )
-		{
-			itemsDict.Add( s, Instanciate(itemScene, itemParent) );
-		}
+		// foreach ( string s in itemsDict.Keys )
+		// {
+		// 	itemsDict.Add( s, Instanciate(itemScene, itemParent) );
+		// }
 	}
 	
 	
