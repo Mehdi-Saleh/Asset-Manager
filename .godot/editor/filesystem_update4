@@ -1,5 +1,3 @@
-res://main.tscn
 res://Scenes/main.tscn
-res://Scripts/Item.cs
-res://Scripts/TestGetFiles.cs
+res://main.tres
 res://Scenes/item.tscn

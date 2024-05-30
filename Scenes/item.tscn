@@ -1,12 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://lkeeoajpujbv"]
+[gd_scene load_steps=3 format=3 uid="uid://lkeeoajpujbv"]
 
+[ext_resource type="Script" path="res://Scripts/item.gd" id="1_1r5sf"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="1_rfxtr"]
 
-[node name="Item" type="MarginContainer"]
+[node name="Item" type="MarginContainer" node_paths=PackedStringArray("picture", "open_button", "folder_button", "name_text", "type_text", "license_text", "tags_parent")]
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
+script = ExtResource("1_1r5sf")
+picture = NodePath("VBoxContainer/Picture/TextureRect")
+open_button = NodePath("VBoxContainer/Info/VBoxContainer/Buttons/Open")
+folder_button = NodePath("VBoxContainer/Info/VBoxContainer/Buttons/Folder")
+name_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/Name")
+type_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/Type")
+license_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/License")
+tags_parent = NodePath("VBoxContainer/Info/VBoxContainer/Tags")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(280, 340)
@@ -42,17 +51,14 @@ layout_mode = 2
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Info/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/Info/VBoxContainer/Buttons"]
+[node name="Open" type="Button" parent="VBoxContainer/Info/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Opn"
+keep_pressed_outside = true
+text = "Open"
 
-[node name="Button2" type="Button" parent="VBoxContainer/Info/VBoxContainer/Buttons"]
+[node name="Folder" type="Button" parent="VBoxContainer/Info/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Fdr"
-
-[node name="Button3" type="Button" parent="VBoxContainer/Info/VBoxContainer/Buttons"]
-layout_mode = 2
-text = "Del
+text = "Folder
 "
 
 [node name="NameTypeLicense" type="HBoxContainer" parent="VBoxContainer/Info/VBoxContainer"]
