@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cugx6eklcnakn"]
+
+[ext_resource type="StyleBox" uid="uid://cg6to82qxdsvg" path="res://main.tres" id="1_vj1kt"]
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/focus = ExtResource("1_vj1kt")
+Button/styles/hover = ExtResource("1_vj1kt")
+Button/styles/normal = ExtResource("1_vj1kt")
+Button/styles/pressed = ExtResource("1_vj1kt")
+Label/styles/normal = ExtResource("1_vj1kt")

@@ -1,3 +1,5 @@
 res://Scenes/main.tscn
 res://main.tres
+res://Scenes/DatabaseManager.gd
 res://Scenes/item.tscn
+res://Scenes/FileSelector.gd

@@ -1,7 +1,7 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1717058013
+::res://::1717070189
 icon.svg::CompressedTexture2D::7210404106983166849::1713781217::1713781220::1::::<><>::
-main.tres::StyleBoxFlat::5259150539305596768::1717056257::0::1::::<><>::
+main.tres::StyleBoxFlat::5259150539305596768::1717058054::0::1::::<><>::
 README.md::TextFile::-1::1713784018::0::1::::<><>::
 ::res://addons/::1717002649
 ::res://addons/godot-sqlite/::1717002649
@@ -12,9 +12,9 @@ plugin.cfg::TextFile::-1::1717002649::0::1::::<><>::
 ::res://addons/godot-sqlite/bin/::1717002649
 ::res://addons/godot-sqlite/bin/libgdsqlite.macos.template_debug.framework/::1717002649
 ::res://addons/godot-sqlite/bin/libgdsqlite.macos.template_release.framework/::1717002649
-::res://Scenes/::1717057891
-item.tscn::PackedScene::792971804462301835::1717057891::0::1::::<><>::res://Scripts/item.gd<>uid://day1kjlh00lob::::res://icon.svg
-main.tscn::PackedScene::1949837644738589930::1717057822::0::1::::<><>::res://Scripts/ItemsManager.gd<>uid://cg6to82qxdsvg::::res://main.tres<>uid://day1kjlh00lob::::res://icon.svg<>uid://lkeeoajpujbv::::res://Scenes/item.tscn
+::res://Scenes/::1717058083
+item.tscn::PackedScene::792971804462301835::1717058083::0::1::::<><>::res://Scripts/item.gd<>uid://day1kjlh00lob::::res://icon.svg
+main.tscn::PackedScene::1949837644738589930::1717058083::0::1::::<><>::res://Scripts/ItemsManager.gd<>uid://cg6to82qxdsvg::::res://main.tres<>uid://day1kjlh00lob::::res://icon.svg<>uid://lkeeoajpujbv::::res://Scenes/item.tscn
 ::res://Scripts/::1717057891
 item.gd::GDScript::-1::1717057891::0::1::::<>Node<>::
 ItemsManager.gd::GDScript::-1::1717057663::0::1::::<>Node<>::
