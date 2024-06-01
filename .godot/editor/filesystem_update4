@@ -1,5 +1,10 @@
 res://Scenes/main.tscn
 res://main.tres
-res://Scenes/DatabaseManager.gd
 res://Scenes/item.tscn
 res://Scenes/FileSelector.gd
+res://Scripts/TestGetFiles.cs
+res://Scripts/item.gd
+res://Scripts/DatabaseManager.gd
+res://Scripts/FileSelector.gd
+res://Scenes/database_manager.tscn
+res://Scenes/file_selector.tscn

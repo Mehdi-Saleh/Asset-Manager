@@ -1,16 +1,30 @@
 [gd_scene load_steps=7 format=3 uid="uid://21rsnsy3ya8i"]
 
-[ext_resource type="Script" path="res://Scenes/DatabaseManager.gd" id="1_0u7m7"]
 [ext_resource type="Script" path="res://Scripts/ItemsManager.gd" id="2_12pyg"]
 [ext_resource type="Theme" uid="uid://cugx6eklcnakn" path="res://Scenes/MainTheme.tres" id="3_5e3v3"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="3_t0y21"]
 [ext_resource type="PackedScene" uid="uid://lkeeoajpujbv" path="res://Scenes/item.tscn" id="4_adtka"]
-[ext_resource type="Script" path="res://Scenes/FileSelector.gd" id="6_wd84p"]
+[ext_resource type="PackedScene" uid="uid://rklxtaewid7k" path="res://Scenes/file_selector.tscn" id="5_xwh65"]
+
+[sub_resource type="GDScript" id="GDScript_7csg2"]
+script/source = "extends Node
+
+signal open_dialog( import_mode : FileSelector.ImportMode )
+
+
+func _on_generate_new_button_pressed():
+	emit_signal( \"open_dialog\", FileSelector.ImportMode.NEW )
+
+
+func _on_update_button_pressed():
+	emit_signal( \"open_dialog\", FileSelector.ImportMode.UPDATE )
+
+
+func _on_import_button_pressed():
+	emit_signal( \"open_dialog\", FileSelector.ImportMode.ADD )
+"
 
 [node name="Main" type="CanvasLayer"]
-
-[node name="DataManager" type="Node" parent="."]
-script = ExtResource("1_0u7m7")
 
 [node name="ItemsManager" type="Node" parent="."]
 script = ExtResource("2_12pyg")
@@ -142,15 +156,16 @@ theme_override_constants/margin_bottom = 200
 layout_mode = 2
 alignment = 1
 
-[node name="FileSelector" type="Node" parent="TabContainer/Import/MarginContainer/MainMenu" node_paths=PackedStringArray("file_dialog", "address_text")]
-script = ExtResource("6_wd84p")
-file_dialog = NodePath("../Address/AddressText/FileDialog")
-address_text = NodePath("../Address/AddressText")
+[node name="FileSelectorReceiver" type="Node" parent="TabContainer/Import/MarginContainer/MainMenu"]
+script = SubResource("GDScript_7csg2")
+
+[node name="FileSelector" parent="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" instance=ExtResource("5_xwh65")]
 
 [node name="Address" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/MainMenu"]
 layout_mode = 2
 
 [node name="ChooseDirButton" type="Button" parent="TabContainer/Import/MarginContainer/MainMenu/Address"]
+visible = false
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 icon = ExtResource("3_t0y21")
@@ -158,6 +173,7 @@ flat = true
 expand_icon = true
 
 [node name="AddressText" type="TextEdit" parent="TabContainer/Import/MarginContainer/MainMenu/Address"]
+visible = false
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -165,38 +181,34 @@ theme_override_font_sizes/font_size = 25
 placeholder_text = "Address..."
 scroll_fit_content_height = true
 
-[node name="FileDialog" type="FileDialog" parent="TabContainer/Import/MarginContainer/MainMenu/Address/AddressText"]
-title = "Open a File or Directory"
-initial_position = 1
-size = Vector2i(678, 159)
-ok_button_text = "Select"
-file_mode = 3
-access = 2
-use_native_dialog = true
-
 [node name="Spacer" type="Control" parent="TabContainer/Import/MarginContainer/MainMenu"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/MainMenu"]
+[node name="HBoxContainer" type="VBoxContainer" parent="TabContainer/Import/MarginContainer/MainMenu"]
 layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 
 [node name="GenerateNewButton" type="Button" parent="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "New Database"
+size_flags_vertical = 3
+text = "New database from folder"
 
 [node name="UpdateButton" type="Button" parent="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Update Database"
+size_flags_vertical = 3
+text = "Update database from folder"
 
 [node name="ImportButton" type="Button" parent="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Import Asset(s)"
+size_flags_vertical = 3
+text = "Import new assets from folder"
 
-[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/Address/ChooseDirButton" to="TabContainer/Import/MarginContainer/MainMenu/FileSelector" method="_on_choose_dir_button_pressed"]
-[connection signal="dir_selected" from="TabContainer/Import/MarginContainer/MainMenu/Address/AddressText/FileDialog" to="TabContainer/Import/MarginContainer/MainMenu/FileSelector" method="_on_file_dialog_dir_selected"]
-[connection signal="file_selected" from="TabContainer/Import/MarginContainer/MainMenu/Address/AddressText/FileDialog" to="TabContainer/Import/MarginContainer/MainMenu/FileSelector" method="_on_file_dialog_file_selected"]
+[connection signal="open_dialog" from="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver/FileSelector" method="_on_file_selector_receiver_open_dialog"]
+[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/GenerateNewButton" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" method="_on_generate_new_button_pressed"]
+[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/UpdateButton" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" method="_on_update_button_pressed"]
+[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/ImportButton" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" method="_on_import_button_pressed"]

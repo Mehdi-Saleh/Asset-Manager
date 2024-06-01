@@ -1,10 +1,10 @@
 Node
+VBoxContainer
 FileDialog
 HBoxContainer
 Button
 Control
 MarginContainer
-VBoxContainer
 TextEdit
 TabContainer
 PanelContainer

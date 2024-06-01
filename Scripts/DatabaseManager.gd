@@ -28,13 +28,14 @@ func init():
 	database.path = database_path
 	database.open_db()
 	
-	create_tables()
+	#create_tables()
 	
 	#database.close_db()
 
 func create_tables():
-	database.delete_rows(MAIN_TABLE_NAME, "true")
 	# Main table
+	#database.delete_rows(MAIN_TABLE_NAME, "true")
+	database.drop_table( MAIN_TABLE_NAME )
 	database.create_table( MAIN_TABLE_NAME, main_table_template)
 	
 	# Tags table
@@ -43,6 +44,7 @@ func create_tables():
 	
 
 func add_asset( name:String, type:String, license:String, location:String, pic_location:String = "DEFAULT" ):
+	print( name )
 	var data : Dictionary = {
 		"name" : name,
 		"type" : type,

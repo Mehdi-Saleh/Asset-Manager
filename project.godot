@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DatabaseManager="*res://Scenes/database_manager.tscn"
+
 [dotnet]
 
 project/assembly_name="Asset Manager"
