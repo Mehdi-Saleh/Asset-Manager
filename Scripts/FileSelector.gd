@@ -15,6 +15,8 @@ extends Node
 var import_mode : ImportMode
 var selected_address : String
 
+signal should_update_items
+
 #var data : Dictionary
 
 func open_file_dialog():
@@ -79,6 +81,9 @@ func generate_data_dict( path : StringName, clear_tables : bool = true ):
 	#print( "****************\n" )
 	for directory in directories:
 		generate_data_dict( path + "/" + directory, false )
+		
+	if clear_tables:
+		emit_signal( "should_update_items" )
 
 
 func get_file_type( file_name : StringName ) -> StringName:

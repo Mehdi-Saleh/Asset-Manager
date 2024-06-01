@@ -22,3 +22,10 @@ func update_items():
 	var data := DatabaseManager.get_items_from_to( 0, 200 )
 	for row in data:
 		instanciate_item( row["name"], row["type"], row["license"], row["location"], row["pic_location"], PackedStringArray() )
+
+
+func _on_tab_container_tab_selected(tab):
+	if tab == 0:
+		# TODO clear previous items
+		update_items()
+		print( "nsauthsnahutnsahuuahstuhansuhauh" )

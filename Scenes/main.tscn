@@ -196,6 +196,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Import new assets from folder"
 
+[connection signal="tab_selected" from="TabContainer" to="ItemsManager" method="_on_tab_container_tab_selected"]
 [connection signal="open_dialog" from="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver/FileSelector" method="_on_file_selector_receiver_open_dialog"]
 [connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/GenerateNewButton" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" method="_on_generate_new_button_pressed"]
 [connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/UpdateButton" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" method="_on_update_button_pressed"]

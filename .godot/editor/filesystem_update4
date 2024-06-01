@@ -6,3 +6,4 @@ res://Scenes/file_selector.tscn
 res://Scenes/hide_parent_on_ready.tscn
 res://Scripts/item.gd
 res://Scenes/item.tscn
+res://Scripts/FileSelector.gd

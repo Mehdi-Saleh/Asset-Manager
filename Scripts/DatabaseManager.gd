@@ -64,6 +64,10 @@ func remove_asset( location:StringName ):
 	pass
 
 
+#func update_items():
+	#$ItemsManager.update_items()
+
+
 func get_items_all() -> Array[Dictionary]:
 	database.query( "SELECT * FROM " + MAIN_TABLE_NAME + ";" )
 	return database.query_result
