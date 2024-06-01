@@ -1,10 +1,8 @@
 res://Scenes/main.tscn
 res://main.tres
-res://Scenes/item.tscn
-res://Scenes/FileSelector.gd
-res://Scripts/TestGetFiles.cs
-res://Scripts/item.gd
+res://Scripts/ItemsManager.gd
 res://Scripts/DatabaseManager.gd
-res://Scripts/FileSelector.gd
-res://Scenes/database_manager.tscn
 res://Scenes/file_selector.tscn
+res://Scenes/hide_parent_on_ready.tscn
+res://Scripts/item.gd
+res://Scenes/item.tscn

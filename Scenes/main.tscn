@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://21rsnsy3ya8i"]
+[gd_scene load_steps=8 format=3 uid="uid://21rsnsy3ya8i"]
 
 [ext_resource type="Script" path="res://Scripts/ItemsManager.gd" id="2_12pyg"]
 [ext_resource type="Theme" uid="uid://cugx6eklcnakn" path="res://Scenes/MainTheme.tres" id="3_5e3v3"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="3_t0y21"]
 [ext_resource type="PackedScene" uid="uid://lkeeoajpujbv" path="res://Scenes/item.tscn" id="4_adtka"]
+[ext_resource type="PackedScene" uid="uid://dopcw51dsysn0" path="res://Scenes/hide_parent_on_ready.tscn" id="5_iw3a5"]
 [ext_resource type="PackedScene" uid="uid://rklxtaewid7k" path="res://Scenes/file_selector.tscn" id="5_xwh65"]
 
 [sub_resource type="GDScript" id="GDScript_7csg2"]
@@ -26,9 +27,10 @@ func _on_import_button_pressed():
 
 [node name="Main" type="CanvasLayer"]
 
-[node name="ItemsManager" type="Node" parent="."]
+[node name="ItemsManager" type="Node" parent="." node_paths=PackedStringArray("items_parent")]
 script = ExtResource("2_12pyg")
-items = [NodePath("../TabContainer/Browse/VBoxContainer/ScrollContainer/Browse/Item")]
+item_scene = ExtResource("4_adtka")
+items_parent = NodePath("../TabContainer/Browse/VBoxContainer/ScrollContainer/Browse")
 
 [node name="-------------------------------------" type="Node" parent="."]
 
@@ -46,10 +48,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
 
 [node name="Browse" type="HSplitContainer" parent="TabContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("3_5e3v3")
 
@@ -96,20 +96,7 @@ size_flags_vertical = 3
 [node name="Item" parent="TabContainer/Browse/VBoxContainer/ScrollContainer/Browse" instance=ExtResource("4_adtka")]
 layout_mode = 2
 
-[node name="Item2" parent="TabContainer/Browse/VBoxContainer/ScrollContainer/Browse" instance=ExtResource("4_adtka")]
-layout_mode = 2
-
-[node name="Item3" parent="TabContainer/Browse/VBoxContainer/ScrollContainer/Browse" instance=ExtResource("4_adtka")]
-layout_mode = 2
-
-[node name="Item4" parent="TabContainer/Browse/VBoxContainer/ScrollContainer/Browse" instance=ExtResource("4_adtka")]
-layout_mode = 2
-
-[node name="Item5" parent="TabContainer/Browse/VBoxContainer/ScrollContainer/Browse" instance=ExtResource("4_adtka")]
-layout_mode = 2
-
-[node name="Item6" parent="TabContainer/Browse/VBoxContainer/ScrollContainer/Browse" instance=ExtResource("4_adtka")]
-layout_mode = 2
+[node name="HideParentOnReady" parent="TabContainer/Browse/VBoxContainer/ScrollContainer/Browse/Item" instance=ExtResource("5_iw3a5")]
 
 [node name="SidePanel" type="PanelContainer" parent="TabContainer/Browse"]
 visible = false
@@ -141,6 +128,7 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="Import" type="TabContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_5e3v3")
 tabs_visible = false

@@ -31,6 +31,15 @@ func initialize( file_name:StringName, type:StringName, license:StringName, loca
 	# self.tags = tags.ToList();
 
 	# Apply
-	name_text.text = name;
+	name_text.text = file_name;
 	type_text.text = type;
 	license_text.text = license;
+	
+	if type == "Graphic2D":
+		load_thumbnail()
+	
+	
+# Loads thumbnail from given location
+func load_thumbnail():
+	var image = Image.new()
+	picture.texture = ImageTexture.create_from_image( image.load_from_file( location + "/" + file_name ) ) # TODO change to pic_location
