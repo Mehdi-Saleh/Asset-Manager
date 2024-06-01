@@ -4,8 +4,12 @@
 
 [node name="FileSelector" type="Node"]
 script = ExtResource("1_a3yb3")
-graphic_2d_formats = PackedStringArray("png", "svg")
-code_text_formats = PackedStringArray("gd")
+ignore_formats = PackedStringArray("xml", "url")
+graphic_2d_formats = PackedStringArray("png", "gif", "bmp", "jpg", "jpeg", "psd", "xcf", "eps", "ai", "svg")
+graphic_3d_formats = PackedStringArray("fbx", "obj", "blend")
+audio_formats = PackedStringArray("wav", "ogg", "mp3", "wma", "flac", "aac")
+code_text_formats = PackedStringArray("gd", "cs", "c", "cpp", "h", "py")
+info_text_formats = PackedStringArray("txt", "doc", "docx", "xls", "xlsx", "pdf", "json")
 
 [node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a Directory"
