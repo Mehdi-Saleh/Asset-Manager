@@ -10,6 +10,7 @@ extends Node
 @export var license_text : Label
 @export var tags_parent : Node
 
+@export var default_pic_location : StringName
 
 var file_name : StringName
 var type : StringName
@@ -17,10 +18,12 @@ var license : StringName
 var location : StringName
 var pic_location : StringName
 
+var item_id : int = -1 # Used by the item manager for indexing
 
 # Initializes all values and applies them
-func initialize( file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location:StringName, tags:Array):
+func initialize( item_id:int, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location:StringName, tags:Array):
 	# Set values
+	self.item_id = item_id
 	self.file_name = file_name;
 	self.location = location;
 	self.pic_location = pic_location;
@@ -34,12 +37,14 @@ func initialize( file_name:StringName, type:StringName, license:StringName, loca
 	name_text.text = file_name;
 	type_text.text = type;
 	license_text.text = license;
-	
-	if type == "Graphic2D":
-		load_thumbnail()
+	load_thumbnail()	
 	
 	
 # Loads thumbnail from given location
 func load_thumbnail():
 	var image = Image.new()
-	picture.texture = ImageTexture.create_from_image( image.load_from_file( location + "/" + file_name ) ) # TODO change to pic_location
+	#if pic_location != "DEFAULT" and type == "Graphic2D": 
+	if type == "Graphic2D": 
+		picture.texture = ImageTexture.create_from_image( image.load_from_file( location + "/" + file_name ) ) # TODO change to pic_location
+	else:
+		picture.texture = ImageTexture.create_from_image( image.load_from_file( default_pic_location ) )

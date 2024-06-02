@@ -47,7 +47,7 @@ func create_tables():
 	
 
 func add_asset( name:String, type:String, license:String, location:String, pic_location:String = "DEFAULT" ):
-	print( name )
+	#print( name )
 	var data : Dictionary = {
 		"name" : name, # TODO add custom names
 		"real_name" : name,

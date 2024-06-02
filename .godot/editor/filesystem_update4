@@ -1,9 +1,8 @@
-res://Scenes/main.tscn
-res://main.tres
-res://Scripts/ItemsManager.gd
-res://Scripts/DatabaseManager.gd
-res://Scenes/file_selector.tscn
-res://Scenes/hide_parent_on_ready.tscn
-res://Scripts/item.gd
 res://Scenes/item.tscn
-res://Scripts/FileSelector.gd
+res://main.tres
+res://Scripts/item.gd
+res://Scripts/ItemsManager.gd
+res://Scenes/main.tscn
+res://Scripts/FileImporter.gd
+res://Scenes/files_importer.tscn
+res://Scripts/DatabaseManager.gd

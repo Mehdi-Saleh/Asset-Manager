@@ -52,6 +52,7 @@ func import():
 	
 func generate_data_dict( path : StringName, clear_tables : bool = true ):
 	if clear_tables:
+		print( "Importing..." )
 		DatabaseManager.create_tables()
 	
 	var directories : PackedStringArray
@@ -84,6 +85,7 @@ func generate_data_dict( path : StringName, clear_tables : bool = true ):
 		
 	if clear_tables:
 		emit_signal( "should_update_items" )
+		print( "Done!" )
 
 
 func get_file_type( file_name : StringName ) -> StringName:

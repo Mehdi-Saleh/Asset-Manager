@@ -16,6 +16,7 @@ name_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/Name")
 type_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/Type")
 license_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/License")
 tags_parent = NodePath("VBoxContainer/Info/VBoxContainer/Tags")
+default_pic_location = &"res://icon.svg"
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(280, 340)

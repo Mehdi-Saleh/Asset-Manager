@@ -1,11 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://21rsnsy3ya8i"]
+[gd_scene load_steps=9 format=3 uid="uid://21rsnsy3ya8i"]
 
 [ext_resource type="Script" path="res://Scripts/ItemsManager.gd" id="2_12pyg"]
 [ext_resource type="Theme" uid="uid://cugx6eklcnakn" path="res://Scenes/MainTheme.tres" id="3_5e3v3"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="3_t0y21"]
 [ext_resource type="PackedScene" uid="uid://lkeeoajpujbv" path="res://Scenes/item.tscn" id="4_adtka"]
 [ext_resource type="PackedScene" uid="uid://dopcw51dsysn0" path="res://Scenes/hide_parent_on_ready.tscn" id="5_iw3a5"]
-[ext_resource type="PackedScene" uid="uid://rklxtaewid7k" path="res://Scenes/file_selector.tscn" id="5_xwh65"]
+[ext_resource type="PackedScene" uid="uid://rklxtaewid7k" path="res://Scenes/files_importer.tscn" id="6_nckds"]
+
+[sub_resource type="GDScript" id="GDScript_lvsl8"]
+script/source = "extends ScrollContainer
+
+
+# TODO change scroll step based on number of elements
+"
 
 [sub_resource type="GDScript" id="GDScript_7csg2"]
 script/source = "extends Node
@@ -87,6 +94,8 @@ expand_icon = true
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Browse/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
+script = SubResource("GDScript_lvsl8")
 
 [node name="Browse" type="HFlowContainer" parent="TabContainer/Browse/VBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -144,10 +153,10 @@ theme_override_constants/margin_bottom = 200
 layout_mode = 2
 alignment = 1
 
-[node name="FileSelectorReceiver" type="Node" parent="TabContainer/Import/MarginContainer/MainMenu"]
+[node name="FilFilesImporterReceiver" type="Node" parent="TabContainer/Import/MarginContainer/MainMenu"]
 script = SubResource("GDScript_7csg2")
 
-[node name="FileSelector" parent="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" instance=ExtResource("5_xwh65")]
+[node name="FilesImporter" parent="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" instance=ExtResource("6_nckds")]
 
 [node name="Address" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/MainMenu"]
 layout_mode = 2
@@ -197,7 +206,7 @@ size_flags_vertical = 3
 text = "Import new assets from folder"
 
 [connection signal="tab_selected" from="TabContainer" to="ItemsManager" method="_on_tab_container_tab_selected"]
-[connection signal="open_dialog" from="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver/FileSelector" method="_on_file_selector_receiver_open_dialog"]
-[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/GenerateNewButton" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" method="_on_generate_new_button_pressed"]
-[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/UpdateButton" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" method="_on_update_button_pressed"]
-[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/ImportButton" to="TabContainer/Import/MarginContainer/MainMenu/FileSelectorReceiver" method="_on_import_button_pressed"]
+[connection signal="open_dialog" from="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver/FilesImporter" method="_on_file_selector_receiver_open_dialog"]
+[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/GenerateNewButton" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" method="_on_generate_new_button_pressed"]
+[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/UpdateButton" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" method="_on_update_button_pressed"]
+[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/ImportButton" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" method="_on_import_button_pressed"]

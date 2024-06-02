@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://rklxtaewid7k"]
 
-[ext_resource type="Script" path="res://Scripts/FileSelector.gd" id="1_a3yb3"]
+[ext_resource type="Script" path="res://Scripts/FileImporter.gd" id="1_a3yb3"]
 
 [node name="FileSelector" type="Node"]
 script = ExtResource("1_a3yb3")
-ignore_formats = PackedStringArray("xml", "url")
-graphic_2d_formats = PackedStringArray("png", "gif", "bmp", "jpg", "jpeg", "psd", "xcf", "eps", "ai", "svg")
+ignore_formats = PackedStringArray("xml", "url", "import")
+graphic_2d_formats = PackedStringArray("png", "gif", "bmp", "jpg", "jpeg", "eps", "svg")
 graphic_3d_formats = PackedStringArray("fbx", "obj", "blend")
 audio_formats = PackedStringArray("wav", "ogg", "mp3", "wma", "flac", "aac")
 code_text_formats = PackedStringArray("gd", "cs", "c", "cpp", "h", "py")
