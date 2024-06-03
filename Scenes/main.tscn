@@ -34,10 +34,11 @@ func _on_import_button_pressed():
 
 [node name="Main" type="CanvasLayer"]
 
-[node name="ItemsManager" type="Node" parent="." node_paths=PackedStringArray("items_parent")]
+[node name="ItemsManager" type="Node" parent="." node_paths=PackedStringArray("items_parent", "search_text")]
 script = ExtResource("2_12pyg")
 item_scene = ExtResource("4_adtka")
 items_parent = NodePath("../TabContainer/Browse/VBoxContainer/ScrollContainer/Browse")
+search_text = NodePath("../TabContainer/Browse/VBoxContainer/SearchBar/PanelContainer/SearchText")
 
 [node name="-------------------------------------" type="Node" parent="."]
 
@@ -72,17 +73,17 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextEdit" type="TextEdit" parent="TabContainer/Browse/VBoxContainer/SearchBar"]
-custom_minimum_size = Vector2(0, 44.955)
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-placeholder_text = "Search..."
-context_menu_enabled = false
-
 [node name="PanelContainer" type="PanelContainer" parent="TabContainer/Browse/VBoxContainer/SearchBar"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="TabContainer/Browse/VBoxContainer/SearchBar/PanelContainer"]
+[node name="SearchText" type="LineEdit" parent="TabContainer/Browse/VBoxContainer/SearchBar/PanelContainer"]
+custom_minimum_size = Vector2(0, 44.955)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Search Tag(s)..."
+clear_button_enabled = true
+
+[node name="SearchButton" type="Button" parent="TabContainer/Browse/VBoxContainer/SearchBar/PanelContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -206,6 +207,7 @@ size_flags_vertical = 3
 text = "Import new assets from folder"
 
 [connection signal="tab_selected" from="TabContainer" to="ItemsManager" method="_on_tab_container_tab_selected"]
+[connection signal="pressed" from="TabContainer/Browse/VBoxContainer/SearchBar/PanelContainer/SearchButton" to="ItemsManager" method="_on_search_button_pressed"]
 [connection signal="open_dialog" from="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver/FilesImporter" method="_on_file_selector_receiver_open_dialog"]
 [connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/GenerateNewButton" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" method="_on_generate_new_button_pressed"]
 [connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/UpdateButton" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" method="_on_update_button_pressed"]

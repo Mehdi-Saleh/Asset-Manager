@@ -2,13 +2,14 @@ extends Node
 
 @export var item_scene : PackedScene
 @export var items_parent : Node
+@export var search_text : LineEdit
 
 var items_active : Array[Item]
 var items_inactive : Array[Item]
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	update_items()
+#func _ready():
+	#update_items()
 
 func instanciate_item( file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location, tags:PackedStringArray ) -> Item:
 	if items_inactive.is_empty():
@@ -38,16 +39,18 @@ func clear_items():
 	print(items_inactive.size())
 
 
-func update_items():
+func update_items( items : Array[Dictionary] ):
 	clear_items()
-	print(items_inactive.size())
-	var data := DatabaseManager.get_items_from_to( 0, 200 )
-	for row in data:
-		instanciate_item( row["name"], row["type"], row["license"], row["location"], row["pic_location"], PackedStringArray() )
+	for item in items:
+		instanciate_item( item["name"], item["type"], item["license"], item["location"], item["pic_location"], PackedStringArray() )
 
 
-func _on_tab_container_tab_selected(tab):
-	if tab == 0:
-		# TODO clear previous items
-		update_items()
-		print( "nsauthsnahutnsahuuahstuhansuhauh" )
+#func _on_tab_container_tab_selected(tab):
+	#if tab == 0:
+		#update_items()
+
+
+func _on_search_button_pressed():
+	var tags := search_text.text.split( " ", false )
+	update_items( DatabaseManager.get_items_by_tag( tags ) )
+	

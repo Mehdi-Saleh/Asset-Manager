@@ -36,10 +36,9 @@ var database : SQLite
 func _ready():
 	init()
 	
-	#print( get_item_id( "tile_tree.png" ) )
-	#add_tag( "Cool", 5 )
-	#add_tag( "Cool", 7 )
-	#add_tag( "NotCool", 6 )
+	var t := get_items_by_id( get_ids_by_tag( [ "Cool", ]) )
+	for i in t:
+		print( i[ "name" ] )
 	
 	#add_asset("anutsh", "aotnuehs", "theo", "ouuo")
 
@@ -49,10 +48,7 @@ func init():
 	database = SQLite.new()
 	database.path = database_path
 	database.open_db()
-	
-	#create_tables()
-	
-	#database.close_db()
+
 
 func create_tables():
 	# Main table
@@ -109,27 +105,43 @@ func remove_asset( location:StringName ):
 func get_items_all() -> Array[Dictionary]:
 	database.query( "SELECT * FROM " + MAIN_TABLE_NAME + ";" )
 	return database.query_result
+	
 
+func get_ids_by_tag( tags : PackedStringArray ) -> PackedInt32Array:
+	var array_string := array_to_sql_list( str( tags ) )
+	
+	database.query( 
+		"SELECT id_main 
+		FROM " + MAIN_TAGS_TABLE_NAME + " JOIN " + TAGS_TABLE_NAME + 
+		" ON " + MAIN_TAGS_TABLE_NAME + ".id_tag = " + TAGS_TABLE_NAME + ".id 
+		WHERE tag IN " + array_string + ";" )
+	
+	var ids : PackedInt32Array
+	for id in database.query_result:
+		ids.append( id[ "id_main" ] )
+	
+	return ids
+	
+func get_items_by_id( ids : PackedInt32Array ) -> Array[Dictionary]:
+	print( ids )
+	var array_string := array_to_sql_list( str( ids ) )
+	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE id IN" + array_string + ";")
+	return database.query_result
+
+func get_items_by_tag( tags : PackedStringArray ) -> Array[Dictionary]:
+	return get_items_by_id( get_ids_by_tag( tags ) )
 
 func get_items_from_to( from:int, to:int ) -> Array[Dictionary]:
 	database.query( "SELECT * FROM " + MAIN_TABLE_NAME + " WHERE id>=" + str(from) + " AND id<" + str(to) + ";" )
 	return database.query_result
+	
 	
 func get_item_id( real_name:StringName ):
 	database.query( "SELECT id FROM " + MAIN_TABLE_NAME + " WHERE real_name=\"" + real_name + "\";" )
 	return database.query_result.front()[ "id" ]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+func array_to_sql_list( array_string : String ) -> String:
+	array_string = array_string.replace( "[", "(" )
+	array_string = array_string.replace( "]", ")" )
+	return array_string

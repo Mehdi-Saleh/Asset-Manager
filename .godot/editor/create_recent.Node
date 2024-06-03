@@ -1,3 +1,4 @@
+LineEdit
 Node
 VBoxContainer
 FileDialog
@@ -11,4 +12,3 @@ PanelContainer
 ScrollContainer
 TextureRect
 Container
-Panel
