@@ -1,4 +1,4 @@
-class_name FileSelector
+class_name FileImporter
 extends Node
 
 @onready var file_dialog : FileDialog = $FileDialog
@@ -38,9 +38,8 @@ func import():
 		ImportMode.NEW:
 			generate_data_dict( selected_address )
 		ImportMode.UPDATE:
-			pass
-		ImportMode.ADD:
-			pass
+			generate_data_dict( selected_address, false)
+
 
 		#// DirContents(rootPath);
 		#
@@ -50,47 +49,47 @@ func import():
 		#// }
 	
 	
-func generate_data_dict( path : StringName, clear_tables : bool = true ):
+func generate_data_dict( path : StringName, clear_tables : bool = true, is_sub_generation : bool = false ):
 	if clear_tables:
-		print( "Importing..." )
 		DatabaseManager.create_tables()
+	if not is_sub_generation:
+		print( "Importing..." )
 	
 	var directories : PackedStringArray
 	
 	var text : String = ""
-	#using var dir = DirAccess.Open(path);
+
 	var dir := DirAccess.open(path)
 	if dir != null:
 		dir.list_dir_begin()
 		var file_name : String = dir.get_next();
 		while file_name != "":
 			if dir.current_is_dir():
-				#print( "directory --> " + file_name + "\n" )
 				directories.append( file_name )
 			else:
-				#print( "-->" + file_name + "\n" )
 				text += "-->" + file_name + "\n"
-				#data[file_name] = Item.new()
 				var file_type : StringName = get_file_type( file_name )
-				#if file_type != "IGNORE":
-				DatabaseManager.add_asset( file_name, file_type, "NONE", path )
+				if file_type != "IGNORE":
+					DatabaseManager.add_asset( file_name, file_type, "NONE", path )
 			file_name = dir.get_next()
-	#else:
-		#print("An error occurred when trying to access the path.")
+	else:
+		assert("An error occurred when trying to access the path.")
 		
-		
-	#print( "****************\n" )
 	for directory in directories:
-		generate_data_dict( path + "/" + directory, false )
+		generate_data_dict( path + "/" + directory, false, true )
 		
-	if clear_tables:
+	if not is_sub_generation:
 		emit_signal( "should_update_items" )
 		print( "Done!" )
 
 
 func get_file_type( file_name : StringName ) -> StringName:
-	var format : String = file_name.get_slice( ".", file_name.get_slice_count( "." ) - 1 )
-	#print( format )
+	var format : String
+	if file_name.find( "." ) == -1:
+		format = ""
+	else:
+		format = file_name.get_slice( ".", file_name.get_slice_count( "." ) - 1 )
+
 	if format in ignore_formats:
 		return "IGNORE"
 	elif format in audio_formats:
@@ -106,32 +105,6 @@ func get_file_type( file_name : StringName ) -> StringName:
 	else:
 		return "NONE"
 	
-
-	
-#func set_address( dir:StringName ):
-	#selected_address = dir
-
-#
-#func _on_choose_dir_button_pressed():
-	#open_file_dialog()
-
-
-# Buttons
-
-#func _on_generate_new_button_pressed():
-	#import_mode = ImportMode.NEW
-	#open_file_dialog()
-	##file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
-#
-#
-#func _on_update_button_pressed():
-	#import_mode = ImportMode.UPDATE
-	#open_file_dialog()
-#
-#
-#func _on_import_button_pressed():
-	#import_mode = ImportMode.ADD
-	#open_file_dialog()
 
 # File dialog
 
@@ -153,7 +126,6 @@ func _on_file_selector_receiver_open_dialog( import_mode : ImportMode ):
 enum ImportMode {
 	NEW,
 	UPDATE,
-	ADD
 }
 
 

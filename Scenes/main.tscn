@@ -17,19 +17,16 @@ script/source = "extends ScrollContainer
 [sub_resource type="GDScript" id="GDScript_7csg2"]
 script/source = "extends Node
 
-signal open_dialog( import_mode : FileSelector.ImportMode )
+signal open_dialog( import_mode : FileImporter.ImportMode )
 
 
 func _on_generate_new_button_pressed():
-	emit_signal( \"open_dialog\", FileSelector.ImportMode.NEW )
+	emit_signal( \"open_dialog\", FileImporter.ImportMode.NEW )
 
 
 func _on_update_button_pressed():
-	emit_signal( \"open_dialog\", FileSelector.ImportMode.UPDATE )
+	emit_signal( \"open_dialog\", FileImporter.ImportMode.UPDATE )
 
-
-func _on_import_button_pressed():
-	emit_signal( \"open_dialog\", FileSelector.ImportMode.ADD )
 "
 
 [node name="Main" type="CanvasLayer"]
@@ -56,8 +53,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 1
 
 [node name="Browse" type="HSplitContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_5e3v3")
 
@@ -138,7 +137,6 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="Import" type="TabContainer" parent="TabContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("3_5e3v3")
 tabs_visible = false
@@ -158,6 +156,7 @@ alignment = 1
 script = SubResource("GDScript_7csg2")
 
 [node name="FilesImporter" parent="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" instance=ExtResource("6_nckds")]
+ignore_formats = PackedStringArray("", "xml", "url", "import")
 
 [node name="Address" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/MainMenu"]
 layout_mode = 2
@@ -198,17 +197,10 @@ text = "New database from folder"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Update database from folder"
-
-[node name="ImportButton" type="Button" parent="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Import new assets from folder"
+text = "Update database / Import new assets"
 
 [connection signal="tab_selected" from="TabContainer" to="ItemsManager" method="_on_tab_container_tab_selected"]
 [connection signal="pressed" from="TabContainer/Browse/VBoxContainer/SearchBar/PanelContainer/SearchButton" to="ItemsManager" method="_on_search_button_pressed"]
 [connection signal="open_dialog" from="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver/FilesImporter" method="_on_file_selector_receiver_open_dialog"]
 [connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/GenerateNewButton" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" method="_on_generate_new_button_pressed"]
 [connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/UpdateButton" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" method="_on_update_button_pressed"]
-[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/ImportButton" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" method="_on_import_button_pressed"]

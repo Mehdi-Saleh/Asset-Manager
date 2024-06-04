@@ -34,9 +34,7 @@ func clear_items():
 	for i in range( items_active.size()-1, -1, -1):
 		items_active[i].hide()
 		items_inactive.append( items_active[i] )
-	#items_inactive.append_array( items_active )
 	items_active.clear()
-	print(items_inactive.size())
 
 
 func update_items( items : Array[Dictionary] ):

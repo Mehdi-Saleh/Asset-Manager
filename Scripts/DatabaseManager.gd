@@ -35,12 +35,6 @@ var database : SQLite
 
 func _ready():
 	init()
-	
-	var t := get_items_by_id( get_ids_by_tag( [ "Cool", ]) )
-	for i in t:
-		print( i[ "name" ] )
-	
-	#add_asset("anutsh", "aotnuehs", "theo", "ouuo")
 
 
 # Initializes the database on start
@@ -66,7 +60,6 @@ func create_tables():
 	database.create_table( NEW_TABLE_NAME, new_table_template)
 
 func add_asset( name:String, type:String, license:String, location:String, pic_location:String = "DEFAULT" ):
-	#print( name )
 	var data : Dictionary = {
 		"name" : name, # TODO add custom names
 		"real_name" : name,
@@ -75,7 +68,11 @@ func add_asset( name:String, type:String, license:String, location:String, pic_l
 		"location" : location,
 		"pic_location" : pic_location,
 	}
-	database.insert_row( MAIN_TABLE_NAME, data )
+	
+	# Don't add item if it already exists
+	database.query( " Select id FROM " + MAIN_TABLE_NAME + " WHERE real_name=\"" + name + "\" AND location=\"" + location + "\" ;" )
+	if not database.query_result.size() > 0:
+		database.insert_row( MAIN_TABLE_NAME, data )
 	
 	#var id : int = get_item_id( name )
 	#for tag in tags:
@@ -83,7 +80,6 @@ func add_asset( name:String, type:String, license:String, location:String, pic_l
 	
 	
 func add_tag( tag:StringName, id_main:int ):
-	#pass
 	database.query( "SELECT id FROM " + TAGS_TABLE_NAME + " WHERE tag=\"" + tag + "\";" )
 	if database.query_result.size() == 0:
 		database.insert_row( TAGS_TABLE_NAME, { "tag":str(tag) } )
@@ -97,9 +93,7 @@ func add_tag( tag:StringName, id_main:int ):
 func remove_asset( location:StringName ):
 	pass
 
-
-#func update_items():
-	#$ItemsManager.update_items()
+# TODO update item
 
 
 func get_items_all() -> Array[Dictionary]:
