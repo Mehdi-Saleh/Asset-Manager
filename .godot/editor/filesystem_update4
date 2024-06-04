@@ -1,7 +1,4 @@
 res://Scenes/main.tscn
 res://main.tres
-res://Scenes/item.tscn
-res://Scenes/files_importer.tscn
-res://Scripts/FileImporter.gd
-res://Scripts/DatabaseManager.gd
+res://Scripts/item.gd
 res://Scripts/ItemsManager.gd

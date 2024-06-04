@@ -20,7 +20,7 @@ var pic_location : StringName
 
 var item_id : int = -1 # Used by the item manager for indexing
 
-# Initializes all values and applies them
+## Initializes all values and applies them to the item object.
 func initialize( item_id:int, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location:StringName, tags:Array):
 	# Set values
 	self.item_id = item_id
@@ -30,6 +30,7 @@ func initialize( item_id:int, file_name:StringName, type:StringName, license:Str
 	self.type = type;
 	self.license = license;
 
+	# TODO tags
 	# self.tags.Clear();
 	# self.tags = tags.ToList();
 
@@ -40,10 +41,10 @@ func initialize( item_id:int, file_name:StringName, type:StringName, license:Str
 	load_thumbnail()	
 	
 	
-# Loads thumbnail from given location
+# TODO thumbnail generation
+## Loads thumbnail from pic_location.
 func load_thumbnail():
 	var image = Image.new()
-	#if pic_location != "DEFAULT" and type == "Graphic2D": 
 	if type == "Graphic2D": 
 		picture.texture = ImageTexture.create_from_image( image.load_from_file( location + "/" + file_name ) ) # TODO change to pic_location
 	else:

@@ -7,29 +7,31 @@ extends Node
 var items_active : Array[Item]
 var items_inactive : Array[Item]
 
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-	#update_items()
 
+## Instanciates a new item object with the given values. (Objects are pooled.)
 func instanciate_item( file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location, tags:PackedStringArray ) -> Item:
+	# Create a new item object if none are available
 	if items_inactive.is_empty():
 		items_inactive.append( item_scene.instantiate() )
 		items_parent.add_child( items_inactive.back() )
 	
 	var new_item : Item = items_inactive.pop_back()
 		
+	# Initialize the item
 	new_item.initialize( items_active.size(), file_name, type, license, location, pic_location, tags )
 	new_item.show()
 	items_active.append( new_item )
 	return new_item
 
 
+## Disables the given item objects and adds it back to the pool.
 func remove_item( item : Item ):
 	items_active.remove_at( item.item_id )
 	items_inactive.append( item )
 	item.hide()
 	
 
+## Disables all active item objects and adds them back to the pool.
 func clear_items():
 	for i in range( items_active.size()-1, -1, -1):
 		items_active[i].hide()
@@ -37,6 +39,7 @@ func clear_items():
 	items_active.clear()
 
 
+## Clears and re-instanciates all item objects.
 func update_items( items : Array[Dictionary] ):
 	clear_items()
 	for item in items:
