@@ -2,3 +2,4 @@ res://Scenes/main.tscn
 res://main.tres
 res://Scenes/item.tscn
 res://Scenes/files_importer.tscn
+res://Scripts/SidePanel.gd
