@@ -148,52 +148,79 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 200
 
-[node name="MainMenu" type="VBoxContainer" parent="TabContainer/Import/MarginContainer"]
+[node name="Menu" type="VBoxContainer" parent="TabContainer/Import/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="FilFilesImporterReceiver" type="Node" parent="TabContainer/Import/MarginContainer/MainMenu"]
+[node name="FilFilesImporterReceiver" type="Node" parent="TabContainer/Import/MarginContainer/Menu"]
 script = SubResource("GDScript_7csg2")
 
-[node name="FilesImporter" parent="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" instance=ExtResource("6_nckds")]
+[node name="FilesImporter" parent="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver" instance=ExtResource("6_nckds")]
 ignore_formats = PackedStringArray("", "xml", "url", "import")
 
-[node name="Address" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/MainMenu"]
-layout_mode = 2
-
-[node name="ChooseDirButton" type="Button" parent="TabContainer/Import/MarginContainer/MainMenu/Address"]
-visible = false
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-icon = ExtResource("3_t0y21")
-flat = true
-expand_icon = true
-
-[node name="AddressText" type="TextEdit" parent="TabContainer/Import/MarginContainer/MainMenu/Address"]
-visible = false
-custom_minimum_size = Vector2(200, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-placeholder_text = "Address..."
-scroll_fit_content_height = true
-
-[node name="Spacer" type="Control" parent="TabContainer/Import/MarginContainer/MainMenu"]
+[node name="Spacer" type="Control" parent="TabContainer/Import/MarginContainer/Menu"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="TabContainer/Import/MarginContainer/MainMenu"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/Menu"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Options" type="VBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Import Options
+"
+
+[node name="PanelContainer" type="VBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "Add tags to all:
+"
+
+[node name="Label3" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "Set license for all:
+"
+
+[node name="Label4" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "Remove file formats from names:
+"
+
+[node name="Label5" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "Replace x with y in names:"
+
+[node name="Buttons" type="VBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
 alignment = 1
 
-[node name="GenerateNewButton" type="Button" parent="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer"]
+[node name="GenerateNewButton" type="Button" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "New database from folder"
 
-[node name="UpdateButton" type="Button" parent="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer"]
+[node name="UpdateButton" type="Button" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -201,6 +228,6 @@ text = "Update database / Import new assets"
 
 [connection signal="tab_selected" from="TabContainer" to="ItemsManager" method="_on_tab_container_tab_selected"]
 [connection signal="pressed" from="TabContainer/Browse/VBoxContainer/SearchBar/PanelContainer/SearchButton" to="ItemsManager" method="_on_search_button_pressed"]
-[connection signal="open_dialog" from="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver/FilesImporter" method="_on_file_selector_receiver_open_dialog"]
-[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/GenerateNewButton" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" method="_on_generate_new_button_pressed"]
-[connection signal="pressed" from="TabContainer/Import/MarginContainer/MainMenu/HBoxContainer/UpdateButton" to="TabContainer/Import/MarginContainer/MainMenu/FilFilesImporterReceiver" method="_on_update_button_pressed"]
+[connection signal="open_dialog" from="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver" to="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver/FilesImporter" method="_on_file_selector_receiver_open_dialog"]
+[connection signal="pressed" from="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Buttons/GenerateNewButton" to="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver" method="_on_generate_new_button_pressed"]
+[connection signal="pressed" from="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Buttons/UpdateButton" to="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver" method="_on_update_button_pressed"]
