@@ -170,57 +170,126 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options"]
+[node name="Title" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Import Options
 "
 
-[node name="PanelContainer" type="VBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options"]
+[node name="Spacer" type="Control" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options"]
+layout_mode = 2
+
+[node name="Options" type="VBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/PanelContainer"]
+[node name="TagOption" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/TagOption"]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 25
 text = "Add tags to all:
 "
 
-[node name="Label3" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/PanelContainer"]
+[node name="TextEdit" type="TextEdit" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/TagOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Tag1 Tag2 ..."
+
+[node name="LicenseOption" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/LicenseOption"]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 25
 text = "Set license for all:
 "
 
-[node name="Label4" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/PanelContainer"]
+[node name="LineEdit" type="LineEdit" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/LicenseOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "eg. CC0"
+
+[node name="RemoveFormatsOption" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/RemoveFormatsOption"]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 25
 text = "Remove file formats from names:
 "
 
-[node name="Label5" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/PanelContainer"]
+[node name="CheckButton" type="CheckButton" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/RemoveFormatsOption"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="ReplaceOption" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/ReplaceOption"]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 25
-text = "Replace x with y in names:"
+text = "Replace "
 
-[node name="Buttons" type="VBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2"]
+[node name="LineEdit" type="LineEdit" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/ReplaceOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "text"
+
+[node name="Label6" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/ReplaceOption"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "with "
+
+[node name="LineEdit2" type="LineEdit" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/ReplaceOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "new text"
+
+[node name="Label7" type="Label" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/ReplaceOption"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "in all names."
+
+[node name="CheckButton" type="CheckButton" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Options/ReplaceOption"]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.6
 alignment = 1
 
-[node name="GenerateNewButton" type="Button" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Buttons"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+
+[node name="GenerateNewButton" type="Button" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Buttons/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "New database from folder"
 
-[node name="UpdateButton" type="Button" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Buttons"]
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+
+[node name="UpdateButton" type="Button" parent="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Buttons/MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -229,5 +298,5 @@ text = "Update database / Import new assets"
 [connection signal="tab_selected" from="TabContainer" to="ItemsManager" method="_on_tab_container_tab_selected"]
 [connection signal="pressed" from="TabContainer/Browse/VBoxContainer/SearchBar/PanelContainer/SearchButton" to="ItemsManager" method="_on_search_button_pressed"]
 [connection signal="open_dialog" from="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver" to="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver/FilesImporter" method="_on_file_selector_receiver_open_dialog"]
-[connection signal="pressed" from="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Buttons/GenerateNewButton" to="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver" method="_on_generate_new_button_pressed"]
-[connection signal="pressed" from="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Buttons/UpdateButton" to="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver" method="_on_update_button_pressed"]
+[connection signal="pressed" from="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Buttons/MarginContainer/GenerateNewButton" to="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver" method="_on_generate_new_button_pressed"]
+[connection signal="pressed" from="TabContainer/Import/MarginContainer/Menu/HBoxContainer2/Options/Buttons/MarginContainer2/UpdateButton" to="TabContainer/Import/MarginContainer/Menu/FilFilesImporterReceiver" method="_on_update_button_pressed"]
