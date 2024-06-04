@@ -12,22 +12,26 @@ extends Node
 @export var code_text_formats : PackedStringArray
 @export var info_text_formats : PackedStringArray
 
-var import_mode : ImportMode
-var selected_address : String
 
-signal should_update_items
+var import_mode : ImportMode ## New clears all the tables before importing but Updates does not clear anything.
+var _selected_address : String
 
-#var data : Dictionary
+signal should_update_items ## Emitted after importing data as the browse tab needs to be updated then.
 
-func open_file_dialog():
+
+## Opens the file dialog for selecting a directory.
+func _open_file_dialog():
 	file_dialog.show()
 	
-func close_file_dialog():
+
+## Closes the file dialog.
+func _close_file_dialog():
 	file_dialog.hide()
 	
 
+## Imports all data in the chosen directory in respect to import_mode.
 func import():
-	var root_path := selected_address
+	var root_path := _selected_address
 	
 	# TODO spawn items in some other node
 	#[Export] public Node itemParent;
@@ -36,26 +40,19 @@ func import():
 	
 	match import_mode:
 		ImportMode.NEW:
-			generate_data_dict( selected_address )
+			generate_data_dict( _selected_address, true )
 		ImportMode.UPDATE:
-			generate_data_dict( selected_address, false)
+			generate_data_dict( _selected_address, false)
 
 
-		#// DirContents(rootPath);
-		#
-		#// foreach ( string s in itemsDict.Keys )
-		#// {
-		#// 	itemsDict.Add( s, Instanciate(itemScene, itemParent) );
-		#// }
-	
-	
-func generate_data_dict( path : StringName, clear_tables : bool = true, is_sub_generation : bool = false ):
+## Adds assets in the given path to the database. Clears all tables if clear_tables is set to true.
+func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub_generation : bool = false ):
 	if clear_tables:
 		DatabaseManager.create_tables()
-	if not is_sub_generation:
+	if not _is_sub_generation:
 		print( "Importing..." )
 	
-	var directories : PackedStringArray
+	var directories : PackedStringArray # Array of every sub-directory that needs to be scanned as well
 	
 	var text : String = ""
 
@@ -75,14 +72,17 @@ func generate_data_dict( path : StringName, clear_tables : bool = true, is_sub_g
 	else:
 		assert("An error occurred when trying to access the path.")
 		
+	# Extract data from the sub-directories
 	for directory in directories:
 		generate_data_dict( path + "/" + directory, false, true )
 		
-	if not is_sub_generation:
+	if not _is_sub_generation:
 		emit_signal( "should_update_items" )
 		print( "Done!" )
 
 
+# TODO read types from a json file
+## Returns the file type of a given file name based on the file format.
 func get_file_type( file_name : StringName ) -> StringName:
 	var format : String
 	if file_name.find( "." ) == -1:
@@ -106,14 +106,15 @@ func get_file_type( file_name : StringName ) -> StringName:
 		return "NONE"
 	
 
-# File dialog
-
+# **File dialog**
+## Opens the file dialog and sets the import_mode.
 func show_file_dialog( import_mode : ImportMode ):
 	self.import_mode = import_mode
-	open_file_dialog()
+	_open_file_dialog()
+
 
 func _on_file_dialog_dir_selected(dir):
-	selected_address = dir
+	_selected_address = dir
 	import()
 
 
@@ -122,7 +123,7 @@ func _on_file_selector_receiver_open_dialog( import_mode : ImportMode ):
 	
 
 
-
+## All possible import modes
 enum ImportMode {
 	NEW,
 	UPDATE,
