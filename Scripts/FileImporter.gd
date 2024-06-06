@@ -22,7 +22,7 @@ extends Node
 var import_mode : ImportMode ## New clears all the tables before importing but Updates does not clear anything.
 var _selected_address : String
 
-signal should_update_items ## Emitted after importing data as the browse tab needs to be updated then.
+#signal should_update_items ## Emitted after importing data as the browse tab needs to be updated then.
 
 
 func _ready():
@@ -84,7 +84,7 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 		generate_data_dict( path + "/" + directory, false, true )
 		
 	if not _is_sub_generation:
-		emit_signal( "should_update_items" )
+		SignalBus.receive_signal( "show_all_items" )
 		print( "Done!" )
 
 

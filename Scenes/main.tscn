@@ -8,8 +8,9 @@ script/source = "extends TabContainer
 
 
 func _on_tab_changed( tab : int ):
-	if tab == 0:
-		SignalBus.receive_signal( \"show_all_items\" )
+	#if tab == 0:
+		#SignalBus.receive_signal( \"show_all_items\", [ false, ] )
+		pass
 "
 
 [node name="Main" type="CanvasLayer"]
