@@ -1,5 +1,8 @@
-MarginContainer
+TextureRect
 Button
+Panel
+Node
+MarginContainer
 HBoxContainer
 Label
 HFlowContainer
@@ -10,5 +13,3 @@ Control
 RichTextLabel
 VBoxContainer
 PanelContainer
-Node
-FileDialog

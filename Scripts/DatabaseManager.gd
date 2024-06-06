@@ -80,6 +80,8 @@ func add_asset( name:String, type:String, license:String, location:String, pic_l
 	if not database.query_result.size() > 0:
 		database.insert_row( MAIN_TABLE_NAME, data )
 	
+	
+	
 	# TODO
 	#var id : int = get_item_id( name )
 	#for tag in tags:
@@ -135,6 +137,12 @@ func get_items_by_id( ids : PackedInt32Array ) -> Array[Dictionary]:
 	var array_string := array_to_sql_list( str( ids ) )
 	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE id IN" + array_string + ";")
 	return database.query_result
+
+
+## Returns the item using the given id.
+func get_item_by_id( id : int ) -> Dictionary:
+	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE id =" + str( id ) + ";")
+	return database.query_result.front()
 
 
 ## Returns every item that has one or more of the given tags

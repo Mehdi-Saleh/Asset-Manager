@@ -1,0 +1,180 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnrg3jjhfpnpd"]
+
+[ext_resource type="Theme" uid="uid://cugx6eklcnakn" path="res://Scenes/MainTheme.tres" id="1_38gha"]
+[ext_resource type="PackedScene" uid="uid://rklxtaewid7k" path="res://Scenes/files_importer.tscn" id="2_sqgxq"]
+
+[sub_resource type="GDScript" id="GDScript_5le2n"]
+script/source = "extends Button
+
+
+func _on_pressed():
+	SignalBus.receive_signal( \"generate_new_database\" )
+"
+
+[sub_resource type="GDScript" id="GDScript_ey2am"]
+script/source = "extends Button
+
+
+func _on_pressed():
+	SignalBus.receive_signal( \"update_database\" )
+"
+
+[node name="ImportTab" type="TabContainer"]
+theme = ExtResource("1_38gha")
+tabs_visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 200
+
+[node name="Menu" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FilesImporter" parent="MarginContainer/Menu" instance=ExtResource("2_sqgxq")]
+ignore_formats = PackedStringArray("", "xml", "url", "import")
+
+[node name="Spacer" type="Control" parent="MarginContainer/Menu"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OptionsAndButtons" type="VBoxContainer" parent="MarginContainer/Menu/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Import Options
+"
+
+[node name="Spacer" type="Control" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons"]
+layout_mode = 2
+
+[node name="Options" type="VBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TagOption" type="HBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/TagOption"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "Add tags to all:
+"
+
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/TagOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Tag1 Tag2 ..."
+
+[node name="LicenseOption" type="HBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/LicenseOption"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "Set license for all:
+"
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/LicenseOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "eg. CC0"
+
+[node name="RemoveFormatsOption" type="HBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/RemoveFormatsOption"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "Remove file formats from names:
+"
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/RemoveFormatsOption"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="ReplaceOption" type="HBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "Replace "
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "text"
+
+[node name="Label6" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "with "
+
+[node name="LineEdit2" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "new text"
+
+[node name="Label7" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 25
+text = "in all names."
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+
+[node name="GenerateNewButton" type="Button" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "New database from folder"
+script = SubResource("GDScript_5le2n")
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+
+[node name="UpdateButton" type="Button" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Update database / Import new assets"
+script = SubResource("GDScript_ey2am")
+
+[connection signal="pressed" from="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons/MarginContainer/GenerateNewButton" to="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons/MarginContainer/GenerateNewButton" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons/MarginContainer2/UpdateButton" to="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons/MarginContainer2/UpdateButton" method="_on_pressed"]

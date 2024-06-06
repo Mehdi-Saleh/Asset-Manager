@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 DatabaseManager="*res://Scenes/database_manager.tscn"
+SignalBus="*res://Scenes/signal_bus.tscn"
 
 [dotnet]
 

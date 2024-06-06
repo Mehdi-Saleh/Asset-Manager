@@ -1,3 +1,4 @@
+class_name ItemsManager
 extends Node
 
 @export var item_scene : PackedScene
@@ -8,8 +9,14 @@ var items_active : Array[Item]
 var items_inactive : Array[Item]
 
 
+func _ready():
+	SignalBus.items_manager = self
+	
+	SignalBus.receive_signal( "show_all_items" )
+
+
 ## Instanciates a new item object with the given values. (Objects are pooled.)
-func instanciate_item( file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location, tags:PackedStringArray ) -> Item:
+func instanciate_item( item_id:int, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location, tags:PackedStringArray ) -> Item:
 	# Create a new item object if none are available
 	if items_inactive.is_empty():
 		items_inactive.append( item_scene.instantiate() )
@@ -18,7 +25,7 @@ func instanciate_item( file_name:StringName, type:StringName, license:StringName
 	var new_item : Item = items_inactive.pop_back()
 		
 	# Initialize the item
-	new_item.initialize( items_active.size(), file_name, type, license, location, pic_location, tags )
+	new_item.initialize( item_id, file_name, type, license, location, pic_location, tags )
 	new_item.show()
 	items_active.append( new_item )
 	return new_item
@@ -43,7 +50,7 @@ func clear_items():
 func update_items( items : Array[Dictionary] ):
 	clear_items()
 	for item in items:
-		instanciate_item( item["name"], item["type"], item["license"], item["location"], item["pic_location"], PackedStringArray() )
+		instanciate_item( item[ "id" ], item[ "name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ], PackedStringArray() )
 
 
 #func _on_tab_container_tab_selected(tab):

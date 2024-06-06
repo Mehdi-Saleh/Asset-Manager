@@ -3,13 +3,13 @@
 [ext_resource type="Script" path="res://Scripts/item.gd" id="1_1r5sf"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="1_rfxtr"]
 
-[node name="Item" type="MarginContainer" node_paths=PackedStringArray("picture", "open_button", "folder_button", "name_text", "type_text", "license_text", "tags_parent")]
+[node name="Item" type="MarginContainer" node_paths=PackedStringArray("preview", "open_button", "folder_button", "name_text", "type_text", "license_text", "tags_parent")]
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 script = ExtResource("1_1r5sf")
-picture = NodePath("VBoxContainer/Picture/TextureRect")
+preview = NodePath("VBoxContainer/Picture/Preview/TextureRect")
 open_button = NodePath("VBoxContainer/Info/VBoxContainer/Buttons/Open")
 folder_button = NodePath("VBoxContainer/Info/VBoxContainer/Buttons/Folder")
 name_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/Name")
@@ -18,7 +18,7 @@ license_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/Licens
 tags_parent = NodePath("VBoxContainer/Info/VBoxContainer/Tags")
 default_pic_location = &"res://icon.svg"
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="."]
 custom_minimum_size = Vector2(280, 340)
 layout_mode = 2
 
@@ -28,14 +28,25 @@ layout_mode = 2
 [node name="Picture" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 3
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Picture"]
+[node name="Preview" type="Button" parent="VBoxContainer/Picture"]
 layout_mode = 2
 size_flags_vertical = 3
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Picture/Preview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("1_rfxtr")
 expand_mode = 1
 stretch_mode = 6
@@ -105,3 +116,5 @@ text = "Tag
 layout_mode = 2
 text = "Tag
 "
+
+[connection signal="pressed" from="VBoxContainer/Picture/Preview" to="." method="_on_preview_pressed"]

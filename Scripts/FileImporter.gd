@@ -1,8 +1,14 @@
 class_name FileImporter
 extends Node
 
+# TODO change / to \ if on windows
+
 @onready var file_dialog : FileDialog = $FileDialog
 #@export var address_text : TextEdit
+
+
+#@export_category( "References" )
+#@export var arr : int
 
 @export_category( "File Types" )
 @export var ignore_formats : PackedStringArray
@@ -19,6 +25,10 @@ var _selected_address : String
 signal should_update_items ## Emitted after importing data as the browse tab needs to be updated then.
 
 
+func _ready():
+	SignalBus.file_importer = self
+
+
 ## Opens the file dialog for selecting a directory.
 func _open_file_dialog():
 	file_dialog.show()
@@ -33,11 +43,6 @@ func _close_file_dialog():
 func import():
 	var root_path := _selected_address
 	
-	# TODO spawn items in some other node
-	#[Export] public Node itemParent;
-	#[Export] public PackedScene itemScene;
-	
-	
 	match import_mode:
 		ImportMode.NEW:
 			generate_data_dict( _selected_address, true )
@@ -51,6 +56,8 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 		DatabaseManager.create_tables()
 	if not _is_sub_generation:
 		print( "Importing..." )
+	
+	# TODO consider options as well (add tags to all, etc.).
 	
 	var directories : PackedStringArray # Array of every sub-directory that needs to be scanned as well
 	
@@ -112,15 +119,11 @@ func show_file_dialog( import_mode : ImportMode ):
 	self.import_mode = import_mode
 	_open_file_dialog()
 
-
+#
 func _on_file_dialog_dir_selected(dir):
 	_selected_address = dir
 	import()
 
-
-func _on_file_selector_receiver_open_dialog( import_mode : ImportMode ):
-	show_file_dialog( import_mode )
-	
 
 
 ## All possible import modes

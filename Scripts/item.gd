@@ -2,7 +2,7 @@ class_name Item
 extends Node
 
 
-@export var picture : TextureRect
+@export var preview : TextureRect
 @export var open_button : Button
 @export var folder_button : Button
 @export var name_text : Label
@@ -11,6 +11,7 @@ extends Node
 @export var tags_parent : Node
 
 @export var default_pic_location : StringName
+
 
 var file_name : StringName
 var type : StringName
@@ -46,6 +47,11 @@ func initialize( item_id:int, file_name:StringName, type:StringName, license:Str
 func load_thumbnail():
 	var image = Image.new()
 	if type == "Graphic2D": 
-		picture.texture = ImageTexture.create_from_image( image.load_from_file( location + "/" + file_name ) ) # TODO change to pic_location
+		preview.texture = ImageTexture.create_from_image( image.load_from_file( location + "/" + file_name ) ) # TODO change to pic_location
 	else:
-		picture.texture = ImageTexture.create_from_image( image.load_from_file( default_pic_location ) )
+		preview.texture = ImageTexture.create_from_image( image.load_from_file( default_pic_location ) )
+
+
+
+func _on_preview_pressed():
+	SignalBus.receive_signal( "show_in_side_panel", [ item_id, ] )
