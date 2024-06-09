@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 DatabaseManager="*res://Scenes/database_manager.tscn"
 SignalBus="*res://Scenes/signal_bus.tscn"
 
+[display]
+
+window/size/mode=2
+
 [dotnet]
 
 project/assembly_name="Asset Manager"

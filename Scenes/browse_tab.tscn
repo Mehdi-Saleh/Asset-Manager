@@ -32,6 +32,7 @@ func _on_add_tag_pressed():
 	add_tag.hide()
 	tag_line_edit.show()
 	tag_line_edit.text = \"\"
+	tag_line_edit.grab_focus()
 
 
 func _on_line_edit_text_submitted(new_text):
@@ -42,6 +43,10 @@ func _on_line_edit_text_submitted(new_text):
 
 
 func _on_side_panel_visibility_changed():
+	back_to_add_tag_button()
+
+
+func _on_tag_line_edit_focus_exited():
 	back_to_add_tag_button()
 "
 
@@ -124,6 +129,7 @@ layout_mode = 2
 
 [node name="SidePanel" type="PanelContainer" parent="." node_paths=PackedStringArray("open_panel_button", "main_split_container")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
@@ -241,6 +247,7 @@ script = SubResource("GDScript_5ttg3")
 [connection signal="pressed" from="VBoxContainer/SearchBar/PanelContainer/SearchButton" to="ItemsManager" method="_on_search_button_pressed"]
 [connection signal="visibility_changed" from="SidePanel" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_side_panel_visibility_changed"]
 [connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/AddTag" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_add_tag_pressed"]
+[connection signal="focus_exited" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_tag_line_edit_focus_exited"]
 [connection signal="text_submitted" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="SidePanel/CloseSidePanel" to="SidePanel/CloseSidePanel" method="_on_pressed"]
 [connection signal="pressed" from="OpenSidePanel" to="OpenSidePanel" method="_on_pressed"]

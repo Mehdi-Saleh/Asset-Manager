@@ -25,6 +25,7 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 			side_panel.show_item( arguements[ "id" ] )
 		"add_tag_side_panel":
 			DatabaseManager.add_tag( arguements[ "tag" ], side_panel.get_current_item_id() )
+			side_panel.show_item( side_panel.get_current_item_id() )
 			
 		# Import Tab
 		"generate_new_database":
