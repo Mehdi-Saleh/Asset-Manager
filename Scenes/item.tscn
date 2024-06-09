@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://lkeeoajpujbv"]
+[gd_scene load_steps=4 format=3 uid="uid://lkeeoajpujbv"]
 
 [ext_resource type="Script" path="res://Scripts/item.gd" id="1_1r5sf"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="1_rfxtr"]
+[ext_resource type="PackedScene" uid="uid://c76mmn8b6ppi1" path="res://Scenes/tag.tscn" id="3_m3yj8"]
 
 [node name="Item" type="MarginContainer" node_paths=PackedStringArray("preview", "open_button", "folder_button", "name_text", "type_text", "license_text", "tags_parent")]
 theme_override_constants/margin_left = 15
@@ -16,6 +17,7 @@ name_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/Name")
 type_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/Type")
 license_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/License")
 tags_parent = NodePath("VBoxContainer/Info/VBoxContainer/Tags")
+tag_scene = ExtResource("3_m3yj8")
 default_pic_location = &"res://icon.svg"
 
 [node name="Background" type="Panel" parent="."]
@@ -97,24 +99,8 @@ text = "CC0"
 [node name="Tags" type="HFlowContainer" parent="VBoxContainer/Info/VBoxContainer"]
 layout_mode = 2
 
-[node name="Tag" type="Label" parent="VBoxContainer/Info/VBoxContainer/Tags"]
+[node name="Tag" parent="VBoxContainer/Info/VBoxContainer/Tags" instance=ExtResource("3_m3yj8")]
+visible = false
 layout_mode = 2
-text = "Tag
-"
-
-[node name="Tag2" type="Label" parent="VBoxContainer/Info/VBoxContainer/Tags"]
-layout_mode = 2
-text = "Tag
-"
-
-[node name="Tag3" type="Label" parent="VBoxContainer/Info/VBoxContainer/Tags"]
-layout_mode = 2
-text = "Tag
-"
-
-[node name="Tag4" type="Label" parent="VBoxContainer/Info/VBoxContainer/Tags"]
-layout_mode = 2
-text = "Tag
-"
 
 [connection signal="pressed" from="VBoxContainer/Picture/Preview" to="." method="_on_preview_pressed"]

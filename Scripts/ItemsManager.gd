@@ -16,7 +16,7 @@ func _ready():
 
 
 ## Instanciates a new item object with the given values. (Objects are pooled.)
-func instanciate_item( item_id:int, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location, tags:PackedStringArray ) -> Item:
+func instanciate_item( item_id:int, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location ) -> Item:
 	# Create a new item object if none are available
 	if items_inactive.is_empty():
 		items_inactive.append( item_scene.instantiate() )
@@ -25,7 +25,7 @@ func instanciate_item( item_id:int, file_name:StringName, type:StringName, licen
 	var new_item : Item = items_inactive.pop_back()
 		
 	# Initialize the item
-	new_item.initialize( item_id, file_name, type, license, location, pic_location, tags )
+	new_item.initialize( item_id, file_name, type, license, location, pic_location )
 	new_item.show()
 	items_active.append( new_item )
 	return new_item
@@ -50,7 +50,7 @@ func clear_items():
 func update_items( items : Array[Dictionary] ):
 	clear_items()
 	for item in items:
-		instanciate_item( item[ "id" ], item[ "name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ], PackedStringArray() )
+		instanciate_item( item[ "id" ], item[ "name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ] )
 
 
 #func _on_tab_container_tab_selected(tab):
@@ -61,7 +61,7 @@ func update_items( items : Array[Dictionary] ):
 func search():
 	var tags := search_text.text.split( " ", false )
 	update_items( DatabaseManager.get_items_by_tag( tags ) )
-	
+
 
 func _on_search_button_pressed():
 	search()

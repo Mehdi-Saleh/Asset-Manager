@@ -131,6 +131,22 @@ func get_ids_by_tag( tags : PackedStringArray ) -> PackedInt32Array:
 	return ids
 	
 
+## Returns id of every item that has one or more of the given tags.
+func get_tags_by_id( id : int ) -> PackedStringArray:
+	database.query( 
+		"SELECT tag 
+		FROM " + MAIN_TAGS_TABLE_NAME + " JOIN " + TAGS_TABLE_NAME + 
+		" ON " + MAIN_TAGS_TABLE_NAME + ".id_tag = " + TAGS_TABLE_NAME + ".id 
+		WHERE id_main = " + str( id ) + ";" )
+	
+	var tags := database.query_result
+	var tags_new : PackedStringArray
+	for tag in tags:
+		tags_new.append( tag[ "tag" ])
+	
+	return tags_new
+
+
 ## Returns items using the given ids.
 func get_items_by_id( ids : PackedInt32Array ) -> Array[Dictionary]:
 	print( ids )

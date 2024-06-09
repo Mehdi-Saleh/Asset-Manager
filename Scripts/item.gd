@@ -9,6 +9,7 @@ extends Node
 @export var type_text : Label
 @export var license_text : Label
 @export var tags_parent : Node
+@export var tag_scene : PackedScene
 
 @export var default_pic_location : StringName
 
@@ -22,7 +23,7 @@ var pic_location : StringName
 var item_id : int = -1 # Used by the item manager for indexing
 
 ## Initializes all values and applies them to the item object.
-func initialize( item_id:int, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location:StringName, tags:Array):
+func initialize( item_id:int, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location:StringName, auto_add_tags:bool = true):
 	# Set values
 	self.item_id = item_id
 	self.file_name = file_name;
@@ -31,9 +32,23 @@ func initialize( item_id:int, file_name:StringName, type:StringName, license:Str
 	self.type = type;
 	self.license = license;
 
-	# TODO tags
-	# self.tags.Clear();
-	# self.tags = tags.ToList();
+	# TODO needs optimization
+	var tag_items : Array = tags_parent.get_children()
+	var tags : Array = DatabaseManager.get_tags_by_id( item_id )
+	# Instanciate new tag items if needed
+	if tags.size() > tag_items.size():
+		var dif : int = tags.size() - tag_items.size()
+		for i in range( dif ):
+			var new_tag : TagItem = tag_scene.instantiate()
+			tags_parent.add_child( new_tag )
+			tag_items.append( new_tag )
+	# Set tags
+	for i in range( 0, tags.size() ):
+		tag_items[ i ].set_tag( tags[ i ] )
+		tag_items[ i ].show()
+	# Disable extra tag items
+	for i in range( tags.size(), tag_items.size() ):
+		tag_items[ i ].hide()
 
 	# Apply
 	name_text.text = file_name;

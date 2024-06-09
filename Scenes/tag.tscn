@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://c76mmn8b6ppi1"]
+[gd_scene load_steps=2 format=3 uid="uid://c76mmn8b6ppi1"]
+
+[ext_resource type="Script" path="res://Scenes/tag.gd" id="1_2kc7s"]
 
 [node name="Tag" type="Label"]
 text = "Tag"
+script = ExtResource("1_2kc7s")
