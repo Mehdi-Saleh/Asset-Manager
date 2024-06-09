@@ -99,7 +99,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 44.955)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-placeholder_text = "Search Tag(s)..."
+placeholder_text = "Search..."
 clear_button_enabled = true
 
 [node name="SearchButton" type="Button" parent="VBoxContainer/SearchBar/PanelContainer"]

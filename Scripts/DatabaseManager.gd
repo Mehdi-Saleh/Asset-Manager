@@ -161,9 +161,28 @@ func get_item_by_id( id : int ) -> Dictionary:
 	return database.query_result.front()
 
 
+## Returns items with the given type
+func get_items_by_type( type : StringName ) -> Array[ Dictionary ]:
+	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE type = \"" + type + "\";")
+	print( database.query_result )
+	return database.query_result
+
+
+## Returns items with the given license
+func get_items_by_license( license : StringName ) -> Array[ Dictionary ]:
+	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE license = \"" + license + "\";")
+	return database.query_result
+
+
 ## Returns every item that has one or more of the given tags
 func get_items_by_tag( tags : PackedStringArray ) -> Array[Dictionary]:
 	return get_items_by_id( get_ids_by_tag( tags ) )
+	
+
+## Searches the database for names that are close to the given name
+func search_name( name : StringName ) -> Array[Dictionary]:
+	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE name LIKE \"" + name + "\";")
+	return database.query_result
 
 
 ## Returns every item with an id between from (inclusive) and to (exclusive).

@@ -1,6 +1,10 @@
 class_name ItemsManager
 extends Node
 
+const COMMAND_TAG := ":tag "
+const COMMAND_TYPE := ":type "
+const COMMAND_LICENSE := ":license "
+
 @export var item_scene : PackedScene
 @export var items_parent : Node
 @export var search_text : LineEdit
@@ -46,11 +50,16 @@ func clear_items():
 	items_active.clear()
 
 
+## Instanciates item objects but does not clear previous ones.
+func append_items( items : Array[Dictionary] ):
+	for item in items:
+		instanciate_item( item[ "id" ], item[ "name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ] )
+
+
 ## Clears and re-instanciates all item objects.
 func update_items( items : Array[Dictionary] ):
 	clear_items()
-	for item in items:
-		instanciate_item( item[ "id" ], item[ "name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ] )
+	append_items( items )
 
 
 #func _on_tab_container_tab_selected(tab):
@@ -59,8 +68,44 @@ func update_items( items : Array[Dictionary] ):
 
 
 func search():
-	var tags := search_text.text.split( " ", false )
-	update_items( DatabaseManager.get_items_by_tag( tags ) )
+	clear_items()
+	
+	var text = search_text.text
+	if not text.begins_with( ":" ):
+		search_name( text )
+	else:
+		if text.begins_with( COMMAND_TAG ):
+			search_tags( text )
+		elif text.begins_with( COMMAND_TYPE ):
+			search_type( text )
+		elif text.begins_with( COMMAND_LICENSE ):
+			search_license( text )
+		# TODO "and" and "or" operators
+		else:
+			assert( "Only commands start with ':'!" )
+
+
+func search_name( text : StringName ):
+	var new_text : String = text
+	new_text = "%" + new_text + "%"
+	new_text.replace( " ", "_" )
+	append_items( DatabaseManager.search_name( new_text ) )
+
+
+func search_tags( text : StringName ):
+	text = text.trim_prefix( COMMAND_TAG )
+	var tags := text.split( " ", false )
+	append_items( DatabaseManager.get_items_by_tag( tags ) )
+
+
+func search_type( text : StringName ):
+	text = text.trim_prefix( COMMAND_TYPE )
+	append_items( DatabaseManager.get_items_by_type( text ) )
+
+
+func search_license( text : StringName ):
+	text = text.trim_prefix( COMMAND_LICENSE )
+	append_items( DatabaseManager.get_items_by_license( text ) )
 
 
 func _on_search_button_pressed():
