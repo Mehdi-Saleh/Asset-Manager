@@ -164,7 +164,6 @@ func get_item_by_id( id : int ) -> Dictionary:
 ## Returns items with the given type
 func get_items_by_type( type : StringName ) -> Array[ Dictionary ]:
 	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE type = \"" + type + "\";")
-	print( database.query_result )
 	return database.query_result
 
 

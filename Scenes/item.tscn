@@ -11,11 +11,11 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 script = ExtResource("1_1r5sf")
 preview = NodePath("VBoxContainer/Picture/Preview/TextureRect")
-open_button = NodePath("VBoxContainer/Info/VBoxContainer/Buttons/Open")
-folder_button = NodePath("VBoxContainer/Info/VBoxContainer/Buttons/Folder")
-name_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/Name")
-type_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/Type")
-license_text = NodePath("VBoxContainer/Info/VBoxContainer/NameTypeLicense/License")
+open_button = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/Open")
+folder_button = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/Folder")
+name_text = NodePath("VBoxContainer/Info/VBoxContainer/MiddleBar/Name")
+type_text = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer/Type")
+license_text = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer/License")
 tags_parent = NodePath("VBoxContainer/Info/VBoxContainer/Tags")
 tag_scene = ExtResource("3_m3yj8")
 default_pic_location = &"res://icon.svg"
@@ -63,38 +63,45 @@ theme_override_constants/margin_bottom = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Info"]
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Info/VBoxContainer"]
+[node name="TopBar" type="HBoxContainer" parent="VBoxContainer/Info/VBoxContainer"]
 layout_mode = 2
 
-[node name="Open" type="Button" parent="VBoxContainer/Info/VBoxContainer/Buttons"]
+[node name="Open" type="Button" parent="VBoxContainer/Info/VBoxContainer/TopBar"]
 layout_mode = 2
 keep_pressed_outside = true
 text = "Open"
 
-[node name="Folder" type="Button" parent="VBoxContainer/Info/VBoxContainer/Buttons"]
+[node name="Folder" type="Button" parent="VBoxContainer/Info/VBoxContainer/TopBar"]
 layout_mode = 2
 text = "Folder
 "
 
-[node name="NameTypeLicense" type="HBoxContainer" parent="VBoxContainer/Info/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Info/VBoxContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Type" type="Label" parent="VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "PNG"
+vertical_alignment = 1
+
+[node name="License" type="Label" parent="VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "CC0"
+vertical_alignment = 1
+
+[node name="MiddleBar" type="HBoxContainer" parent="VBoxContainer/Info/VBoxContainer"]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="VBoxContainer/Info/VBoxContainer/NameTypeLicense"]
+[node name="Name" type="Label" parent="VBoxContainer/Info/VBoxContainer/MiddleBar"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Godot Icon"
 autowrap_mode = 1
-
-[node name="Type" type="Label" parent="VBoxContainer/Info/VBoxContainer/NameTypeLicense"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "PNG"
-
-[node name="License" type="Label" parent="VBoxContainer/Info/VBoxContainer/NameTypeLicense"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "CC0"
 
 [node name="Tags" type="HFlowContainer" parent="VBoxContainer/Info/VBoxContainer"]
 layout_mode = 2

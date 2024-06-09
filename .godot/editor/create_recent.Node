@@ -1,10 +1,10 @@
+HBoxContainer
 Button
 LineEdit
 Node
 TextureRect
 Panel
 MarginContainer
-HBoxContainer
 Label
 HFlowContainer
 CheckButton
