@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" path="res://Scenes/tag.gd" id="1_2kc7s"]
 
-[node name="Tag" type="Label"]
+[node name="Tag" type="Button"]
 text = "Tag"
 script = ExtResource("1_2kc7s")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

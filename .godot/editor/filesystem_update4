@@ -1,11 +1,9 @@
+res://Scripts/SidePanel.gd
 res://Scenes/browse_tab.tscn
 res://main.tres
 res://Scenes/main.tscn
 res://Scenes/item.tscn
 res://Scenes/import_tab.tscn
-res://Scenes/signal_bus.tscn
-res://Scripts/ItemsManager.gd
-res://Scenes/tag.gd
+res://Scripts/SignalBus.gd
 res://Scenes/tag.tscn
-res://Scripts/item.gd
-res://Scripts/DatabaseManager.gd
+res://Scenes/tag.gd

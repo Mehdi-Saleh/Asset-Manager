@@ -13,6 +13,8 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 		"show_all_items":
 			# TODO should change later
 			items_manager.update_items( DatabaseManager.get_items_from_to( 0, 200 ) )
+		"search_tags":
+			items_manager.update_items( DatabaseManager.get_items_by_tag( arguements[ "tags" ] ) )
 		
 		# Side Panel
 		"open_side_panel":
