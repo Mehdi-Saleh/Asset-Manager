@@ -1,9 +1,7 @@
-res://Scenes/main.tscn
+res://Scenes/browse_tab.tscn
 res://main.tres
+res://Scenes/main.tscn
 res://Scenes/item.tscn
 res://Scenes/import_tab.tscn
-res://Scenes/browse_tab.tscn
-res://Scenes/files_importer.tscn
-res://Scripts/SignalBus.gd
+res://Scenes/signal_bus.tscn
 res://Scripts/ItemsManager.gd
-res://Scripts/FileImporter.gd

@@ -55,6 +55,10 @@ func show_item( item_id : int):
 	
 
 
+func get_current_item_id() -> int:
+	return current_item[ "id" ]
+
+
 func _on_close_side_panel_pressed():
 	close_panel()
 

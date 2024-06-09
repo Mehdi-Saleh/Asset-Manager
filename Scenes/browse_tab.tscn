@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cu3k4xm46mqj8"]
+[gd_scene load_steps=12 format=3 uid="uid://cu3k4xm46mqj8"]
 
 [ext_resource type="Theme" uid="uid://cugx6eklcnakn" path="res://Scenes/MainTheme.tres" id="1_buci7"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="2_mddpf"]
@@ -13,6 +13,36 @@ script/source = "extends ScrollContainer
 
 
 # TODO change scroll step based on number of elements
+"
+
+[sub_resource type="GDScript" id="GDScript_5gwyc"]
+script/source = "extends HFlowContainer
+
+
+@onready var add_tag = $AddTag
+@onready var tag_line_edit = $TagLineEdit
+
+
+func back_to_add_tag_button():
+	add_tag.show()
+	tag_line_edit.hide()
+
+
+func _on_add_tag_pressed():
+	add_tag.hide()
+	tag_line_edit.show()
+	tag_line_edit.text = \"\"
+
+
+func _on_line_edit_text_submitted(new_text):
+	# TODO ignore incurrect enteries
+	SignalBus.receive_signal( \"add_tag_side_panel\", { \"tag\" : tag_line_edit.text } )
+	add_tag.show()
+	tag_line_edit.hide()
+
+
+func _on_side_panel_visibility_changed():
+	back_to_add_tag_button()
 "
 
 [sub_resource type="GDScript" id="GDScript_xtnq7"]
@@ -170,6 +200,7 @@ text = "License: CC0"
 
 [node name="Tags" type="HFlowContainer" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+script = SubResource("GDScript_5gwyc")
 
 [node name="TagsLabel" type="Label" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags"]
 layout_mode = 2
@@ -179,6 +210,14 @@ text = "Tags: "
 layout_mode = 2
 
 [node name="HideParentOnReady" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/Tag" instance=ExtResource("4_7tcya")]
+
+[node name="AddTag" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.733333, 1, 0.705882, 1)
+text = "+Add"
+
+[node name="TagLineEdit" type="LineEdit" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags"]
+layout_mode = 2
 
 [node name="CloseSidePanel" type="Button" parent="SidePanel"]
 custom_minimum_size = Vector2(15, 40)
@@ -198,6 +237,10 @@ icon = ExtResource("2_mddpf")
 expand_icon = true
 script = SubResource("GDScript_5ttg3")
 
+[connection signal="text_submitted" from="VBoxContainer/SearchBar/PanelContainer/SearchText" to="ItemsManager" method="_on_search_text_text_submitted"]
 [connection signal="pressed" from="VBoxContainer/SearchBar/PanelContainer/SearchButton" to="ItemsManager" method="_on_search_button_pressed"]
+[connection signal="visibility_changed" from="SidePanel" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_side_panel_visibility_changed"]
+[connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/AddTag" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_add_tag_pressed"]
+[connection signal="text_submitted" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="SidePanel/CloseSidePanel" to="SidePanel/CloseSidePanel" method="_on_pressed"]
 [connection signal="pressed" from="OpenSidePanel" to="OpenSidePanel" method="_on_pressed"]

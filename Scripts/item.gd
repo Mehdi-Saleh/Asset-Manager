@@ -54,4 +54,4 @@ func load_thumbnail():
 
 
 func _on_preview_pressed():
-	SignalBus.receive_signal( "show_in_side_panel", [ item_id, ] )
+	SignalBus.receive_signal( "show_in_side_panel", { "id" : item_id } )

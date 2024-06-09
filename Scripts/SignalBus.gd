@@ -7,7 +7,7 @@ var side_panel : SidePanel
 
 
 
-func receive_signal( signal_name : StringName, arguements : Array = Array() ):
+func receive_signal( signal_name : StringName, arguements : Dictionary = Dictionary() ):
 	match signal_name:
 		# Items
 		"show_all_items":
@@ -20,10 +20,16 @@ func receive_signal( signal_name : StringName, arguements : Array = Array() ):
 		"close_side_panel":
 			side_panel.close_panel()
 		"show_in_side_panel":
-			side_panel.show_item( arguements[ 0 ] )
+			side_panel.show_item( arguements[ "id" ] )
+		"add_tag_side_panel":
+			DatabaseManager.add_tag( arguements[ "tag" ], side_panel.get_current_item_id() )
 			
 		# Import Tab
 		"generate_new_database":
 			file_importer.show_file_dialog( FileImporter.ImportMode.NEW )
 		"update_database":
 			file_importer.show_file_dialog( FileImporter.ImportMode.UPDATE )
+		
+		# Default
+		_:
+			print( "No such signal is available!" )

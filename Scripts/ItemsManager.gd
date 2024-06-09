@@ -58,7 +58,14 @@ func update_items( items : Array[Dictionary] ):
 		#update_items()
 
 
-func _on_search_button_pressed():
+func search():
 	var tags := search_text.text.split( " ", false )
 	update_items( DatabaseManager.get_items_by_tag( tags ) )
 	
+
+func _on_search_button_pressed():
+	search()
+
+
+func _on_search_text_text_submitted( text ):
+	search()
