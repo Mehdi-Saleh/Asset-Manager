@@ -1,11 +1,31 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cugx6eklcnakn"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cugx6eklcnakn"]
 
-[ext_resource type="StyleBox" uid="uid://cg6to82qxdsvg" path="res://main.tres" id="1_vj1kt"]
+[ext_resource type="StyleBox" uid="uid://cf2jibnjsda6t" path="res://Styles/label_normal.tres" id="1_dus21"]
+[ext_resource type="StyleBox" uid="uid://ba5wga6mji8be" path="res://Styles/line_edit_normal.tres" id="2_d2c6y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vub52"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b413w"]
+bg_color = Color(0.396078, 0.329412, 0.686275, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [resource]
-Button/colors/font_color = Color(1, 1, 1, 1)
-Button/styles/focus = ExtResource("1_vj1kt")
-Button/styles/hover = ExtResource("1_vj1kt")
-Button/styles/normal = ExtResource("1_vj1kt")
-Button/styles/pressed = ExtResource("1_vj1kt")
-Label/styles/normal = ExtResource("1_vj1kt")
+Button/colors/font_hover_color = Color(0.913725, 0.4, 0.627451, 1)
+Button/colors/font_pressed_color = Color(0.584314, 0.458824, 0.870588, 1)
+Label/colors/font_color = Color(0.941176, 0.952941, 1, 1)
+Label/styles/normal = ExtResource("1_dus21")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_vub52")
+LineEdit/styles/normal = ExtResource("2_d2c6y")
+Panel/styles/panel = SubResource("StyleBoxFlat_b413w")

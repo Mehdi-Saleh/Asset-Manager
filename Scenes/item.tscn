@@ -18,7 +18,7 @@ type_text = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer/Type
 license_text = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer/License")
 tags_parent = NodePath("VBoxContainer/Info/VBoxContainer/Tags")
 tag_scene = ExtResource("3_m3yj8")
-default_pic_location = &"res://icon.svg"
+default_pic_location = &"res://Graphics/question_mark_faded.png"
 
 [node name="Background" type="Panel" parent="."]
 custom_minimum_size = Vector2(280, 340)

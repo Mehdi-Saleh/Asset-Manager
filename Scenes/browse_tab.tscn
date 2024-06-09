@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu3k4xm46mqj8"]
+[gd_scene load_steps=14 format=3 uid="uid://cu3k4xm46mqj8"]
 
 [ext_resource type="Theme" uid="uid://cugx6eklcnakn" path="res://Scenes/MainTheme.tres" id="1_buci7"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="2_mddpf"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dopcw51dsysn0" path="res://Scenes/hide_parent_on_ready.tscn" id="4_7tcya"]
 [ext_resource type="Script" path="res://Scripts/SidePanel.gd" id="5_ocswk"]
 [ext_resource type="PackedScene" uid="uid://c76mmn8b6ppi1" path="res://Scenes/tag.tscn" id="6_4ewky"]
+[ext_resource type="Texture2D" uid="uid://cca3if7yufh3t" path="res://Graphics/Delta01__#Delta01_white_RIGHT__48p.png" id="8_kmmnn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8y041"]
 
 [sub_resource type="GDScript" id="GDScript_lvsl8"]
 script/source = "extends ScrollContainer
@@ -94,6 +97,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/SearchBar"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8y041")
 
 [node name="SearchText" type="LineEdit" parent="VBoxContainer/SearchBar/PanelContainer"]
 custom_minimum_size = Vector2(0, 44.955)
@@ -101,8 +105,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 placeholder_text = "Search..."
 clear_button_enabled = true
+select_all_on_focus = true
+caret_blink = true
 
 [node name="SearchButton" type="Button" parent="VBoxContainer/SearchBar/PanelContainer"]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -129,7 +136,6 @@ layout_mode = 2
 
 [node name="SidePanel" type="PanelContainer" parent="." node_paths=PackedStringArray("open_panel_button", "main_split_container")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
@@ -145,7 +151,9 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 10
 
 [node name="ScrollContainer" type="ScrollContainer" parent="SidePanel/MarginContainer"]
+clip_contents = false
 layout_mode = 2
+horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SidePanel/MarginContainer/ScrollContainer"]
 layout_mode = 2
@@ -219,7 +227,7 @@ layout_mode = 2
 
 [node name="AddTag" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.733333, 1, 0.705882, 1)
+theme_override_colors/font_color = Color(0.584314, 0.458824, 0.870588, 1)
 text = "+Add"
 
 [node name="TagLineEdit" type="LineEdit" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags"]
@@ -230,11 +238,16 @@ custom_minimum_size = Vector2(15, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-icon = ExtResource("2_mddpf")
+theme_override_colors/icon_pressed_color = Color(0.584314, 0.458824, 0.870588, 1)
+theme_override_colors/icon_hover_color = Color(0.913725, 0.4, 0.627451, 1)
+icon = ExtResource("8_kmmnn")
 expand_icon = true
 script = SubResource("GDScript_xtnq7")
 
+[node name="HideParentOnReady" parent="SidePanel" instance=ExtResource("4_7tcya")]
+
 [node name="OpenSidePanel" type="Button" parent="."]
+visible = false
 custom_minimum_size = Vector2(15, 40)
 layout_mode = 2
 size_flags_horizontal = 8

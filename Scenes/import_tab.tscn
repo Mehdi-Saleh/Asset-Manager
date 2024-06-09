@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bnrg3jjhfpnpd"]
 
-[ext_resource type="Theme" uid="uid://cugx6eklcnakn" path="res://Scenes/MainTheme.tres" id="1_38gha"]
+[ext_resource type="Theme" uid="uid://dkytkyn8unxl5" path="res://import_tab.tres" id="1_8llth"]
 [ext_resource type="PackedScene" uid="uid://rklxtaewid7k" path="res://Scenes/files_importer.tscn" id="2_sqgxq"]
 
 [sub_resource type="GDScript" id="GDScript_5le2n"]
@@ -19,9 +19,11 @@ func _on_pressed():
 	SignalBus.receive_signal( \"update_database\" )
 "
 
-[node name="ImportTab" type="TabContainer"]
-theme = ExtResource("1_38gha")
-tabs_visible = false
+[node name="ImportTab" type="PanelContainer"]
+theme = ExtResource("1_8llth")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -72,7 +74,7 @@ theme_override_font_sizes/font_size = 25
 text = "Add tags to all:
 "
 
-[node name="TextEdit" type="TextEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/TagOption"]
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/TagOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Tag1 Tag2 ..."

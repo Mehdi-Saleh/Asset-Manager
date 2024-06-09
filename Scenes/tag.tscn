@@ -6,4 +6,10 @@
 text = "Tag"
 script = ExtResource("1_2kc7s")
 
+[node name="Button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
 [connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://21rsnsy3ya8i"]
+[gd_scene load_steps=6 format=3 uid="uid://21rsnsy3ya8i"]
 
 [ext_resource type="PackedScene" uid="uid://cu3k4xm46mqj8" path="res://Scenes/browse_tab.tscn" id="3_vxght"]
 [ext_resource type="PackedScene" uid="uid://bnrg3jjhfpnpd" path="res://Scenes/import_tab.tscn" id="4_s0603"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d7f2q"]
+bg_color = Color(0.168627, 0.152941, 0.188235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aud2n"]
+bg_color = Color(0.168627, 0.152941, 0.188235, 1)
 
 [sub_resource type="GDScript" id="GDScript_af6v1"]
 script/source = "extends TabContainer
@@ -21,7 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0588235, 0.0588235, 0.137255, 1)
+color = Color(0.137255, 0.121569, 0.152941, 1)
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchors_preset = 15
@@ -29,6 +35,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_d7f2q")
+theme_override_styles/panel = SubResource("StyleBoxFlat_aud2n")
 script = SubResource("GDScript_af6v1")
 
 [node name="BrowseTab" parent="TabContainer" instance=ExtResource("3_vxght")]

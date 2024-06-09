@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dkytkyn8unxl5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ea4c5"]
+bg_color = Color(0.168627, 0.152941, 0.188235, 1)
+
+[resource]
+Button/colors/font_hover_color = Color(0.913725, 0.4, 0.627451, 1)
+Button/colors/font_pressed_color = Color(0.584314, 0.458824, 0.870588, 1)
+Panel/styles/panel = SubResource("StyleBoxFlat_ea4c5")
