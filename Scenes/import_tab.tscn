@@ -117,6 +117,7 @@ text = "Remove file formats from names:
 [node name="RemoveFormats" type="CheckButton" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/RemoveFormatsOption"]
 layout_mode = 2
 size_flags_horizontal = 10
+button_pressed = true
 
 [node name="ReplaceOption" type="HBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options"]
 layout_mode = 2

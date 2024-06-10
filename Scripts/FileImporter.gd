@@ -79,16 +79,21 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 			if dir.current_is_dir():
 				directories.append( file_name )
 			else:
-				text += "-->" + file_name + "\n"
+				var new_name := file_name
+				if remove_formats.button_pressed and new_name.contains( "." ):
+					new_name = new_name.left( new_name.rfind( "." ) )
 				var file_type : StringName = get_file_type( file_name )
 				if file_type != "IGNORE":
 					var license_str := "NONE"
 					if not license.text.is_empty():
 						license_str = license.text
+					var pic_location :String = "DEFAULT"
+					if file_type == "Graphic2D":
+						pic_location = path + "/" + file_name
 					if extracted_tags.is_empty():
-						DatabaseManager.add_asset( file_name, file_type, license_str, path )
+						DatabaseManager.add_asset( new_name, file_name, file_type, license_str, path, [], pic_location )
 					else:
-						DatabaseManager.add_asset( file_name, file_type, license_str, path, extracted_tags )
+						DatabaseManager.add_asset( new_name, file_name, file_type, license_str, path, extracted_tags, pic_location )
 			file_name = dir.get_next()
 	else:
 		assert("An error occurred when trying to access the path.")

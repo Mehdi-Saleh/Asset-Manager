@@ -66,10 +66,10 @@ func create_tables():
 	database.create_table( NEW_TABLE_NAME, new_table_template)
 
 ## Adds a new asset to the database if it doesn't already exist there.
-func add_asset( name:String, type:String, license:String, location:String, tags:PackedStringArray=PackedStringArray(), pic_location:String = "DEFAULT" ):
+func add_asset( name:String, real_name:String, type:String, license:String, location:String, tags:PackedStringArray=PackedStringArray(), pic_location:String = "DEFAULT" ):
 	var data : Dictionary = {
-		"name" : name, # TODO add custom names
-		"real_name" : name,
+		"name" : name,
+		"real_name" : real_name,
 		"type" : type,
 		"license" : license,
 		"location" : location,

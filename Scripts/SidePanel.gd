@@ -42,13 +42,13 @@ func show_item( item_id : int):
 	# Set preview image
 	var image = Image.new()
 	if current_item[ "type" ] == "Graphic2D":
-		preview.texture = ImageTexture.create_from_image( image.load_from_file( current_item[ "location" ] + "/" + current_item[ "name" ] ) ) # TODO change to pic_location
+		preview.texture = ImageTexture.create_from_image( image.load_from_file( current_item[ "pic_location"] ) ) # TODO change to pic_location
 	else:
 		preview.texture = ImageTexture.create_from_image( image.load_from_file( default_preview_pic_location ) )
 	
 	# Set labels values
 	title.text = current_item[ "name" ]
-	location.text = "Location: " + current_item[ "location" ] + "/" + current_item[ "name" ]
+	location.text = "Location: " + current_item[ "location" ] + "/" + current_item[ "real_name" ]
 	type.text = "Type: " + current_item[ "type" ]
 	license.text = "License: " + current_item[ "license" ]
 	

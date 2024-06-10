@@ -14,6 +14,7 @@ extends Node
 @export var default_pic_location : StringName
 
 
+var name_str : StringName
 var file_name : StringName
 var type : StringName
 var license : StringName
@@ -23,14 +24,15 @@ var pic_location : StringName
 var item_id : int = -1 # Used by the item manager for indexing
 
 ## Initializes all values and applies them to the item object.
-func initialize( item_id:int, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location:StringName, auto_add_tags:bool = true):
+func initialize( item_id:int, name:StringName, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location:StringName, auto_add_tags:bool = true):
 	# Set values
 	self.item_id = item_id
-	self.file_name = file_name;
-	self.location = location;
-	self.pic_location = pic_location;
-	self.type = type;
-	self.license = license;
+	self.name_str = name
+	self.file_name = file_name
+	self.location = location
+	self.pic_location = pic_location
+	self.type = type
+	self.license = license
 
 	# TODO needs optimization
 	var tag_items : Array = tags_parent.get_children()
@@ -51,7 +53,7 @@ func initialize( item_id:int, file_name:StringName, type:StringName, license:Str
 		tag_items[ i ].hide()
 
 	# Apply
-	name_text.text = file_name;
+	name_text.text = name_str;
 	type_text.text = type;
 	license_text.text = license;
 	load_thumbnail()	

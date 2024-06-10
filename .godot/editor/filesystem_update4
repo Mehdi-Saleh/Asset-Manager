@@ -8,3 +8,8 @@ res://Scenes/item.tscn
 res://Scenes/browse_tab.tscn
 res://Scenes/tag.tscn
 res://Scenes/database_manager.tscn
+res://Scripts/FileImporter.gd
+res://Scripts/DatabaseManager.gd
+res://Scripts/ItemsManager.gd
+res://Scripts/item.gd
+res://Scripts/SidePanel.gd

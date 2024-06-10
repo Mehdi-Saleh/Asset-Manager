@@ -145,7 +145,7 @@ script = ExtResource("5_ocswk")
 open_panel_button = NodePath("../OpenSidePanel")
 main_split_container = NodePath("..")
 tag_scene = ExtResource("6_4ewky")
-default_preview_pic_location = &"res://icon.svg"
+default_preview_pic_location = &"res://Graphics/question_mark_faded.png"
 
 [node name="MarginContainer" type="MarginContainer" parent="SidePanel"]
 layout_mode = 2

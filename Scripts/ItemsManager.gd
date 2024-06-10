@@ -33,7 +33,7 @@ func _process(delta):
 
 
 ## Instanciates a new item object with the given values. (Objects are pooled.)
-func instanciate_item( item_id:int, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location ) -> Item:
+func instanciate_item( item_id:int, name:StringName, file_name:StringName, type:StringName, license:StringName, location:StringName, pic_location ) -> Item:
 	# Create a new item object if none are available
 	if items_inactive.is_empty():
 		items_inactive.append( item_scene.instantiate() )
@@ -42,7 +42,7 @@ func instanciate_item( item_id:int, file_name:StringName, type:StringName, licen
 	var new_item : Item = items_inactive.pop_back()
 		
 	# Initialize the item
-	new_item.initialize( item_id, file_name, type, license, location, pic_location )
+	new_item.initialize( item_id, name, file_name, type, license, location, pic_location )
 	new_item.show()
 	items_active.append( new_item )
 	return new_item
@@ -65,7 +65,7 @@ func _load_more_items() -> bool:
 		if target_load >= query_size:
 			target_load = query_size - 1
 		for item in last_query.slice( last_loaded_from_query+1, target_load+1 ):
-			instanciate_item( item[ "id" ], item[ "name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ] )
+			instanciate_item( item[ "id" ], item[ "name" ], item[ "real_name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ] )
 		last_loaded_from_query = target_load
 		return true
 	else:
@@ -94,6 +94,7 @@ func update_items( items : Array[Dictionary] ):
 	print( items.size() )
 	clear_items()
 	append_items( items, false )
+	last_loaded_from_query = -1
 	_load_more_items()
 
 
