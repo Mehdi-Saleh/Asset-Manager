@@ -8,7 +8,4 @@ res://Scenes/import_tab.tscn
 res://Scenes/browse_tab.tscn
 res://Scenes/tag.tscn
 res://Scenes/database_manager.tscn
-res://Scripts/DatabaseManager.gd
-res://Scripts/FileImporter.gd
-res://Scripts/SignalBus.gd
 res://Scripts/ItemsManager.gd

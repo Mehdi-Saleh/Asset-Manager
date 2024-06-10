@@ -59,7 +59,8 @@ func remove_item( item : Item ):
 ## Returns true if any items were actually instanciated
 func _load_more_items() -> bool:
 	var query_size := last_query.size()
-	if query_size > last_loaded_from_query:
+	print( last_query.size() )
+	if query_size >= last_loaded_from_query:
 		var target_load : int = last_loaded_from_query + NUM_OF_ITEMS_TO_LOAD
 		if target_load >= query_size:
 			target_load = query_size - 1
@@ -78,19 +79,19 @@ func clear_items():
 		items_active[i].hide()
 		items_inactive.append( items_active[i] )
 	items_active.clear()
+	print( last_query.size() )
 
 
 ## Instanciates item objects but does not clear previous ones.
 func append_items( items : Array[Dictionary], load_items : bool = true ):
-	for item in items:
-		last_query.append_array( items )
-		#instanciate_item( item[ "id" ], item[ "name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ] )
-		if load_items:
-			_load_more_items()
+	last_query.append_array( items )
+	if load_items:
+		_load_more_items()
 
 
 ## Clears and re-instanciates all item objects.
 func update_items( items : Array[Dictionary] ):
+	print( items.size() )
 	clear_items()
 	append_items( items, false )
 	_load_more_items()
@@ -153,6 +154,5 @@ func _on_search_text_text_submitted( text ):
 func _on_scroll_container_scroll_ended():
 	var max_scroll_value : float = max( 0.0, float( items_parent.get_rect().size.y - items_scroll_container.get_rect().size.y ))
 	scroll_value = float( items_scroll_container.scroll_vertical ) / max_scroll_value
-	print( scroll_value )
 	if scroll_value >= LOAD_MORE_ON_SCROLL_VALUE:
 		_load_more_items()

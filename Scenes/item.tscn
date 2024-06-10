@@ -81,17 +81,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="Type" type="Label" parent="VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer"]
+[node name="Type" type="Button" parent="VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 1
 text = "PNG"
-vertical_alignment = 1
 
-[node name="License" type="Label" parent="VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer"]
+[node name="License" type="Button" parent="VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 1
 text = "CC0"
-vertical_alignment = 1
 
 [node name="MiddleBar" type="HBoxContainer" parent="VBoxContainer/Info/VBoxContainer"]
 layout_mode = 2

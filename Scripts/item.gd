@@ -6,8 +6,8 @@ extends Node
 @export var open_button : Button
 @export var folder_button : Button
 @export var name_text : Label
-@export var type_text : Label
-@export var license_text : Label
+@export var type_text : Button
+@export var license_text : Button
 @export var tags_parent : Node
 @export var tag_scene : PackedScene
 
