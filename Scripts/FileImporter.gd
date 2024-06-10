@@ -82,6 +82,8 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 				var new_name := file_name
 				if remove_formats.button_pressed and new_name.contains( "." ):
 					new_name = new_name.left( new_name.rfind( "." ) )
+				if replace.button_pressed:
+					new_name = new_name.replace( replace_from.text, replace_to.text )
 				var file_type : StringName = get_file_type( file_name )
 				if file_type != "IGNORE":
 					var license_str := "NONE"

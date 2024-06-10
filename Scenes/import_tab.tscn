@@ -79,8 +79,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 25
-text = "Add tags to all:
-"
+text = "Add tags to all: "
 
 [node name="Tags" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/TagOption"]
 layout_mode = 2
@@ -95,8 +94,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 25
-text = "Set license for all:
-"
+text = "Set license for all: "
 
 [node name="License" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/LicenseOption"]
 layout_mode = 2
@@ -109,10 +107,8 @@ size_flags_vertical = 3
 
 [node name="Label4" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/RemoveFormatsOption"]
 layout_mode = 2
-size_flags_vertical = 6
 theme_override_font_sizes/font_size = 25
-text = "Remove file formats from names:
-"
+text = "Remove file formats from names: "
 
 [node name="RemoveFormats" type="CheckButton" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/RemoveFormatsOption"]
 layout_mode = 2
