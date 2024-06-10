@@ -48,6 +48,7 @@ ignore_formats = PackedStringArray("", "xml", "url", "import")
 [node name="Spacer" type="Control" parent="MarginContainer/Menu"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/Menu"]
 layout_mode = 2
@@ -72,6 +73,7 @@ size_flags_vertical = 3
 
 [node name="TagOption" type="HBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Label2" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/TagOption"]
 layout_mode = 2
@@ -87,6 +89,7 @@ placeholder_text = "Tag1 Tag2 ..."
 
 [node name="LicenseOption" type="HBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Label3" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/LicenseOption"]
 layout_mode = 2
@@ -102,6 +105,7 @@ placeholder_text = "eg. CC0"
 
 [node name="RemoveFormatsOption" type="HBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Label4" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/RemoveFormatsOption"]
 layout_mode = 2
@@ -116,6 +120,7 @@ size_flags_horizontal = 10
 
 [node name="ReplaceOption" type="HBoxContainer" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Label5" type="Label" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
 layout_mode = 2
