@@ -36,7 +36,13 @@ theme_override_constants/margin_bottom = 200
 layout_mode = 2
 alignment = 1
 
-[node name="FilesImporter" parent="MarginContainer/Menu" instance=ExtResource("2_sqgxq")]
+[node name="FilesImporter" parent="MarginContainer/Menu" node_paths=PackedStringArray("tags", "license", "remove_formats", "replace_from", "replace_to", "replace") instance=ExtResource("2_sqgxq")]
+tags = NodePath("../HBoxContainer2/OptionsAndButtons/Options/TagOption/Tags")
+license = NodePath("../HBoxContainer2/OptionsAndButtons/Options/LicenseOption/License")
+remove_formats = NodePath("../HBoxContainer2/OptionsAndButtons/Options/RemoveFormatsOption/RemoveFormats")
+replace_from = NodePath("../HBoxContainer2/OptionsAndButtons/Options/ReplaceOption/ReplaceFrom")
+replace_to = NodePath("../HBoxContainer2/OptionsAndButtons/Options/ReplaceOption/ReplaceTo")
+replace = NodePath("../HBoxContainer2/OptionsAndButtons/Options/ReplaceOption/Replace")
 ignore_formats = PackedStringArray("", "xml", "url", "import")
 
 [node name="Spacer" type="Control" parent="MarginContainer/Menu"]
@@ -74,7 +80,7 @@ theme_override_font_sizes/font_size = 25
 text = "Add tags to all:
 "
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/TagOption"]
+[node name="Tags" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/TagOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Tag1 Tag2 ..."
@@ -89,7 +95,7 @@ theme_override_font_sizes/font_size = 25
 text = "Set license for all:
 "
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/LicenseOption"]
+[node name="License" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/LicenseOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "eg. CC0"
@@ -104,7 +110,7 @@ theme_override_font_sizes/font_size = 25
 text = "Remove file formats from names:
 "
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/RemoveFormatsOption"]
+[node name="RemoveFormats" type="CheckButton" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/RemoveFormatsOption"]
 layout_mode = 2
 size_flags_horizontal = 10
 
@@ -117,7 +123,7 @@ size_flags_vertical = 6
 theme_override_font_sizes/font_size = 25
 text = "Replace "
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
+[node name="ReplaceFrom" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "text"
@@ -128,7 +134,7 @@ size_flags_vertical = 6
 theme_override_font_sizes/font_size = 25
 text = "with "
 
-[node name="LineEdit2" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
+[node name="ReplaceTo" type="LineEdit" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "new text"
@@ -139,7 +145,7 @@ size_flags_vertical = 6
 theme_override_font_sizes/font_size = 25
 text = "in all names."
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
+[node name="Replace" type="CheckButton" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Options/ReplaceOption"]
 layout_mode = 2
 
 [node name="Spacer2" type="Control" parent="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons"]

@@ -12,8 +12,12 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 		# Items
 		"show_all_items":
 			# TODO should change later
-			items_manager.update_items( DatabaseManager.get_items_from_to( 0, 200 ) )
+			items_manager.update_items( DatabaseManager.get_items_all() )
 		"search_tags":
+			var new_search_text : String = items_manager.COMMAND_TAG
+			for tag in arguements[ "tags" ]:
+				new_search_text += tag
+			items_manager.search_text.text = new_search_text
 			items_manager.update_items( DatabaseManager.get_items_by_tag( arguements[ "tags" ] ) )
 		
 		# Side Panel

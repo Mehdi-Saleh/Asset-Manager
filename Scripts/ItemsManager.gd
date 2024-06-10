@@ -5,18 +5,31 @@ const COMMAND_TAG := ":tag "
 const COMMAND_TYPE := ":type "
 const COMMAND_LICENSE := ":license "
 
+const NUM_OF_ITEMS_TO_LOAD := 100
+const LOAD_MORE_ON_SCROLL_VALUE := 0.9
+
 @export var item_scene : PackedScene
-@export var items_parent : Node
+@export var items_parent : Control
+@export var items_scroll_container : ScrollContainer
 @export var search_text : LineEdit
 
 var items_active : Array[Item]
 var items_inactive : Array[Item]
+
+var last_query : Array[Dictionary]
+var last_loaded_from_query : int = -1
+var scroll_value : float = 0.0 # 0.0 to 1.0
 
 
 func _ready():
 	SignalBus.items_manager = self
 	
 	SignalBus.receive_signal( "show_all_items" )
+
+
+func _process(delta):
+	if Input.is_action_just_released( "update_scroll" ):
+		_on_scroll_container_scroll_ended()
 
 
 ## Instanciates a new item object with the given values. (Objects are pooled.)
@@ -40,10 +53,27 @@ func remove_item( item : Item ):
 	items_active.remove_at( item.item_id )
 	items_inactive.append( item )
 	item.hide()
-	
+
+
+## Instanciates more items. Used to prevent instanciating everything at once! 
+## Returns true if any items were actually instanciated
+func _load_more_items() -> bool:
+	var query_size := last_query.size()
+	if query_size > last_loaded_from_query:
+		var target_load : int = last_loaded_from_query + NUM_OF_ITEMS_TO_LOAD
+		if target_load >= query_size:
+			target_load = query_size - 1
+		for item in last_query.slice( last_loaded_from_query+1, target_load+1 ):
+			instanciate_item( item[ "id" ], item[ "name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ] )
+		last_loaded_from_query = target_load
+		return true
+	else:
+		return false
+
 
 ## Disables all active item objects and adds them back to the pool.
 func clear_items():
+	last_query.clear()
 	for i in range( items_active.size()-1, -1, -1):
 		items_active[i].hide()
 		items_inactive.append( items_active[i] )
@@ -51,15 +81,19 @@ func clear_items():
 
 
 ## Instanciates item objects but does not clear previous ones.
-func append_items( items : Array[Dictionary] ):
+func append_items( items : Array[Dictionary], load_items : bool = true ):
 	for item in items:
-		instanciate_item( item[ "id" ], item[ "name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ] )
+		last_query.append_array( items )
+		#instanciate_item( item[ "id" ], item[ "name" ], item[ "type" ], item[ "license" ], item[ "location" ], item[ "pic_location" ] )
+		if load_items:
+			_load_more_items()
 
 
 ## Clears and re-instanciates all item objects.
 func update_items( items : Array[Dictionary] ):
 	clear_items()
-	append_items( items )
+	append_items( items, false )
+	_load_more_items()
 
 
 #func _on_tab_container_tab_selected(tab):
@@ -114,3 +148,11 @@ func _on_search_button_pressed():
 
 func _on_search_text_text_submitted( text ):
 	search()
+
+
+func _on_scroll_container_scroll_ended():
+	var max_scroll_value : float = max( 0.0, float( items_parent.get_rect().size.y - items_scroll_container.get_rect().size.y ))
+	scroll_value = float( items_scroll_container.scroll_vertical ) / max_scroll_value
+	print( scroll_value )
+	if scroll_value >= LOAD_MORE_ON_SCROLL_VALUE:
+		_load_more_items()

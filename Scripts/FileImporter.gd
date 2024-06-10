@@ -4,11 +4,17 @@ extends Node
 # TODO change / to \ if on windows
 
 @onready var file_dialog : FileDialog = $FileDialog
-#@export var address_text : TextEdit
 
 
-#@export_category( "References" )
-#@export var arr : int
+@export_category( "Options" )
+@export var tags : LineEdit
+var extracted_tags : PackedStringArray
+@export var license : LineEdit
+@export var remove_formats : CheckButton
+@export var replace_from : LineEdit
+@export var replace_to : LineEdit
+@export var replace : CheckButton
+
 
 @export_category( "File Types" )
 @export var ignore_formats : PackedStringArray
@@ -56,6 +62,8 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 		DatabaseManager.create_tables()
 	if not _is_sub_generation:
 		print( "Importing..." )
+		if not tags.text.is_empty():
+			extracted_tags = tags.text.split( " ", false )
 	
 	# TODO consider options as well (add tags to all, etc.).
 	
@@ -74,7 +82,13 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 				text += "-->" + file_name + "\n"
 				var file_type : StringName = get_file_type( file_name )
 				if file_type != "IGNORE":
-					DatabaseManager.add_asset( file_name, file_type, "NONE", path )
+					var license_str := "NONE"
+					if not license.text.is_empty():
+						license_str = license.text
+					if extracted_tags.is_empty():
+						DatabaseManager.add_asset( file_name, file_type, license_str, path )
+					else:
+						DatabaseManager.add_asset( file_name, file_type, license_str, path, extracted_tags )
 			file_name = dir.get_next()
 	else:
 		assert("An error occurred when trying to access the path.")

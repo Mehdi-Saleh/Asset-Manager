@@ -77,10 +77,11 @@ offset_bottom = 649.0
 theme = ExtResource("1_buci7")
 dragger_visibility = 1
 
-[node name="ItemsManager" type="Node" parent="." node_paths=PackedStringArray("items_parent", "search_text")]
+[node name="ItemsManager" type="Node" parent="." node_paths=PackedStringArray("items_parent", "items_scroll_container", "search_text")]
 script = ExtResource("2_xexwd")
 item_scene = ExtResource("3_7xff7")
 items_parent = NodePath("../VBoxContainer/ScrollContainer/Items")
+items_scroll_container = NodePath("../VBoxContainer/ScrollContainer")
 search_text = NodePath("../VBoxContainer/SearchBar/PanelContainer/SearchText")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -121,6 +122,7 @@ expand_icon = true
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+follow_focus = true
 horizontal_scroll_mode = 0
 script = SubResource("GDScript_lvsl8")
 
@@ -258,6 +260,7 @@ script = SubResource("GDScript_5ttg3")
 
 [connection signal="text_submitted" from="VBoxContainer/SearchBar/PanelContainer/SearchText" to="ItemsManager" method="_on_search_text_text_submitted"]
 [connection signal="pressed" from="VBoxContainer/SearchBar/PanelContainer/SearchButton" to="ItemsManager" method="_on_search_button_pressed"]
+[connection signal="scroll_ended" from="VBoxContainer/ScrollContainer" to="ItemsManager" method="_on_scroll_container_scroll_ended"]
 [connection signal="visibility_changed" from="SidePanel" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_side_panel_visibility_changed"]
 [connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/AddTag" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_add_tag_pressed"]
 [connection signal="focus_exited" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_tag_line_edit_focus_exited"]

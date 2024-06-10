@@ -17,6 +17,7 @@ var main_table_template := {
 	"type" : { "data_type":"text", "not_null":true,  },
 	"license" : { "data_type":"text", "not_null":true,  },
 }
+# TODO info table
 var tags_table_template := {
 	"id" : { "data_type":"int", "primary_key":true, "not_null":true, "auto_increment":true },
 	"tag" : { "data_type":"text", "not_null":true,  },
@@ -65,7 +66,7 @@ func create_tables():
 	database.create_table( NEW_TABLE_NAME, new_table_template)
 
 ## Adds a new asset to the database if it doesn't already exist there.
-func add_asset( name:String, type:String, license:String, location:String, pic_location:String = "DEFAULT" ):
+func add_asset( name:String, type:String, license:String, location:String, tags:PackedStringArray=PackedStringArray(), pic_location:String = "DEFAULT" ):
 	var data : Dictionary = {
 		"name" : name, # TODO add custom names
 		"real_name" : name,
@@ -80,23 +81,33 @@ func add_asset( name:String, type:String, license:String, location:String, pic_l
 	if not database.query_result.size() > 0:
 		database.insert_row( MAIN_TABLE_NAME, data )
 	
-	
+	if not tags.is_empty():
+		database.query( " Select id FROM " + MAIN_TABLE_NAME + " WHERE real_name=\"" + name + "\" AND location=\"" + location + "\" ;" )
+		var id : int = database.query_result.front()[ "id" ]
+		add_tags( tags, id )
 	
 	# TODO
 	#var id : int = get_item_id( name )
 	#for tag in tags:
 			#add_tag( tag, id )
-	
+
 
 ## Adds a tag to an already existing item.
-func add_tag( tag:StringName, id_main:int ):
+func add_tag( tag:StringName, item_id:int ):
+	# TODO do not add repeated tags
 	database.query( "SELECT id FROM " + TAGS_TABLE_NAME + " WHERE tag=\"" + tag + "\";" )
 	if database.query_result.size() == 0:
 		database.insert_row( TAGS_TABLE_NAME, { "tag":str(tag) } )
 		database.query( "SELECT id FROM " + TAGS_TABLE_NAME + " WHERE tag=\"" + tag + "\";" )
 	
-	var id_tag : int = database.query_result[0] [ "id" ]
-	database.insert_row( MAIN_TAGS_TABLE_NAME, { "id_main" : id_main, "id_tag" : id_tag })
+	var tag_id : int = database.query_result[0] [ "id" ]
+	database.insert_row( MAIN_TAGS_TABLE_NAME, { "id_main" : item_id, "id_tag" : tag_id })
+
+
+## Adds the given tags to the item
+func add_tags( tags:PackedStringArray, item_id:int ):
+	for tag in tags:
+		add_tag( tag, item_id )
 
 
 # TODO Removes an asset from the database
