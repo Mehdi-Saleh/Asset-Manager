@@ -22,11 +22,17 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 		
 		# Side Panel
 		"open_side_panel":
+			items_manager.set_last_line_count()
 			side_panel.open_panel()
+			items_manager.update_scroll_relative()
 		"close_side_panel":
+			items_manager.set_last_line_count()
 			side_panel.close_panel()
+			items_manager.update_scroll_relative()
 		"show_in_side_panel":
+			items_manager.set_last_line_count()
 			side_panel.show_item( arguements[ "id" ] )
+			items_manager.update_scroll_relative()
 		"add_tag_side_panel":
 			DatabaseManager.add_tag( arguements[ "tag" ], side_panel.get_current_item_id() )
 			side_panel.show_item( side_panel.get_current_item_id() )

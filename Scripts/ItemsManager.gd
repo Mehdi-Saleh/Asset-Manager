@@ -9,7 +9,7 @@ const NUM_OF_ITEMS_TO_LOAD := 100
 const LOAD_MORE_ON_SCROLL_VALUE := 0.9
 
 @export var item_scene : PackedScene
-@export var items_parent : Control
+@export var items_parent : FlowContainer
 @export var items_scroll_container : ScrollContainer
 @export var search_text : LineEdit
 
@@ -19,10 +19,12 @@ var items_inactive : Array[Item]
 var last_query : Array[Dictionary]
 var last_loaded_from_query : int = -1
 var scroll_value : float = 0.0 # 0.0 to 1.0
+var last_line_count : int = 0
 
 
 func _ready():
 	SignalBus.items_manager = self
+	get_window().size_changed.connect( update_scroll_relative )
 	
 	SignalBus.receive_signal( "show_all_items" )
 
@@ -59,7 +61,6 @@ func remove_item( item : Item ):
 ## Returns true if any items were actually instanciated
 func _load_more_items() -> bool:
 	var query_size := last_query.size()
-	print( last_query.size() )
 	if query_size >= last_loaded_from_query:
 		var target_load : int = last_loaded_from_query + NUM_OF_ITEMS_TO_LOAD
 		if target_load >= query_size:
@@ -70,6 +71,8 @@ func _load_more_items() -> bool:
 		return true
 	else:
 		return false
+	
+	last_line_count = items_parent.get_line_count()
 
 
 ## Disables all active item objects and adds them back to the pool.
@@ -144,6 +147,29 @@ func search_license( text : StringName ):
 	append_items( DatabaseManager.get_items_by_license( text ) )
 
 
+func get_scroll_value() -> float:
+	var max_scroll_value : float = max( 0.0, float( items_parent.get_rect().size.y - items_scroll_container.get_rect().size.y ))
+	scroll_value = float( items_scroll_container.scroll_vertical ) / max_scroll_value
+	return scroll_value
+
+
+func set_scroll_value( value : float ) -> void:
+	var max_scroll_value : float = max( 0.0, float( items_parent.get_rect().size.y - items_scroll_container.get_rect().size.y ))
+	items_scroll_container.scroll_vertical = int( value * max_scroll_value )
+
+
+## Change scroll value an container size change to always stay on the same item.
+func update_scroll_relative():
+	var line_count := items_parent.get_line_count()
+	if last_line_count != 0 and last_line_count != line_count:
+		set_scroll_value( get_scroll_value() * float( last_line_count) / float( line_count ) )
+	last_line_count = line_count
+
+
+func set_last_line_count():
+	last_line_count = items_parent.get_line_count()
+
+
 func _on_search_button_pressed():
 	search()
 
@@ -153,7 +179,6 @@ func _on_search_text_text_submitted( text ):
 
 
 func _on_scroll_container_scroll_ended():
-	var max_scroll_value : float = max( 0.0, float( items_parent.get_rect().size.y - items_scroll_container.get_rect().size.y ))
-	scroll_value = float( items_scroll_container.scroll_vertical ) / max_scroll_value
-	if scroll_value >= LOAD_MORE_ON_SCROLL_VALUE:
+	if get_scroll_value() >= LOAD_MORE_ON_SCROLL_VALUE:
 		_load_more_items()
+	print( get_scroll_value() )

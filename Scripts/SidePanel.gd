@@ -24,7 +24,7 @@ func _ready():
 
 func open_panel():
 	show()
-	open_panel_button.hide()
+	#open_panel_button.hide()
 	main_split_container.dragger_visibility = SplitContainer.DRAGGER_VISIBLE
 
 
