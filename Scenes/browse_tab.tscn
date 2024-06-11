@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cu3k4xm46mqj8"]
+[gd_scene load_steps=16 format=3 uid="uid://cu3k4xm46mqj8"]
 
 [ext_resource type="Theme" uid="uid://cugx6eklcnakn" path="res://Scenes/MainTheme.tres" id="1_buci7"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="2_mddpf"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://Scripts/SidePanel.gd" id="5_ocswk"]
 [ext_resource type="PackedScene" uid="uid://c76mmn8b6ppi1" path="res://Scenes/tag.tscn" id="6_4ewky"]
 [ext_resource type="Texture2D" uid="uid://cca3if7yufh3t" path="res://Graphics/Delta01__#Delta01_white_RIGHT__48p.png" id="8_kmmnn"]
+[ext_resource type="PackedScene" uid="uid://dscteyb1pwi2l" path="res://Scenes/editable_label.tscn" id="8_mce1d"]
+[ext_resource type="StyleBox" uid="uid://bslkvwyq55gbx" path="res://label.tres" id="9_o0roc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8y041"]
 
@@ -177,6 +179,7 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -191,24 +194,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Open Containing Folder"
 
-[node name="Name" type="Label" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Name" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("8_mce1d")]
 layout_mode = 2
-size_flags_vertical = 0
-text = "Name"
-horizontal_alignment = 1
-
-[node name="Edit" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Name"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -23.0
-grow_horizontal = 0
-grow_vertical = 2
-icon = ExtResource("2_mddpf")
-icon_alignment = 2
-expand_icon = true
 
 [node name="Location" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
@@ -218,41 +205,37 @@ text = "Location: ://staustnah/hausetuah/uhtasuheuasnuasuh"
 alignment = 0
 text_overrun_behavior = 3
 
-[node name="Type" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Type" type="HBoxContainer" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 0
-text = "Type: Graphic2D"
 
-[node name="Edit" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Type"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -31.0
-grow_horizontal = 0
-grow_vertical = 2
-icon = ExtResource("2_mddpf")
-icon_alignment = 2
-expand_icon = true
-
-[node name="License" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Type"]
 layout_mode = 2
-size_flags_vertical = 0
-text = "License: CC0"
+size_flags_vertical = 1
+theme_override_styles/normal = ExtResource("9_o0roc")
+text = " Type: "
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Edit" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/License"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -31.0
-grow_horizontal = 0
-grow_vertical = 2
-icon = ExtResource("2_mddpf")
-icon_alignment = 2
-expand_icon = true
+[node name="Type" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Type" instance=ExtResource("8_mce1d")]
+layout_mode = 2
+size_flags_horizontal = 3
+whats_this_for = "type"
+
+[node name="License" type="HBoxContainer" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/License"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = ExtResource("9_o0roc")
+text = " License: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="License" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/License" instance=ExtResource("8_mce1d")]
+layout_mode = 2
+size_flags_horizontal = 3
+whats_this_for = "license"
 
 [node name="Tags" type="HFlowContainer" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -273,6 +256,7 @@ theme_override_colors/font_color = Color(0.584314, 0.458824, 0.870588, 1)
 text = "+Add"
 
 [node name="TagLineEdit" type="LineEdit" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags"]
+visible = false
 layout_mode = 2
 
 [node name="CloseSidePanel" type="Button" parent="SidePanel"]
@@ -303,8 +287,8 @@ script = SubResource("GDScript_5ttg3")
 [connection signal="scroll_ended" from="VBoxContainer/ScrollContainer" to="ItemsManager" method="_on_scroll_container_scroll_ended"]
 [connection signal="visibility_changed" from="SidePanel" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_side_panel_visibility_changed"]
 [connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Location" to="SidePanel" method="_on_location_pressed"]
-[connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Type" to="SidePanel" method="_on_type_pressed"]
-[connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/License" to="SidePanel" method="_on_license_pressed"]
+[connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Type/Type" to="SidePanel" method="_on_type_pressed"]
+[connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/License/License" to="SidePanel" method="_on_license_pressed"]
 [connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/AddTag" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_add_tag_pressed"]
 [connection signal="focus_exited" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_tag_line_edit_focus_exited"]
 [connection signal="text_submitted" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_line_edit_text_submitted"]

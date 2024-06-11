@@ -5,6 +5,7 @@ extends Node
 const MAIN_TABLE_NAME : StringName = "Main"
 const TAGS_TABLE_NAME : StringName = "Tags"
 const MAIN_TAGS_TABLE_NAME : StringName = "Main_Tags"
+const NOTES_TABLE_NAME : StringName = "Notes"
 const NEW_TABLE_NAME : StringName = "New"
 
 # Table templates (tables are created according to these when creating a new database)
@@ -26,6 +27,11 @@ var main_tags_table_template := {
 	"id" : { "data_type":"int", "primary_key":true, "not_null":true, "auto_increment":true },
 	"id_main" : { "data_type":"int", "not_null":true,  },
 	"id_tag" : { "data_type":"int", "not_null":true,  },
+}
+var notes_table_template := {
+	"id" : { "data_type":"int", "primary_key":true, "not_null":true, "auto_increment":true },
+	"id_main" : { "data_type":"int", "not_null":true,  },
+	"note" : { "data_type":"text", "not_null":true,  },
 }
 var new_table_template := {
 	"id" : { "data_type":"int", "primary_key":true, "not_null":true },
@@ -51,19 +57,25 @@ func init():
 func create_tables():
 	# Main table
 	database.drop_table( MAIN_TABLE_NAME )
-	database.create_table( MAIN_TABLE_NAME, main_table_template)
+	database.create_table( MAIN_TABLE_NAME, main_table_template )
 	
 	# Tags table
 	database.drop_table( TAGS_TABLE_NAME )
-	database.create_table( TAGS_TABLE_NAME, tags_table_template)
+	database.create_table( TAGS_TABLE_NAME, tags_table_template )
 	
 	# Main <-> Tags table
 	database.drop_table( MAIN_TAGS_TABLE_NAME )
-	database.create_table( MAIN_TAGS_TABLE_NAME, main_tags_table_template)
+	database.create_table( MAIN_TAGS_TABLE_NAME, main_tags_table_template )
 	
+	# TODO
+	# Notes table
+	database.drop_table( NOTES_TABLE_NAME )
+	database.create_table( NOTES_TABLE_NAME, notes_table_template )
+	
+	# TODO
 	# New enteries table
 	database.drop_table( NEW_TABLE_NAME )
-	database.create_table( NEW_TABLE_NAME, new_table_template)
+	database.create_table( NEW_TABLE_NAME, new_table_template )
 
 ## Adds a new asset to the database if it doesn't already exist there.
 func add_asset( name:String, real_name:String, type:String, license:String, location:String, tags:PackedStringArray=PackedStringArray(), pic_location:String = "DEFAULT" ):
@@ -115,7 +127,8 @@ func remove_asset( location:StringName ):
 	pass
 
 # TODO func to update an item
-
+func update_item( id:int, values:Dictionary ):
+	database.update_rows( MAIN_TABLE_NAME, "id = " + str( id ) + ";", values )
 
 ## Returns every item in the database. 
 ## It is not recommended to use this often as the number of items

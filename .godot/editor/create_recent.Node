@@ -1,14 +1,14 @@
+Label
+HBoxContainer
 Button
-TagItem
 LineEdit
+TagItem
 Panel
 Control
 PanelContainer
-HBoxContainer
 Node
 TextureRect
 MarginContainer
-Label
 HFlowContainer
 CheckButton
 TextEdit

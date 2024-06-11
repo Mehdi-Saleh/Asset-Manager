@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://dscteyb1pwi2l"]
+
+[ext_resource type="Script" path="res://Scripts/EditableLabel.gd" id="1_v012k"]
+[ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="2_co4w6"]
+
+[node name="EditableLabel" type="Button"]
+size_flags_vertical = 0
+text = "Name"
+text_overrun_behavior = 3
+script = ExtResource("1_v012k")
+
+[node name="Edit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+grow_horizontal = 0
+grow_vertical = 2
+icon = ExtResource("2_co4w6")
+icon_alignment = 2
+expand_icon = true
+
+[node name="LineEdit" type="LineEdit" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+select_all_on_focus = true
+
+[connection signal="pressed" from="Edit" to="." method="_on_edit_pressed"]
+[connection signal="focus_exited" from="LineEdit" to="." method="_on_line_edit_focus_exited"]
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

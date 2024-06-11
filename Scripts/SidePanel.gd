@@ -7,10 +7,10 @@ extends PanelContainer
 
 @onready var preview : TextureRect = $MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/Preview
 @export var default_preview_pic_location : StringName
-@onready var title : Label = $MarginContainer/ScrollContainer/VBoxContainer/Name
+@onready var title : EditableLabel = $MarginContainer/ScrollContainer/VBoxContainer/Name
 @onready var location : Button = $MarginContainer/ScrollContainer/VBoxContainer/Location
-@onready var type : Button = $MarginContainer/ScrollContainer/VBoxContainer/Type
-@onready var license : Button = $MarginContainer/ScrollContainer/VBoxContainer/License
+@onready var type : EditableLabel = $MarginContainer/ScrollContainer/VBoxContainer/Type/Type
+@onready var license : EditableLabel = $MarginContainer/ScrollContainer/VBoxContainer/License/License
 @onready var tags_parent : Node = $MarginContainer/ScrollContainer/VBoxContainer/Tags
 @onready var tag_label : Button = $MarginContainer/ScrollContainer/VBoxContainer/Tags/Tag
 
@@ -20,6 +20,10 @@ var current_item : Dictionary
 
 func _ready():
 	SignalBus.side_panel = self
+	
+	title.change_item.connect( on_label_changed )
+	type.change_item.connect( on_label_changed )
+	license.change_item.connect( on_label_changed )
 
 
 func open_panel():
@@ -49,8 +53,8 @@ func show_item( item_id : int):
 	# Set labels values
 	title.text = current_item[ "name" ]
 	location.text = "Location: " + current_item[ "location" ] + "/" + current_item[ "real_name" ]
-	type.text = "Type: " + current_item[ "type" ]
-	license.text = "License: " + current_item[ "license" ]
+	type.text = current_item[ "type" ]
+	license.text = current_item[ "license" ]
 	
 	# TODO needs optimization
 	var tag_items : Array = tags_parent.get_children()
@@ -105,3 +109,10 @@ func _on_type_pressed():
 func _on_license_pressed():
 	SignalBus.receive_signal( "show_items", { "items" : DatabaseManager.get_items_by_license( current_item[ "license" ] ),
 	"new_search_text" : ItemsManager.COMMAND_LICENSE + current_item[ "license" ] } )
+
+
+# TODO doesn't work!
+func on_label_changed( whats_the_label_for : StringName, new_value : StringName ):
+	var new_item := current_item.duplicate()
+	new_item[ whats_the_label_for ] = new_value
+	DatabaseManager.update_item( current_item[ "id" ], new_item )

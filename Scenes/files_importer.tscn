@@ -10,6 +10,7 @@ graphic_3d_formats = PackedStringArray("fbx", "obj", "blend")
 audio_formats = PackedStringArray("wav", "ogg", "mp3", "wma", "flac", "aac")
 code_text_formats = PackedStringArray("gd", "cs", "c", "cpp", "h", "py")
 info_text_formats = PackedStringArray("txt", "doc", "docx", "xls", "xlsx", "pdf", "json")
+package_formats = PackedStringArray("zip", "rar", "pkg")
 
 [node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a Directory"

@@ -23,6 +23,7 @@ var extracted_tags : PackedStringArray
 @export var audio_formats : PackedStringArray
 @export var code_text_formats : PackedStringArray
 @export var info_text_formats : PackedStringArray
+@export var package_formats : PackedStringArray
 
 
 var import_mode : ImportMode ## New clears all the tables before importing but Updates does not clear anything.
@@ -130,6 +131,8 @@ func get_file_type( file_name : StringName ) -> StringName:
 		return "Graphic2D"
 	elif format in graphic_3d_formats:
 		return "Graphic3D"
+	elif format in package_formats:
+		return "Package"
 	else:
 		return "NONE"
 	

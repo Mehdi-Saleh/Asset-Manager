@@ -27,6 +27,8 @@ func _ready():
 	get_window().size_changed.connect( update_scroll_relative )
 	
 	SignalBus.receive_signal( "show_all_items" )
+	
+	search_text.grab_focus()
 
 
 func _process(delta):
