@@ -19,6 +19,10 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 				new_search_text += tag
 			items_manager.search_text.text = new_search_text
 			items_manager.update_items( DatabaseManager.get_items_by_tag( arguements[ "tags" ] ) )
+		"show_items":
+			items_manager.update_items( arguements[ "items" ] )
+			if arguements.has( "new_search_text" ):
+				items_manager.search_text.text = arguements[ "new_search_text" ]
 		
 		# Side Panel
 		"open_side_panel":

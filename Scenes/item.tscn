@@ -11,7 +11,7 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 script = ExtResource("1_1r5sf")
 preview = NodePath("VBoxContainer/Picture/Preview/TextureRect")
-open_button = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/Open")
+open_button = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/OpenFolder")
 folder_button = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/Folder")
 name_text = NodePath("VBoxContainer/Info/VBoxContainer/MiddleBar/Name")
 type_text = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer/Type")
@@ -66,12 +66,13 @@ layout_mode = 2
 [node name="TopBar" type="HBoxContainer" parent="VBoxContainer/Info/VBoxContainer"]
 layout_mode = 2
 
-[node name="Open" type="Button" parent="VBoxContainer/Info/VBoxContainer/TopBar"]
+[node name="OpenFolder" type="Button" parent="VBoxContainer/Info/VBoxContainer/TopBar"]
 layout_mode = 2
 keep_pressed_outside = true
-text = "Open"
+text = "Open Folder"
 
 [node name="Folder" type="Button" parent="VBoxContainer/Info/VBoxContainer/TopBar"]
+visible = false
 layout_mode = 2
 text = "Folder
 "
@@ -107,3 +108,6 @@ visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/Picture/Preview" to="." method="_on_preview_pressed"]
+[connection signal="pressed" from="VBoxContainer/Info/VBoxContainer/TopBar/OpenFolder" to="." method="_on_open_folder_pressed"]
+[connection signal="pressed" from="VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer/Type" to="." method="_on_type_pressed"]
+[connection signal="pressed" from="VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer/License" to="." method="_on_license_pressed"]

@@ -197,22 +197,62 @@ size_flags_vertical = 0
 text = "Name"
 horizontal_alignment = 1
 
-[node name="Location" type="Label" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Edit" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Name"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+grow_horizontal = 0
+grow_vertical = 2
+icon = ExtResource("2_mddpf")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Location" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_vertical = 0
 text = "Location: ://staustnah/hausetuah/uhtasuheuasnuasuh"
-autowrap_mode = 3
+alignment = 0
+text_overrun_behavior = 3
 
-[node name="Type" type="Label" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Type" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Type: Graphic2D"
 
-[node name="License" type="Label" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Edit" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Type"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -31.0
+grow_horizontal = 0
+grow_vertical = 2
+icon = ExtResource("2_mddpf")
+icon_alignment = 2
+expand_icon = true
+
+[node name="License" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "License: CC0"
+
+[node name="Edit" type="Button" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/License"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -31.0
+grow_horizontal = 0
+grow_vertical = 2
+icon = ExtResource("2_mddpf")
+icon_alignment = 2
+expand_icon = true
 
 [node name="Tags" type="HFlowContainer" parent="SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -262,6 +302,9 @@ script = SubResource("GDScript_5ttg3")
 [connection signal="pressed" from="VBoxContainer/SearchBar/PanelContainer/SearchButton" to="ItemsManager" method="_on_search_button_pressed"]
 [connection signal="scroll_ended" from="VBoxContainer/ScrollContainer" to="ItemsManager" method="_on_scroll_container_scroll_ended"]
 [connection signal="visibility_changed" from="SidePanel" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_side_panel_visibility_changed"]
+[connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Location" to="SidePanel" method="_on_location_pressed"]
+[connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Type" to="SidePanel" method="_on_type_pressed"]
+[connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/License" to="SidePanel" method="_on_license_pressed"]
 [connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/AddTag" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_add_tag_pressed"]
 [connection signal="focus_exited" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_tag_line_edit_focus_exited"]
 [connection signal="text_submitted" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_line_edit_text_submitted"]

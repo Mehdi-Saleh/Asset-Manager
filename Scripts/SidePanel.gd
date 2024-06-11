@@ -8,9 +8,9 @@ extends PanelContainer
 @onready var preview : TextureRect = $MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/Preview
 @export var default_preview_pic_location : StringName
 @onready var title : Label = $MarginContainer/ScrollContainer/VBoxContainer/Name
-@onready var location : Label = $MarginContainer/ScrollContainer/VBoxContainer/Location
-@onready var type : Label = $MarginContainer/ScrollContainer/VBoxContainer/Type
-@onready var license : Label = $MarginContainer/ScrollContainer/VBoxContainer/License
+@onready var location : Button = $MarginContainer/ScrollContainer/VBoxContainer/Location
+@onready var type : Button = $MarginContainer/ScrollContainer/VBoxContainer/Type
+@onready var license : Button = $MarginContainer/ScrollContainer/VBoxContainer/License
 @onready var tags_parent : Node = $MarginContainer/ScrollContainer/VBoxContainer/Tags
 @onready var tag_label : Button = $MarginContainer/ScrollContainer/VBoxContainer/Tags/Tag
 
@@ -91,3 +91,17 @@ func _on_close_side_panel_pressed():
 
 func _on_open_side_panel_pressed():
 	open_panel()
+
+
+func _on_location_pressed():
+	OS.shell_show_in_file_manager( current_item[ "location" ] + "/" + current_item[ "real_name" ] )
+
+
+func _on_type_pressed():
+	SignalBus.receive_signal( "show_items", { "items" : DatabaseManager.get_items_by_type( current_item[ "type" ] ),
+	 "new_search_text" : ItemsManager.COMMAND_TYPE + current_item[ "type" ] } )
+
+
+func _on_license_pressed():
+	SignalBus.receive_signal( "show_items", { "items" : DatabaseManager.get_items_by_license( current_item[ "license" ] ),
+	"new_search_text" : ItemsManager.COMMAND_LICENSE + current_item[ "license" ] } )

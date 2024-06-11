@@ -1,4 +1,5 @@
 Button
+TagItem
 LineEdit
 Panel
 Control
@@ -11,4 +12,3 @@ Label
 HFlowContainer
 CheckButton
 TextEdit
-RichTextLabel

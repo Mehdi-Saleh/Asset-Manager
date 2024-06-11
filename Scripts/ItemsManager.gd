@@ -78,11 +78,11 @@ func _load_more_items() -> bool:
 ## Disables all active item objects and adds them back to the pool.
 func clear_items():
 	last_query.clear()
+	last_loaded_from_query = -1
 	for i in range( items_active.size()-1, -1, -1):
 		items_active[i].hide()
 		items_inactive.append( items_active[i] )
 	items_active.clear()
-	print( last_query.size() )
 
 
 ## Instanciates item objects but does not clear previous ones.
@@ -94,7 +94,6 @@ func append_items( items : Array[Dictionary], load_items : bool = true ):
 
 ## Clears and re-instanciates all item objects.
 func update_items( items : Array[Dictionary] ):
-	print( items.size() )
 	clear_items()
 	append_items( items, false )
 	last_loaded_from_query = -1
@@ -181,4 +180,3 @@ func _on_search_text_text_submitted( text ):
 func _on_scroll_container_scroll_ended():
 	if get_scroll_value() >= LOAD_MORE_ON_SCROLL_VALUE:
 		_load_more_items()
-	print( get_scroll_value() )

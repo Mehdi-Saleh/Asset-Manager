@@ -160,7 +160,6 @@ func get_tags_by_id( id : int ) -> PackedStringArray:
 
 ## Returns items using the given ids.
 func get_items_by_id( ids : PackedInt32Array ) -> Array[Dictionary]:
-	print( ids )
 	var array_string := array_to_sql_list( str( ids ) )
 	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE id IN" + array_string + ";")
 	return database.query_result

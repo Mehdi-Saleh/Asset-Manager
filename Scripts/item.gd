@@ -72,3 +72,17 @@ func load_thumbnail():
 
 func _on_preview_pressed():
 	SignalBus.receive_signal( "show_in_side_panel", { "id" : item_id } )
+
+
+func _on_open_folder_pressed():
+	OS.shell_show_in_file_manager( location )
+
+
+func _on_type_pressed():
+	SignalBus.receive_signal( "show_items", { "items" : DatabaseManager.get_items_by_type( type ),
+	"new_search_text" : ItemsManager.COMMAND_TYPE + type } )
+
+
+func _on_license_pressed():
+	SignalBus.receive_signal( "show_items", { "items" : DatabaseManager.get_items_by_license( license ),
+	"new_search_text" : ItemsManager.COMMAND_LICENSE + license } )
