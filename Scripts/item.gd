@@ -11,7 +11,7 @@ extends Control
 @export var tags_parent : Node
 @export var tag_scene : PackedScene
 
-@export var default_pic_location : StringName
+@export var default_pic : Image
 
 
 var name_str : StringName
@@ -62,11 +62,10 @@ func initialize( item_id:int, name:StringName, file_name:StringName, type:String
 # TODO thumbnail generation
 ## Loads thumbnail from pic_location.
 func load_thumbnail():
-	var image = Image.new()
 	if type == "Graphic2D": 
-		preview.texture = ImageTexture.create_from_image( image.load_from_file( location + GlobalData.slash_sign + file_name ) ) # TODO change to pic_location
+		preview.texture = ImageTexture.create_from_image( Image.load_from_file( location + GlobalData.slash_sign + file_name ) ) # TODO change to pic_location
 	else:
-		preview.texture = ImageTexture.create_from_image( image.load_from_file( default_pic_location ) )
+		preview.texture = ImageTexture.create_from_image( default_pic )
 
 
 

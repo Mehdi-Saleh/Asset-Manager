@@ -1,4 +1,5 @@
-res://Scripts/FileImporter.gd
+res://Scripts/item.gd
+res://Scripts/SidePanel.gd
 res://Scenes/main.tscn
 res://Styles/label_normal.tres
 res://Styles/line_edit_normal.tres
@@ -11,6 +12,3 @@ res://Scenes/browse_tab.tscn
 res://Scenes/database_manager.tscn
 res://Scenes/editable_label.tscn
 res://Scenes/files_importer.tscn
-res://Scripts/item.gd
-res://Scripts/SidePanel.gd
-res://Scenes/GlobalData.gd

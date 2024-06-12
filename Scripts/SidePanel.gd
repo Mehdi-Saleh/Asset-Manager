@@ -6,7 +6,7 @@ extends PanelContainer
 @export var tag_scene : PackedScene
 
 @onready var preview : TextureRect = $MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/Preview
-@export var default_preview_pic_location : StringName
+@export var default_preview_pic : Image
 @onready var title : EditableLabel = $MarginContainer/ScrollContainer/VBoxContainer/Name
 @onready var location : Button = $MarginContainer/ScrollContainer/VBoxContainer/Location
 @onready var type : EditableLabel = $MarginContainer/ScrollContainer/VBoxContainer/Type/Type
@@ -44,11 +44,10 @@ func show_item( item_id : int):
 	current_item = DatabaseManager.get_item_by_id( item_id )
 	
 	# Set preview image
-	var image = Image.new()
 	if current_item[ "type" ] == "Graphic2D":
-		preview.texture = ImageTexture.create_from_image( image.load_from_file( current_item[ "pic_location"] ) ) # TODO change to pic_location
+		preview.texture = ImageTexture.create_from_image( Image.load_from_file( current_item[ "pic_location"] ) ) # TODO change to pic_location
 	else:
-		preview.texture = ImageTexture.create_from_image( image.load_from_file( default_preview_pic_location ) )
+		preview.texture = ImageTexture.create_from_image( default_preview_pic )
 	
 	# Set labels values
 	title.text = current_item[ "name" ]
