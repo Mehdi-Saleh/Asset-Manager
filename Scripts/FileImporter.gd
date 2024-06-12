@@ -1,7 +1,6 @@
 class_name FileImporter
 extends Node
 
-# TODO change / to \ if on windows
 
 @onready var file_dialog : FileDialog = $FileDialog
 
@@ -92,7 +91,7 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 						license_str = license.text
 					var pic_location :String = "DEFAULT"
 					if file_type == "Graphic2D":
-						pic_location = path + "/" + file_name
+						pic_location = path + GlobalData.slash_sign + file_name
 					if extracted_tags.is_empty():
 						DatabaseManager.add_asset( new_name, file_name, file_type, license_str, path, [], pic_location )
 					else:
@@ -103,7 +102,7 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 		
 	# Extract data from the sub-directories
 	for directory in directories:
-		generate_data_dict( path + "/" + directory, false, true )
+		generate_data_dict( path + GlobalData.slash_sign + directory, false, true )
 		
 	if not _is_sub_generation:
 		SignalBus.receive_signal( "show_all_items" )

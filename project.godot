@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+GlobalData="*res://Scenes/global_data.tscn"
 DatabaseManager="*res://Scenes/database_manager.tscn"
 SignalBus="*res://Scenes/signal_bus.tscn"
 

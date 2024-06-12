@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://21rsnsy3ya8i"]
+[gd_scene load_steps=7 format=3 uid="uid://21rsnsy3ya8i"]
 
+[ext_resource type="PackedScene" uid="uid://3s0op60duae5" path="res://Scenes/global_data.tscn" id="3_54lqs"]
 [ext_resource type="PackedScene" uid="uid://cu3k4xm46mqj8" path="res://Scenes/browse_tab.tscn" id="3_vxght"]
 [ext_resource type="PackedScene" uid="uid://bnrg3jjhfpnpd" path="res://Scenes/import_tab.tscn" id="4_s0603"]
 
@@ -45,5 +46,7 @@ layout_mode = 2
 [node name="ImportTab" parent="TabContainer" instance=ExtResource("4_s0603")]
 visible = false
 layout_mode = 2
+
+[node name="GlobalData" parent="." instance=ExtResource("3_54lqs")]
 
 [connection signal="tab_changed" from="TabContainer" to="TabContainer" method="_on_tab_changed"]

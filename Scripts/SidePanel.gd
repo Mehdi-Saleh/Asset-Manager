@@ -52,7 +52,7 @@ func show_item( item_id : int):
 	
 	# Set labels values
 	title.text = current_item[ "name" ]
-	location.text = "Location: " + current_item[ "location" ] + "/" + current_item[ "real_name" ]
+	location.text = "Location: " + current_item[ "location" ] + GlobalData.slash_sign + current_item[ "real_name" ]
 	type.text = current_item[ "type" ]
 	license.text = current_item[ "license" ]
 	
@@ -98,7 +98,7 @@ func _on_open_side_panel_pressed():
 
 
 func _on_location_pressed():
-	OS.shell_show_in_file_manager( current_item[ "location" ] + "/" + current_item[ "real_name" ] )
+	OS.shell_show_in_file_manager( current_item[ "location" ] + GlobalData.slash_sign + current_item[ "real_name" ] )
 
 
 func _on_type_pressed():

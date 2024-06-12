@@ -22,7 +22,7 @@
         }
       }
     },
-    "net6.0/linux-x64": {
+    "net6.0/win-x64": {
       "Godot.SourceGenerators/4.2.1": {
         "type": "package",
         "build": {
@@ -146,7 +146,7 @@
             "version": "[6.0.30, 6.0.30]"
           },
           {
-            "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
+            "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
             "version": "[6.0.30, 6.0.30]"
           },
           {
@@ -154,7 +154,7 @@
             "version": "[6.0.30, 6.0.30]"
           },
           {
-            "name": "Microsoft.NETCore.App.Runtime.linux-x64",
+            "name": "Microsoft.NETCore.App.Runtime.win-x64",
             "version": "[6.0.30, 6.0.30]"
           }
         ],
@@ -167,7 +167,7 @@
       }
     },
     "runtimes": {
-      "linux-x64": {
+      "win-x64": {
         "#import": []
       }
     }
