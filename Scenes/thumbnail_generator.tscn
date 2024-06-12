@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0kcyr1bs4eho"]
+
+[ext_resource type="Script" path="res://Scripts/ThumbnailGenerator.gd" id="1_tn8cr"]
+
+[node name="ThumbnailGenerator" type="Node"]
+script = ExtResource("1_tn8cr")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+render_target_clear_mode = 2
+render_target_update_mode = 0

@@ -12,3 +12,7 @@ res://Scenes/browse_tab.tscn
 res://Scenes/database_manager.tscn
 res://Scenes/editable_label.tscn
 res://Scenes/files_importer.tscn
+res://Scripts/thumbnail_generator.gd
+res://Scripts/ThumbnailGenerator.gd
+res://Scripts/DatabaseManager.gd
+res://Scenes/thumbnail_generator.tscn
