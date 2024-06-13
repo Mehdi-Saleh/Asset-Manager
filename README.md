@@ -4,7 +4,7 @@ This is a tag-based assets management tool that I'm developing for management of
 
 ## Key Features:
 - Importing any file format 
-- Thumbnail generation for common 2D and 3D file formats (work in progress)
+- Thumbnail generation for common 2D and 3D file formats (work in progress, only gltf/glb format is currentlly supported for 3D files)
 - Automatic and configurable identification of different file types (2D graphics, 3D graphics, audio, etc.)
 - Viewing and searching assets based on their name, tags, license or file type
 
