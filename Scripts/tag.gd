@@ -34,5 +34,4 @@ func _on_mouse_exited():
 
 
 func _on_timer_timeout():
-	print( "ausht" )
 	remove.hide()

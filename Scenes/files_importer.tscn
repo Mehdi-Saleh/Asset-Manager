@@ -6,7 +6,7 @@
 script = ExtResource("1_a3yb3")
 ignore_formats = PackedStringArray("xml", "url", "import")
 graphic_2d_formats = PackedStringArray("png", "gif", "bmp", "jpg", "jpeg", "eps", "svg")
-graphic_3d_formats = PackedStringArray("fbx", "obj", "blend")
+graphic_3d_formats = PackedStringArray("glb", "gltf")
 audio_formats = PackedStringArray("wav", "ogg", "mp3", "wma", "flac", "aac")
 code_text_formats = PackedStringArray("gd", "cs", "c", "cpp", "h", "py")
 info_text_formats = PackedStringArray("txt", "doc", "docx", "xls", "xlsx", "pdf", "json")

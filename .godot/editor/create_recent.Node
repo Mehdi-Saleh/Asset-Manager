@@ -1,4 +1,7 @@
+Camera3D
+MeshInstance3D
 SubViewport
+MeshInstance2D
 Node
 Label
 HBoxContainer
@@ -9,7 +12,3 @@ Panel
 Control
 PanelContainer
 TextureRect
-MarginContainer
-HFlowContainer
-CheckButton
-TextEdit

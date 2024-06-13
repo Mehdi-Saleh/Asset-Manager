@@ -44,10 +44,6 @@ var database : SQLite
 
 func _ready():
 	init()
-	
-	
-	database.query( "SELECT * FROM " + MAIN_TABLE_NAME )
-	ThumbnailGenerator.generate_thumbnail( database.query_result.front()[ "location" ] + "/" + database.query_result.front()[ "real_name" ], database.query_result.front()[ "name" ] )
 
 
 ## Initializes the database on launch.

@@ -1,10 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0kcyr1bs4eho"]
+[gd_scene load_steps=6 format=3 uid="uid://d0kcyr1bs4eho"]
 
 [ext_resource type="Script" path="res://Scripts/ThumbnailGenerator.gd" id="1_tn8cr"]
 
-[node name="ThumbnailGenerator" type="Node"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_washu"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ij3fs"]
+sky_material = SubResource("ProceduralSkyMaterial_washu")
+
+[sub_resource type="Environment" id="Environment_crx1r"]
+background_mode = 2
+sky = SubResource("Sky_ij3fs")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_78cmv"]
+
+[node name="ThumbnailGenerator" type="SubViewport"]
 script = ExtResource("1_tn8cr")
 
-[node name="SubViewport" type="SubViewport" parent="."]
-render_target_clear_mode = 2
-render_target_update_mode = 0
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_crx1r")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.75903)
+projection = 1
+size = 2.23713
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_78cmv")

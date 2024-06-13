@@ -62,10 +62,10 @@ func initialize( item_id:int, name:StringName, file_name:StringName, type:String
 # TODO thumbnail generation
 ## Loads thumbnail from pic_location.
 func load_thumbnail():
-	if type == "Graphic2D": 
-		preview.texture = ImageTexture.create_from_image( Image.load_from_file( location + GlobalData.slash_sign + file_name ) ) # TODO change to pic_location
-	else:
+	if pic_location == "DEFAULT": 
 		preview.texture = ImageTexture.create_from_image( default_pic )
+	else:
+		preview.texture = ImageTexture.create_from_image( Image.load_from_file( pic_location ) )
 
 
 

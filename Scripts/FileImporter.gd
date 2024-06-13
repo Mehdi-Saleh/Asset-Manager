@@ -79,19 +79,18 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 			if dir.current_is_dir():
 				directories.append( file_name )
 			else:
+				var format := get_file_format( file_name )
 				var new_name := file_name
 				if remove_formats.button_pressed and new_name.contains( "." ):
 					new_name = new_name.left( new_name.rfind( "." ) )
 				if replace.button_pressed:
 					new_name = new_name.replace( replace_from.text, replace_to.text )
-				var file_type : StringName = get_file_type( file_name )
+				var file_type : StringName = get_file_type( format )
 				if file_type != "IGNORE":
 					var license_str := "NONE"
 					if not license.text.is_empty():
 						license_str = license.text
-					var pic_location :String = "DEFAULT"
-					if file_type == "Graphic2D":
-						pic_location = path + GlobalData.slash_sign + file_name
+					var pic_location :String = await ThumbnailGenerator.generate_thumbnail( path + GlobalData.slash_sign + file_name, new_name, format )
 					if extracted_tags.is_empty():
 						DatabaseManager.add_asset( new_name, file_name, file_type, license_str, path, [], pic_location )
 					else:
@@ -111,30 +110,33 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 
 # TODO read types from a json file
 ## Returns the file type of a given file name based on the file format.
-func get_file_type( file_name : StringName ) -> StringName:
-	var format : String
-	if file_name.find( "." ) == -1:
-		format = ""
-	else:
-		format = file_name.get_slice( ".", file_name.get_slice_count( "." ) - 1 )
-
-	if format in ignore_formats:
+func get_file_type( file_format : StringName ) -> StringName:
+	if file_format in ignore_formats:
 		return "IGNORE"
-	elif format in audio_formats:
+	elif file_format in audio_formats:
 		return "Audio"
-	elif format in code_text_formats:
+	elif file_format in code_text_formats:
 		return "Code"
-	elif format in info_text_formats:
+	elif file_format in info_text_formats:
 		return "Text"
-	elif format in graphic_2d_formats:
+	elif file_format in graphic_2d_formats:
 		return "Graphic2D"
-	elif format in graphic_3d_formats:
+	elif file_format in graphic_3d_formats:
 		return "Graphic3D"
-	elif format in package_formats:
+	elif file_format in package_formats:
 		return "Package"
 	else:
 		return "NONE"
-	
+
+
+func get_file_format( real_name : String ) -> String:
+	var format : String
+	if real_name.find( "." ) == -1:
+		format = ""
+	else:
+		format = real_name.get_slice( ".", real_name.get_slice_count( "." ) - 1 )
+	return format
+
 
 # **File dialog**
 ## Opens the file dialog and sets the import_mode.
