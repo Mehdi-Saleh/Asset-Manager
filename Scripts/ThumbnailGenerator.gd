@@ -4,23 +4,13 @@ extends SubViewport
 
 const PREVIEW_SIZE = Vector2i( 512, 512 )
 const THUMBNAILS_PATH = "thumbnails/"
-const CAM_DISTANCE_MULT := 0.3
+const CAM_DISTANCE_MULT := 0.4
 
-#var _viewport : SubViewport = null
-#@onready var _viewport : SubViewport = $SubViewport
 @onready var camera = $Camera3D
 
 
 func generate_thumbnail( file_path : StringName, file_name : StringName, file_format : StringName ) -> String:
 	var thumbnail_path : String = "DEFAULT"
-	
-	#var thumbnail := _generate_from_path( file_path, PREVIEW_SIZE, {} )
-	#var new_scene := PackedScene.new()
-	#var image : PackedByteArray = FileAccess.get_file_as_bytes( file_path )
-	
-	#var image : TextureRect = TextureRect.new()
-	#image.texture = ImageTexture.create_from_image( Image.load_from_file( file_path ) )
-	#_viewport.add_child( image )
 	
 	# Gnerate thumbnail for a 3D file
 	if file_format == "glb" or file_format == "gltf":
@@ -57,6 +47,7 @@ func generate_thumbnail( file_path : StringName, file_name : StringName, file_fo
 		thumbnail_path = THUMBNAILS_PATH + file_name + ".png"
 		thumbnail.get_image().save_png( thumbnail_path )
 		
+		gltf_scene_root_node.hide()
 		gltf_scene_root_node.queue_free()
 	# Gnerate thumbnail for a 2D file
 	elif file_format in [ "png", "jpg", "jpep", "bmb", "svg" ]:
