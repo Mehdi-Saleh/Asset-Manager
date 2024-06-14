@@ -1,3 +1,5 @@
+Button
+MarginContainer
 Camera3D
 MeshInstance3D
 SubViewport
@@ -5,10 +7,8 @@ MeshInstance2D
 Node
 Label
 HBoxContainer
-Button
 LineEdit
 TagItem
 Panel
 Control
 PanelContainer
-TextureRect

@@ -4,9 +4,13 @@ extends Button
 
 @onready var remove : Button = $Remove
 
-@export var hide_remove_delay : float = 10.0
+@export var hide_remove_delay : float = 0.1
+@export var show_remove_button : bool = true
 
 var timer : Timer = Timer.new()
+var tag : String
+var can_hide_remove : bool = true
+var is_mouse_on_tag : bool = false
 
 
 func _ready():
@@ -18,6 +22,7 @@ func _ready():
 
 
 func set_tag( tag : StringName ):
+	self.tag = tag
 	text = tag
 
 
@@ -26,12 +31,30 @@ func _on_pressed():
 
 
 func _on_mouse_entered():
-	remove.show()
+	if show_remove_button:
+		is_mouse_on_tag = true
+		text = tag + "   "
+		remove.show()
 
 
 func _on_mouse_exited():
-	timer.start()
+	if show_remove_button:
+		is_mouse_on_tag = false
+		timer.start()
 
 
 func _on_timer_timeout():
-	remove.hide()
+	if can_hide_remove and not is_mouse_on_tag:
+		text = tag
+		remove.hide()
+
+
+func _on_remove_mouse_entered():
+	if show_remove_button:
+		can_hide_remove = false
+
+
+func _on_remove_mouse_exited():
+	if show_remove_button:
+		can_hide_remove = true
+	timer.start()

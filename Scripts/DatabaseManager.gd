@@ -41,6 +41,7 @@ var new_table_template := {
 @export var database_path : StringName = "res://database.db"
 
 var database : SQLite
+var last_search_query : String
 
 func _ready():
 	init()
@@ -123,30 +124,44 @@ func add_tags( tags:PackedStringArray, item_id:int ):
 
 
 # TODO Removes an asset from the database
-func remove_asset( location:StringName ):
-	pass
+func remove_asset( id : int ):
+	database.delete_rows( MAIN_TABLE_NAME, "id = \"" + str( id ) + "\";" )
+	database.query( "SELECT id FROM " + MAIN_TAGS_TABLE_NAME + " WHERE id_main = " + str( id ) + ";" )
+	for tag in database.query_result:
+		database.delete_rows( MAIN_TAGS_TABLE_NAME, "id = " + str( tag[ "id" ] ) )
 
-# TODO func to update an item
+# Updates an item with the new values.
 func update_item( id:int, values:Dictionary ):
 	database.update_rows( MAIN_TABLE_NAME, "id = " + str( id ) + ";", values )
+
+
+## Retries the last query that was used by a search function.
+func redo_search() -> Array[Dictionary]:
+	database.query( last_search_query )
+	return database.query_result
+
 
 ## Returns every item in the database. 
 ## It is not recommended to use this often as the number of items
 ## could easily reach beyound thousands!
 func get_items_all() -> Array[Dictionary]:
-	database.query( "SELECT * FROM " + MAIN_TABLE_NAME + ";" )
+	last_search_query = "SELECT * FROM " + MAIN_TABLE_NAME + ";"
+	database.query( last_search_query )
 	return database.query_result
 	
+
+
 
 ## Returns id of every item that has one or more of the given tags.
 func get_ids_by_tag( tags : PackedStringArray ) -> PackedInt32Array:
 	var array_string := array_to_sql_list( str( tags ) )
 	
-	database.query( 
-		"SELECT id_main 
+	last_search_query = ( "SELECT id_main 
 		FROM " + MAIN_TAGS_TABLE_NAME + " JOIN " + TAGS_TABLE_NAME + 
 		" ON " + MAIN_TAGS_TABLE_NAME + ".id_tag = " + TAGS_TABLE_NAME + ".id 
 		WHERE tag IN " + array_string + ";" )
+	
+	database.query( last_search_query )
 	
 	var ids : PackedInt32Array
 	for id in database.query_result:
@@ -174,7 +189,8 @@ func get_tags_by_id( id : int ) -> PackedStringArray:
 ## Returns items using the given ids.
 func get_items_by_id( ids : PackedInt32Array ) -> Array[Dictionary]:
 	var array_string := array_to_sql_list( str( ids ) )
-	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE id IN" + array_string + ";")
+	last_search_query = " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE id IN" + array_string + ";"
+	database.query( last_search_query )
 	return database.query_result
 
 
@@ -186,13 +202,15 @@ func get_item_by_id( id : int ) -> Dictionary:
 
 ## Returns items with the given type
 func get_items_by_type( type : StringName ) -> Array[ Dictionary ]:
-	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE type = \"" + type + "\";")
+	last_search_query = " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE type = \"" + type + "\";"
+	database.query( last_search_query )
 	return database.query_result
 
 
 ## Returns items with the given license
 func get_items_by_license( license : StringName ) -> Array[ Dictionary ]:
-	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE license = \"" + license + "\";")
+	last_search_query = " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE license = \"" + license + "\";"
+	database.query( last_search_query )
 	return database.query_result
 
 
@@ -203,13 +221,15 @@ func get_items_by_tag( tags : PackedStringArray ) -> Array[Dictionary]:
 
 ## Searches the database for names that are close to the given name
 func search_name( name : StringName ) -> Array[Dictionary]:
-	database.query( " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE name LIKE \"" + name + "\";")
+	last_search_query = " SELECT * FROM " + MAIN_TABLE_NAME + " WHERE name LIKE \"" + name + "\";"
+	database.query( last_search_query )
 	return database.query_result
 
 
 ## Returns every item with an id between from (inclusive) and to (exclusive).
 func get_items_from_to( from:int, to:int ) -> Array[Dictionary]:
-	database.query( "SELECT * FROM " + MAIN_TABLE_NAME + " WHERE id>=" + str(from) + " AND id<" + str(to) + ";" )
+	last_search_query = "SELECT * FROM " + MAIN_TABLE_NAME + " WHERE id>=" + str(from) + " AND id<" + str(to) + ";"
+	database.query( last_search_query )
 	return database.query_result
 	
 

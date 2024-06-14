@@ -88,6 +88,11 @@ func get_current_item_id() -> int:
 	return current_item[ "id" ]
 
 
+func remove_item():
+	DatabaseManager.remove_asset( current_item[ "id" ] )
+	SignalBus.receive_signal( "reload_items" )
+
+
 func _on_close_side_panel_pressed():
 	close_panel()
 
@@ -110,8 +115,11 @@ func _on_license_pressed():
 	"new_search_text" : ItemsManager.COMMAND_LICENSE + current_item[ "license" ] } )
 
 
-# TODO doesn't work!
-func on_label_changed( whats_the_label_for : StringName, new_value : StringName ):
+func on_label_changed( whats_the_label_for : StringName, new_value : String ):
 	var new_item := current_item.duplicate()
 	new_item[ whats_the_label_for ] = new_value
 	DatabaseManager.update_item( current_item[ "id" ], new_item )
+
+
+func _on_remove_button_pressed():
+	remove_item()

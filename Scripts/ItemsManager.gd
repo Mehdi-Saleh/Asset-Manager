@@ -102,6 +102,10 @@ func update_items( items : Array[Dictionary] ):
 	_load_more_items()
 
 
+func reload_items( query : Array[Dictionary] ):
+	# TODO keep scroll value on reload
+	update_items( query )
+
 #func _on_tab_container_tab_selected(tab):
 	#if tab == 0:
 		#update_items()

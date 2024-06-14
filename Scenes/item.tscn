@@ -105,6 +105,7 @@ layout_mode = 2
 [node name="Tag" parent="VBoxContainer/Info/VBoxContainer/Tags" instance=ExtResource("3_m3yj8")]
 visible = false
 layout_mode = 2
+show_remove_button = false
 
 [connection signal="pressed" from="VBoxContainer/Picture/Preview" to="." method="_on_preview_pressed"]
 [connection signal="pressed" from="VBoxContainer/Info/VBoxContainer/TopBar/OpenFolder" to="." method="_on_open_folder_pressed"]

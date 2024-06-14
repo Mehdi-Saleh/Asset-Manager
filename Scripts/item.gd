@@ -42,6 +42,7 @@ func initialize( item_id:int, name:StringName, file_name:StringName, type:String
 		var dif : int = tags.size() - tag_items.size()
 		for i in range( dif ):
 			var new_tag : TagItem = tag_scene.instantiate()
+			new_tag.show_remove_button = false
 			tags_parent.add_child( new_tag )
 			tag_items.append( new_tag )
 	# Set tags

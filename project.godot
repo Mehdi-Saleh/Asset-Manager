@@ -35,6 +35,10 @@ project/assembly_name="Asset Manager"
 
 enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg")
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 update_scroll={

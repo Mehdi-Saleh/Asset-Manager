@@ -23,6 +23,8 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 			items_manager.update_items( arguements[ "items" ] )
 			if arguements.has( "new_search_text" ):
 				items_manager.search_text.text = arguements[ "new_search_text" ]
+		"reload_items":
+			items_manager.reload_items( DatabaseManager.redo_search() )
 		
 		# Side Panel
 		"open_side_panel":
