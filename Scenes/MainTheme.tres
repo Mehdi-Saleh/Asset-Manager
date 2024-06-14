@@ -24,6 +24,8 @@ corner_radius_bottom_left = 3
 [resource]
 Button/colors/font_hover_color = Color(0.913725, 0.4, 0.627451, 1)
 Button/colors/font_pressed_color = Color(0.584314, 0.458824, 0.870588, 1)
+Button/colors/icon_hover_color = Color(0.913725, 0.4, 0.627451, 1)
+Button/colors/icon_pressed_color = Color(0.584314, 0.458824, 0.870588, 1)
 Label/colors/font_color = Color(0.941176, 0.952941, 1, 1)
 Label/styles/normal = ExtResource("1_dus21")
 LineEdit/styles/focus = SubResource("StyleBoxFlat_vub52")

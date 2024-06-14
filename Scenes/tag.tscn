@@ -1,25 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://c76mmn8b6ppi1"]
+[gd_scene load_steps=4 format=3 uid="uid://c76mmn8b6ppi1"]
 
 [ext_resource type="Script" path="res://Scripts/tag.gd" id="1_2kc7s"]
-[ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="2_wg7hj"]
+[ext_resource type="Texture2D" uid="uid://ckm4p65agyohf" path="res://Graphics/flatLight33.png" id="2_vxiu3"]
+[ext_resource type="PackedScene" uid="uid://dopcw51dsysn0" path="res://Scenes/hide_parent_on_ready.tscn" id="3_n1265"]
 
 [node name="Tag" type="Button"]
 text = "Tag"
 script = ExtResource("1_2kc7s")
 
 [node name="Remove" type="Button" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -13.0
+offset_left = -21.0
 grow_horizontal = 0
 grow_vertical = 2
-icon = ExtResource("2_wg7hj")
+theme_override_colors/icon_pressed_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(1, 0, 0, 1)
+icon = ExtResource("2_vxiu3")
 icon_alignment = 2
 expand_icon = true
+
+[node name="HideParentOnReady" parent="Remove" instance=ExtResource("3_n1265")]
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

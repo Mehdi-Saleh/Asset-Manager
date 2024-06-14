@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dscteyb1pwi2l"]
 
 [ext_resource type="Script" path="res://Scripts/EditableLabel.gd" id="1_v012k"]
-[ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="2_co4w6"]
+[ext_resource type="Texture2D" uid="uid://dqix20i0t62rt" path="res://Graphics/flatLight20.png" id="2_c3bgd"]
 
 [node name="EditableLabel" type="Button"]
 size_flags_vertical = 0
@@ -18,7 +18,7 @@ anchor_bottom = 1.0
 offset_left = -23.0
 grow_horizontal = 0
 grow_vertical = 2
-icon = ExtResource("2_co4w6")
+icon = ExtResource("2_c3bgd")
 icon_alignment = 2
 expand_icon = true
 

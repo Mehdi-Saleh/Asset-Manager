@@ -2,6 +2,8 @@ class_name TagItem
 extends Button
 
 
+const EXTRA_SPACE_ON_HOVER := "    "
+
 @onready var remove : Button = $Remove
 
 @export var hide_remove_delay : float = 0.1
@@ -33,7 +35,7 @@ func _on_pressed():
 func _on_mouse_entered():
 	if show_remove_button:
 		is_mouse_on_tag = true
-		text = tag + "   "
+		text = tag + EXTRA_SPACE_ON_HOVER
 		remove.show()
 
 
