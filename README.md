@@ -19,6 +19,7 @@ The currently available commands are:
 - *:tag* for searching for specific tag(s)
 - *:license* for showing assets with a specific license
 - *:type* for showing assets of the specified file type
+(You can also click on a tag, etc. to search for it.)
 
 Example: 
 - ":license CC0" will show every asset with a CC0 license.
