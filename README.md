@@ -26,4 +26,4 @@ Example:
 - ":tag Texture Funny" will show assets that have either of Texture or Funny tags. (searching only for the ones with both tags is not yet implemented.)
 
 
-**IMPORTANT:** Please note that this application does not change the actual asset files but still it's your responsiblity to back-up your data!
+**IMPORTANT:** Please note that this application does not change the actual asset files but still it's your responsibility to back-up your data!
