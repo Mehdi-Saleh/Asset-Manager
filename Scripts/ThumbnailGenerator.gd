@@ -9,6 +9,12 @@ const CAM_DISTANCE_MULT := 0.4
 @onready var camera = $Camera3D
 
 
+func _ready():
+	var dir_access := DirAccess.open( "res://" )
+	if not dir_access.dir_exists( THUMBNAILS_PATH ):
+		dir_access.make_dir( THUMBNAILS_PATH )
+
+
 func generate_thumbnail( file_path : StringName, file_name : StringName, file_format : StringName ) -> String:
 	var thumbnail_path : String = "DEFAULT"
 	

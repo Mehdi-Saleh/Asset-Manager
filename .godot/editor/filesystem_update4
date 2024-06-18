@@ -1,12 +1,13 @@
+res://Scripts/ThumbnailGenerator.gd
 res://Scenes/main.tscn
 res://Styles/label_normal.tres
 res://Styles/line_edit_normal.tres
 res://Scenes/MainTheme.tres
 res://label.tres
 res://import_tab.tres
+res://Scripts/FileImporter.gd
 res://Scenes/browse_tab.tscn
 res://Scenes/tag.tscn
 res://Scenes/item.tscn
 res://Scenes/database_manager.tscn
 res://Scenes/editable_label.tscn
-res://Scripts/tag.gd
