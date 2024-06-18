@@ -101,7 +101,7 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 		
 	# Extract data from the sub-directories
 	for directory in directories:
-		generate_data_dict( path + GlobalData.slash_sign + directory, false, true )
+		await generate_data_dict( path + GlobalData.slash_sign + directory, false, true )
 		
 	if not _is_sub_generation:
 		SignalBus.receive_signal( "show_all_items" )

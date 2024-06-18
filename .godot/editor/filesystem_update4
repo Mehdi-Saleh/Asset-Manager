@@ -11,3 +11,5 @@ res://Scenes/tag.tscn
 res://Scenes/item.tscn
 res://Scenes/database_manager.tscn
 res://Scenes/editable_label.tscn
+res://Scenes/thumbnail_generator.tscn
+res://Scenes/import_tab.tscn
