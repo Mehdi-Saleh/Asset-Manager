@@ -14,6 +14,10 @@ var extracted_tags : PackedStringArray
 @export var replace_to : LineEdit
 @export var replace : CheckButton
 
+@export_category( "Other References" )
+@export var import_start : Window
+@export var import_end : Window
+
 
 @export_category( "File Types" )
 @export var ignore_formats : PackedStringArray
@@ -23,7 +27,6 @@ var extracted_tags : PackedStringArray
 @export var code_text_formats : PackedStringArray
 @export var info_text_formats : PackedStringArray
 @export var package_formats : PackedStringArray
-
 
 var import_mode : ImportMode ## New clears all the tables before importing but Updates does not clear anything.
 var _selected_address : String
@@ -61,6 +64,7 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 	if clear_tables:
 		DatabaseManager.create_tables()
 	if not _is_sub_generation:
+		import_start.show()
 		print( "Importing..." )
 		if not tags.text.is_empty():
 			extracted_tags = tags.text.split( " ", false )
@@ -105,6 +109,8 @@ func generate_data_dict( path : StringName, clear_tables : bool = false, _is_sub
 		
 	if not _is_sub_generation:
 		SignalBus.receive_signal( "show_all_items" )
+		import_start.hide()
+		import_end.show()
 		print( "Done!" )
 
 

@@ -36,13 +36,15 @@ theme_override_constants/margin_bottom = 200
 layout_mode = 2
 alignment = 1
 
-[node name="FilesImporter" parent="MarginContainer/Menu" node_paths=PackedStringArray("tags", "license", "remove_formats", "replace_from", "replace_to", "replace") instance=ExtResource("2_sqgxq")]
+[node name="FilesImporter" parent="MarginContainer/Menu" node_paths=PackedStringArray("tags", "license", "remove_formats", "replace_from", "replace_to", "replace", "import_start", "import_end") instance=ExtResource("2_sqgxq")]
 tags = NodePath("../HBoxContainer2/OptionsAndButtons/Options/TagOption/Tags")
 license = NodePath("../HBoxContainer2/OptionsAndButtons/Options/LicenseOption/License")
 remove_formats = NodePath("../HBoxContainer2/OptionsAndButtons/Options/RemoveFormatsOption/RemoveFormats")
 replace_from = NodePath("../HBoxContainer2/OptionsAndButtons/Options/ReplaceOption/ReplaceFrom")
 replace_to = NodePath("../HBoxContainer2/OptionsAndButtons/Options/ReplaceOption/ReplaceTo")
 replace = NodePath("../HBoxContainer2/OptionsAndButtons/Options/ReplaceOption/Replace")
+import_start = NodePath("../../../ImportStartDialog")
+import_end = NodePath("../../../ImportEndDialog")
 ignore_formats = PackedStringArray("", "xml", "url", "import")
 
 [node name="Spacer" type="Control" parent="MarginContainer/Menu"]
@@ -185,6 +187,30 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Update database / Import new assets"
 script = SubResource("GDScript_ey2am")
+
+[node name="ImportStartDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Importing..."
+initial_position = 1
+size = Vector2i(295, 100)
+unresizable = true
+always_on_top = true
+popup_window = true
+extend_to_title = true
+dialog_text = "This could take up to a few minutes."
+dialog_close_on_escape = false
+
+[node name="ImportEndDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Import Finished"
+initial_position = 1
+size = Vector2i(308, 100)
+unresizable = true
+always_on_top = true
+popup_window = true
+extend_to_title = true
+dialog_text = "You can now browse your new assets!"
+dialog_close_on_escape = false
 
 [connection signal="pressed" from="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons/MarginContainer/GenerateNewButton" to="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons/MarginContainer/GenerateNewButton" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons/MarginContainer2/UpdateButton" to="MarginContainer/Menu/HBoxContainer2/OptionsAndButtons/Buttons/MarginContainer2/UpdateButton" method="_on_pressed"]
