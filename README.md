@@ -19,10 +19,11 @@ The currently available commands are:
 - *:tag* for searching for specific tag(s)
 - *:license* for showing assets with a specific license
 - *:type* for showing assets of the specified file type
+(You can also click on a tag, etc. to search for it.)
 
 Example: 
 - ":license CC0" will show every asset with a CC0 license.
 - ":tag Texture Funny" will show assets that have either of Texture or Funny tags. (searching only for the ones with both tags is not yet implemented.)
 
 
-**IMPORTANT:** Please note that this application does not change the actual asset files but still it's your responsiblity to back-up your data!
+**IMPORTANT:** Please note that this application does not change the actual asset files but still it's your responsibility to back-up your data!
