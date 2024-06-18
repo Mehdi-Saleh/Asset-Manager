@@ -1,4 +1,5 @@
 # Asset Manager
+![ScreenShot](./Screenshots/screenshot1.png)
 
 This is a tag-based assets management tool that I'm developing for management of my many different assets.
 
