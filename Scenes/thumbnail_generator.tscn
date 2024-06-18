@@ -10,7 +10,7 @@ ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 sky_material = SubResource("ProceduralSkyMaterial_washu")
 
 [sub_resource type="Environment" id="Environment_crx1r"]
-background_mode = 2
+background_color = Color(0.576471, 0.4, 0.372549, 1)
 sky = SubResource("Sky_ij3fs")
 tonemap_mode = 2
 

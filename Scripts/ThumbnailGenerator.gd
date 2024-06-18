@@ -3,7 +3,7 @@ extends SubViewport
 
 
 const PREVIEW_SIZE = Vector2i( 512, 512 )
-const THUMBNAILS_PATH = "thumbnails/"
+const THUMBNAILS_PATH = "thumbnails"
 const CAM_DISTANCE_MULT := 0.4
 
 @onready var camera = $Camera3D
@@ -50,7 +50,7 @@ func generate_thumbnail( file_path : StringName, file_name : StringName, file_fo
 		var thumbnail: Texture2D = get_texture()
 		#thumb_created.emit(texture)
 		
-		thumbnail_path = THUMBNAILS_PATH + file_name + ".png"
+		thumbnail_path = THUMBNAILS_PATH + GlobalData.slash_sign + file_name + ".png"
 		thumbnail.get_image().save_png( thumbnail_path )
 		
 		gltf_scene_root_node.hide()

@@ -44,10 +44,10 @@ func show_item( item_id : int):
 	current_item = DatabaseManager.get_item_by_id( item_id )
 	
 	# Set preview image
-	if current_item[ "type" ] == "Graphic2D":
-		preview.texture = ImageTexture.create_from_image( Image.load_from_file( current_item[ "pic_location"] ) ) # TODO change to pic_location
-	else:
+	if current_item[ "pic_location" ] == "DEFAULT":
 		preview.texture = ImageTexture.create_from_image( default_preview_pic )
+	else:
+		preview.texture = ImageTexture.create_from_image( Image.load_from_file( current_item[ "pic_location"] ) )
 	
 	# Set labels values
 	title.text = current_item[ "name" ]
