@@ -19,7 +19,12 @@ var items_inactive : Array[Item]
 var last_query : Array[Dictionary]
 var last_loaded_from_query : int = -1
 var scroll_value : float = 0.0 # 0.0 to 1.0
-var last_line_count : int = 0
+#var last_scroll_value : float = 0.0
+#var last_line_count : int = 0
+var first_visible_item : int = 0
+
+var should_update : int = 0
+const SHOULD_UPDATE_AFTER : int = 2
 
 
 func _ready():
@@ -34,6 +39,12 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_released( "update_scroll" ):
 		_on_scroll_container_scroll_ended()
+	if should_update > 0:
+		should_update -= 1
+		if should_update <= 0:
+			update_scroll_relative()
+
+	
 
 
 ## Instanciates a new item object with the given values. (Objects are pooled.)
@@ -74,7 +85,7 @@ func _load_more_items() -> bool:
 	else:
 		return false
 	
-	last_line_count = items_parent.get_line_count()
+	#last_line_count = items_parent.get_line_count()
 
 
 ## Disables all active item objects and adds them back to the pool.
@@ -159,20 +170,29 @@ func get_scroll_value() -> float:
 
 
 func set_scroll_value( value : float ) -> void:
+	print( "set ", value )
 	var max_scroll_value : float = max( 0.0, float( items_parent.get_rect().size.y - items_scroll_container.get_rect().size.y ))
-	items_scroll_container.scroll_vertical = int( value * max_scroll_value )
+	items_scroll_container.scroll_vertical = int( min( value, 1.0 ) * max_scroll_value )
 
 
 ## Change scroll value an container size change to always stay on the same item.
 func update_scroll_relative():
+	print(-1)
 	var line_count := items_parent.get_line_count()
-	if last_line_count != 0 and last_line_count != line_count:
-		set_scroll_value( get_scroll_value() * float( last_line_count) / float( line_count ) )
-	last_line_count = line_count
+	#val last_visible_item : int = 
+	#if last_line_count != 0 and last_line_count != line_count:
+	set_scroll_value( float( first_visible_item ) / ( float( items_parent.get_child_count() ) ) )
+	items_parent.get_child_count()
+		
+	#print( last_scroll_value, ",", scroll_value, ",", last_scroll_value * float( last_line_count) / float( line_count ) )
+	#last_line_count = line_count
 
 
-func set_last_line_count():
-	last_line_count = items_parent.get_line_count()
+func set_should_update():
+	#last_line_count = items_parent.get_line_count()
+	#last_scroll_value = scroll_value
+	first_visible_item = items_parent.get_child_count() * get_scroll_value()
+	should_update = SHOULD_UPDATE_AFTER
 
 
 func _on_search_button_pressed():
