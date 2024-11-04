@@ -1,16 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://lkeeoajpujbv"]
+[gd_scene load_steps=8 format=3 uid="uid://lkeeoajpujbv"]
 
 [ext_resource type="Script" path="res://Scripts/item.gd" id="1_1r5sf"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="1_rfxtr"]
 [ext_resource type="PackedScene" uid="uid://c76mmn8b6ppi1" path="res://Scenes/tag.tscn" id="3_m3yj8"]
+[ext_resource type="Texture2D" uid="uid://cmdhiyvy2p73c" path="res://Graphics/Right-Round.png" id="4_xfwvl"]
+[ext_resource type="Texture2D" uid="uid://bcplaja0mmwnt" path="res://Graphics/Pause-Round.png" id="5_lbgcp"]
 
-[node name="Item" type="MarginContainer" node_paths=PackedStringArray("preview", "open_button", "folder_button", "name_text", "type_text", "license_text", "tags_parent")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b4jwc"]
+
+[sub_resource type="Theme" id="Theme_140pa"]
+Button/styles/disabled = SubResource("StyleBoxEmpty_b4jwc")
+Button/styles/focus = SubResource("StyleBoxEmpty_b4jwc")
+Button/styles/hover = SubResource("StyleBoxEmpty_b4jwc")
+Button/styles/normal = SubResource("StyleBoxEmpty_b4jwc")
+Button/styles/pressed = SubResource("StyleBoxEmpty_b4jwc")
+
+[node name="Item" type="MarginContainer" node_paths=PackedStringArray("preview", "play", "pause", "open_button", "folder_button", "name_text", "type_text", "license_text", "tags_parent")]
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 script = ExtResource("1_1r5sf")
 preview = NodePath("VBoxContainer/Picture/Preview/TextureRect")
+play = NodePath("VBoxContainer/Picture/Preview/PlayButton")
+pause = NodePath("VBoxContainer/Picture/Preview/PauseButton")
 open_button = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/OpenFolder")
 folder_button = NodePath("VBoxContainer/Info/VBoxContainer/TopBar/Folder")
 name_text = NodePath("VBoxContainer/Info/VBoxContainer/MiddleBar/Name")
@@ -51,6 +64,44 @@ mouse_filter = 2
 texture = ExtResource("1_rfxtr")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/Picture/Preview"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -52.0
+offset_right = 52.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_140pa")
+icon = ExtResource("4_xfwvl")
+icon_alignment = 1
+expand_icon = true
+
+[node name="PauseButton" type="Button" parent="VBoxContainer/Picture/Preview"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -52.0
+offset_right = 52.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_140pa")
+icon = ExtResource("5_lbgcp")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Info" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -108,6 +159,8 @@ layout_mode = 2
 show_remove_button = false
 
 [connection signal="pressed" from="VBoxContainer/Picture/Preview" to="." method="_on_preview_pressed"]
+[connection signal="pressed" from="VBoxContainer/Picture/Preview/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Picture/Preview/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Info/VBoxContainer/TopBar/OpenFolder" to="." method="_on_open_folder_pressed"]
 [connection signal="pressed" from="VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer/Type" to="." method="_on_type_pressed"]
 [connection signal="pressed" from="VBoxContainer/Info/VBoxContainer/TopBar/HBoxContainer/License" to="." method="_on_license_pressed"]

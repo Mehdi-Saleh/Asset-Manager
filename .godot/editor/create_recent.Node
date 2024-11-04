@@ -1,6 +1,8 @@
+Button
+CheckButton
+TextureButton
 Window
 SubViewport
-Button
 MarginContainer
 Camera3D
 MeshInstance3D
@@ -10,6 +12,3 @@ Label
 HBoxContainer
 LineEdit
 TagItem
-Panel
-Control
-PanelContainer

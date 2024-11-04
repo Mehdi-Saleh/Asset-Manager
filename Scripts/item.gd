@@ -3,6 +3,8 @@ extends Control
 
 
 @export var preview : TextureRect
+@export var play : Button
+@export var pause : Button
 @export var open_button : Button
 @export var folder_button : Button
 @export var name_text : Label
@@ -58,15 +60,24 @@ func initialize( item_id:int, name:StringName, file_name:StringName, type:String
 	type_text.text = type;
 	license_text.text = license;
 	load_thumbnail()	
+	if type != "Audio":
+		play.hide()
+		pause.hide()
+	else:
+		play.show()
+		#pause.show()
 	
 	
-# TODO thumbnail generation
 ## Loads thumbnail from pic_location.
 func load_thumbnail():
 	if pic_location == "DEFAULT": 
 		preview.texture = ImageTexture.create_from_image( default_pic )
 	else:
 		preview.texture = ImageTexture.create_from_image( Image.load_from_file( pic_location ) )
+		
+
+func play_audio():
+	pass
 
 
 
@@ -86,3 +97,13 @@ func _on_type_pressed():
 func _on_license_pressed():
 	SignalBus.receive_signal( "show_items", { "items" : DatabaseManager.get_items_by_license( license ),
 	"new_search_text" : ItemsManager.COMMAND_LICENSE + license } )
+
+
+func _on_play_button_pressed():
+	play.hide()
+	pause.show()
+
+
+func _on_pause_button_pressed():
+	play.show()
+	pause.hide()
