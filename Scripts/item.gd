@@ -35,7 +35,28 @@ func initialize( item_id:int, name:StringName, file_name:StringName, type:String
 	self.pic_location = pic_location
 	self.type = type
 	self.license = license
+	
+	update_preview()
 
+
+func initialize_with_id( item_id : int ) -> void:
+	self.item_id = item_id
+	rinitialize_with_last_id()
+
+
+func rinitialize_with_last_id():
+	var item := DatabaseManager.get_item_by_id( item_id );
+	name_str = item["name"]
+	file_name = item["real_name"]
+	location = item["location"]
+	pic_location = item["pic_location"]
+	type = item["type"]
+	license = item["license"]
+	
+	update_preview()
+
+
+func update_preview():
 	# TODO needs optimization
 	var tag_items : Array = tags_parent.get_children()
 	var tags : Array = DatabaseManager.get_tags_by_id( item_id )

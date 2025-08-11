@@ -15,6 +15,7 @@ const LOAD_MORE_ON_SCROLL_VALUE := 0.9
 
 var items_active : Array[Item]
 var items_inactive : Array[Item]
+var item_id_to_item : Dictionary
 
 var last_query : Array[Dictionary]
 var last_loaded_from_query : int = -1
@@ -60,11 +61,13 @@ func instanciate_item( item_id:int, name:StringName, file_name:StringName, type:
 	new_item.initialize( item_id, name, file_name, type, license, location, pic_location )
 	new_item.show()
 	items_active.append( new_item )
+	item_id_to_item[new_item.item_id] = new_item
 	return new_item
 
 
 ## Disables the given item objects and adds it back to the pool.
 func remove_item( item : Item ):
+	item_id_to_item.erase( item.item_id )
 	items_active.remove_at( item.item_id )
 	items_inactive.append( item )
 	item.hide()
@@ -90,6 +93,7 @@ func _load_more_items() -> bool:
 
 ## Disables all active item objects and adds them back to the pool.
 func clear_items():
+	item_id_to_item.clear()
 	last_query.clear()
 	last_loaded_from_query = -1
 	for i in range( items_active.size()-1, -1, -1):
@@ -120,6 +124,14 @@ func reload_items( query : Array[Dictionary] ):
 #func _on_tab_container_tab_selected(tab):
 	#if tab == 0:
 		#update_items()
+
+
+func reinitialize_item( item_id : int ) -> void:
+	if not item_id_to_item.has( item_id ):
+		return
+	var item : Item = item_id_to_item[item_id]
+	item.initialize_with_id( item_id )
+	pass
 
 
 func search():

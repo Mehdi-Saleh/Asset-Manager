@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/mehdi/My Projects/Asset Manager/Asset Manager.csproj": {}
+    "/home/mehdi/MyProjects/Asset-Manager/Asset Manager.csproj": {}
   },
   "projects": {
-    "/home/mehdi/My Projects/Asset Manager/Asset Manager.csproj": {
+    "/home/mehdi/MyProjects/Asset-Manager/Asset Manager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mehdi/My Projects/Asset Manager/Asset Manager.csproj",
+        "projectUniqueName": "/home/mehdi/MyProjects/Asset-Manager/Asset Manager.csproj",
         "projectName": "Asset Manager",
-        "projectPath": "/home/mehdi/My Projects/Asset Manager/Asset Manager.csproj",
+        "projectPath": "/home/mehdi/MyProjects/Asset-Manager/Asset Manager.csproj",
         "packagesPath": "/home/mehdi/.nuget/packages/",
-        "outputPath": "/home/mehdi/My Projects/Asset Manager/.godot/mono/temp/obj/",
+        "outputPath": "/home/mehdi/MyProjects/Asset-Manager/.godot/mono/temp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/mehdi/.nuget/NuGet/NuGet.Config"
@@ -70,11 +70,11 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.30, 6.0.30]"
+              "version": "[6.0.36, 6.0.36]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.30, 6.0.30]"
+              "version": "[6.0.36, 6.0.36]"
             }
           ],
           "frameworkReferences": {
@@ -82,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/mehdi/.dotnet/sdk/8.0.300/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.413/RuntimeIdentifierGraph.json"
         }
       }
     }

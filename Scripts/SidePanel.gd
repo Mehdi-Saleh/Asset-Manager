@@ -93,6 +93,10 @@ func remove_item():
 	SignalBus.receive_signal( "reload_items" )
 
 
+func update_current_items_card():
+	SignalBus.receive_signal( "reinitialize_item", { "item_id":current_item["id"] } )
+
+
 func _on_close_side_panel_pressed():
 	close_panel()
 
@@ -116,10 +120,12 @@ func _on_license_pressed():
 
 
 func on_label_changed( whats_the_label_for : StringName, new_value : String ):
+	current_item[ whats_the_label_for ] = new_value
 	var new_item := current_item.duplicate()
-	new_item[ whats_the_label_for ] = new_value
 	DatabaseManager.update_item( current_item[ "id" ], new_item )
+	update_current_items_card()
 
 
 func _on_remove_button_pressed():
 	remove_item()
+

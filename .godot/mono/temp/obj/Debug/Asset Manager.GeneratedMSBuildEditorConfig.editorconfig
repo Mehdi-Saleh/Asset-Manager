@@ -1,6 +1,6 @@
 is_global = true
 build_property.GodotDisabledSourceGenerators = 
-build_property.GodotProjectDir = /home/mehdi/My Projects/Asset Manager/
+build_property.GodotProjectDir = /home/mehdi/MyProjects/Asset-Manager/
 build_property.GodotProjectDirBase64 = 
 build_property.GodotSourceGenerators = 
 build_property.IsGodotToolsProject = 
@@ -13,6 +13,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AssetManager
-build_property.ProjectDir = /home/mehdi/My Projects/Asset Manager/
+build_property.ProjectDir = /home/mehdi/MyProjects/Asset-Manager/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

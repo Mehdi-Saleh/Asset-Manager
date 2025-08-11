@@ -304,6 +304,7 @@ script = SubResource("GDScript_5ttg3")
 [connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/AddTag" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_add_tag_pressed"]
 [connection signal="focus_exited" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_tag_line_edit_focus_exited"]
 [connection signal="text_submitted" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags" method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Tags/TagLineEdit" to="SidePanel" method="update_current_items_card" unbinds=1]
 [connection signal="pressed" from="SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Remove/RemoveButton" to="SidePanel" method="_on_remove_button_pressed"]
 [connection signal="pressed" from="SidePanel/CloseSidePanel" to="SidePanel/CloseSidePanel" method="_on_pressed"]
 [connection signal="pressed" from="OpenSidePanel" to="OpenSidePanel" method="_on_pressed"]

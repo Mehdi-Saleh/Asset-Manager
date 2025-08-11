@@ -25,6 +25,8 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 				items_manager.search_text.text = arguements[ "new_search_text" ]
 		"reload_items":
 			items_manager.reload_items( DatabaseManager.redo_search() )
+		"reinitialize_item":
+			items_manager.reinitialize_item( arguements["item_id"] )
 		
 		# Side Panel
 		"open_side_panel":
@@ -37,8 +39,10 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 			items_manager.set_should_update()
 			side_panel.show_item( arguements[ "id" ] )
 		"add_tag_side_panel":
-			DatabaseManager.add_tag( arguements[ "tag" ], side_panel.get_current_item_id() )
+			var item_id : int = side_panel.get_current_item_id()
+			DatabaseManager.add_tag( arguements[ "tag" ], item_id )
 			side_panel.show_item( side_panel.get_current_item_id() )
+			#items_manager.reinitialize_item( item_id )
 			
 		# Import Tab
 		"generate_new_database":
@@ -48,4 +52,4 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 		
 		# Default
 		_:
-			print( "No such signal is available!" )
+			assert( "No such signal is available: " + signal_name )

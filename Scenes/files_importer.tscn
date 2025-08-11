@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://rklxtaewid7k"]
+[gd_scene load_steps=3 format=3 uid="uid://rklxtaewid7k"]
 
 [ext_resource type="Script" path="res://Scripts/FileImporter.gd" id="1_a3yb3"]
+[ext_resource type="Theme" uid="uid://dkytkyn8unxl5" path="res://import_tab.tres" id="2_ptm5t"]
 
 [node name="FileSelector" type="Node"]
 script = ExtResource("1_a3yb3")
@@ -14,11 +15,11 @@ package_formats = PackedStringArray("zip", "rar", "pkg")
 
 [node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a Directory"
-initial_position = 1
-size = Vector2i(678, 159)
+initial_position = 2
+size = Vector2i(918, 484)
+theme = ExtResource("2_ptm5t")
 ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
-use_native_dialog = true
 
 [connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]
