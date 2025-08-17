@@ -73,6 +73,21 @@ func remove_item( item : Item ):
 	item.hide()
 
 
+func select_item( item_id : int ):
+	if not item_id_to_item.has( item_id ):
+		return
+	var item : Item = item_id_to_item[item_id]
+	item.set_selected( true )
+
+
+func deselect_item( item_id : int ):
+	
+	if not item_id_to_item.has( item_id ):
+		return
+	var item : Item = item_id_to_item[item_id]
+	item.set_selected( false )
+
+
 ## Instanciates more items. Used to prevent instanciating everything at once! 
 ## Returns true if any items were actually instanciated
 func _load_more_items() -> bool:
@@ -182,14 +197,12 @@ func get_scroll_value() -> float:
 
 
 func set_scroll_value( value : float ) -> void:
-	print( "set ", value )
 	var max_scroll_value : float = max( 0.0, float( items_parent.get_rect().size.y - items_scroll_container.get_rect().size.y ))
 	items_scroll_container.scroll_vertical = int( min( value, 1.0 ) * max_scroll_value )
 
 
 ## Change scroll value an container size change to always stay on the same item.
 func update_scroll_relative():
-	print(-1)
 	var line_count := items_parent.get_line_count()
 	#val last_visible_item : int = 
 	#if last_line_count != 0 and last_line_count != line_count:

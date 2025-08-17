@@ -35,13 +35,18 @@ func open_panel():
 func close_panel():
 	hide()
 	#open_panel_button.show()
+	if current_item.has( "id" ):
+		SignalBus.receive_signal( "deselect_item", { "item_id":current_item["id"] } )
 	main_split_container.dragger_visibility = SplitContainer.DRAGGER_HIDDEN
 
 
 func show_item( item_id : int):
 	open_panel()
 	
+	if current_item.has( "id" ):
+		SignalBus.receive_signal( "deselect_item", { "item_id":current_item["id"] } )
 	current_item = DatabaseManager.get_item_by_id( item_id )
+	SignalBus.receive_signal( "select_item", { "item_id":current_item["id"] } )
 	
 	# Set preview image
 	if current_item[ "pic_location" ] == "DEFAULT":

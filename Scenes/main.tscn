@@ -39,10 +39,10 @@ theme_override_styles/tab_selected = SubResource("StyleBoxFlat_d7f2q")
 theme_override_styles/panel = SubResource("StyleBoxFlat_aud2n")
 script = SubResource("GDScript_af6v1")
 
-[node name="BrowseTab" parent="TabContainer" instance=ExtResource("3_vxght")]
+[node name="Browse" parent="TabContainer" instance=ExtResource("3_vxght")]
 layout_mode = 2
 
-[node name="ImportTab" parent="TabContainer" instance=ExtResource("4_s0603")]
+[node name="Import" parent="TabContainer" instance=ExtResource("4_s0603")]
 visible = false
 layout_mode = 2
 

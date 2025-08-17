@@ -27,6 +27,10 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 			items_manager.reload_items( DatabaseManager.redo_search() )
 		"reinitialize_item":
 			items_manager.reinitialize_item( arguements["item_id"] )
+		"select_item":
+			items_manager.select_item( arguements["item_id"] )
+		"deselect_item":
+			items_manager.deselect_item( arguements["item_id"] )
 		
 		# Side Panel
 		"open_side_panel":

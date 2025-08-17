@@ -12,6 +12,7 @@ extends Control
 @export var license_text : Button
 @export var tags_parent : Node
 @export var tag_scene : PackedScene
+@export var highlight : Control
 
 @export var default_pic : Image
 
@@ -36,11 +37,13 @@ func initialize( item_id:int, name:StringName, file_name:StringName, type:String
 	self.type = type
 	self.license = license
 	
+	set_selected( false )
 	update_preview()
 
 
 func initialize_with_id( item_id : int ) -> void:
 	self.item_id = item_id
+	set_selected( false )
 	rinitialize_with_last_id()
 
 
@@ -100,6 +103,12 @@ func load_thumbnail():
 func play_audio():
 	pass
 
+
+func set_selected( selected : bool ):
+	if selected:
+		highlight.show()
+	else:
+		highlight.hide()
 
 
 func _on_preview_pressed():
