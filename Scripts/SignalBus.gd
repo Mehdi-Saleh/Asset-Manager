@@ -34,13 +34,16 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 		
 		# Side Panel
 		"open_side_panel":
-			items_manager.set_should_update()
+			if not side_panel.visible:
+				items_manager.set_should_update()
 			side_panel.open_panel()
 		"close_side_panel":
-			items_manager.set_should_update()
+			if side_panel.visible:
+				items_manager.set_should_update()
 			side_panel.close_panel()
 		"show_in_side_panel":
-			items_manager.set_should_update()
+			if not side_panel.visible:
+				items_manager.set_should_update()
 			side_panel.show_item( arguements[ "id" ] )
 		"add_tag_side_panel":
 			var item_id : int = side_panel.get_current_item_id()
