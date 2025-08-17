@@ -11,6 +11,9 @@ export_presets.cfg
 .mono/
 data_*/
 
+# Code editors and IDEs ignores
+.vscode/
+
 # Database ignores
 *.db
 .thumbnails/
