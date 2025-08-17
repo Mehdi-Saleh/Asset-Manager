@@ -132,6 +132,7 @@ script = SubResource("GDScript_lvsl8")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+alignment = 1
 
 [node name="Item" parent="VBoxContainer/ScrollContainer/Items" instance=ExtResource("3_7xff7")]
 layout_mode = 2

@@ -15,14 +15,14 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 			items_manager.update_items( DatabaseManager.get_items_all() )
 		"search_tags":
 			var new_search_text : String = items_manager.COMMAND_TAG
-			for tag in arguements[ "tags" ]:
+			for tag in arguements["tags"]:
 				new_search_text += tag
 			items_manager.search_text.text = new_search_text
-			items_manager.update_items( DatabaseManager.get_items_by_tag( arguements[ "tags" ] ) )
+			items_manager.update_items( DatabaseManager.get_items_by_tag( arguements["tags"] ) )
 		"show_items":
-			items_manager.update_items( arguements[ "items" ] )
+			items_manager.update_items( arguements["items"] )
 			if arguements.has( "new_search_text" ):
-				items_manager.search_text.text = arguements[ "new_search_text" ]
+				items_manager.search_text.text = arguements["new_search_text"]
 		"reload_items":
 			items_manager.reload_items( DatabaseManager.redo_search() )
 		"reinitialize_item":
@@ -42,12 +42,13 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 				items_manager.set_should_update()
 			side_panel.close_panel()
 		"show_in_side_panel":
-			if not side_panel.visible:
-				items_manager.set_should_update()
-			side_panel.show_item( arguements[ "id" ] )
+			#if not side_panel.visible:
+				#items_manager.set_should_update()
+			items_manager.scroll_to_item( arguements["id"] )
+			side_panel.show_item( arguements["id"] )
 		"add_tag_side_panel":
 			var item_id : int = side_panel.get_current_item_id()
-			DatabaseManager.add_tag( arguements[ "tag" ], item_id )
+			DatabaseManager.add_tag( arguements["tag"], item_id )
 			side_panel.show_item( side_panel.get_current_item_id() )
 			#items_manager.reinitialize_item( item_id )
 			

@@ -213,11 +213,40 @@ func update_scroll_relative():
 	#last_line_count = line_count
 
 
+func scroll_to_item( item_id : int ):
+	if not item_id_to_item.has( item_id ):
+		return
+	var line_count := items_parent.get_line_count()
+	var items_per_line : int = roundf( float( items_parent.get_child_count() ) / line_count )
+	var item_index := _get_item_id_to_list_index( item_id )
+	var item_line := item_index / ( items_parent.get_child_count() / line_count )
+	print ( "line count: " + str( line_count ) )
+	print ( "item line: " + str( item_line ) )
+	print ( "items per line: " + str( items_per_line ) )
+	print ( "item index: " + str( item_index ) )
+	print( str( get_scroll_value() ) + " to " + str( float( item_line ) / ( float( line_count ) ) ) )
+	scroll_to_line( item_line )
+
+
+func scroll_to_line( line : int ):
+	var line_count := items_parent.get_line_count()
+	var value := ( float( line ) ) / ( float( line_count ) )
+	value += ( float( line ) ) / ( float( line_count ) ) * 2.0 / float( line_count )
+	set_scroll_value( value )
+
+
 func set_should_update():
 	#last_line_count = items_parent.get_line_count()
 	#last_scroll_value = scroll_value
 	first_visible_item = items_parent.get_child_count() * get_scroll_value()
 	should_update = SHOULD_UPDATE_AFTER
+
+
+func _get_item_id_to_list_index( item_id : int ) -> int:
+	if not item_id_to_item.has( item_id ):
+		return -1
+	var item : Item = item_id_to_item[item_id]
+	return items_active.find( item )
 
 
 func _on_search_button_pressed():

@@ -28,6 +28,7 @@ Button/styles/normal = SubResource("StyleBoxEmpty_b4jwc")
 Button/styles/pressed = SubResource("StyleBoxEmpty_b4jwc")
 
 [node name="Item" type="MarginContainer" node_paths=PackedStringArray("preview", "play", "pause", "open_button", "folder_button", "name_text", "type_text", "license_text", "tags_parent", "highlight")]
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
