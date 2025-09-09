@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cu3k4xm46mqj8"]
+[gd_scene load_steps=17 format=3 uid="uid://cu3k4xm46mqj8"]
 
 [ext_resource type="Theme" uid="uid://cugx6eklcnakn" path="res://Scenes/MainTheme.tres" id="1_buci7"]
 [ext_resource type="Texture2D" uid="uid://day1kjlh00lob" path="res://icon.svg" id="2_mddpf"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://lkeeoajpujbv" path="res://Scenes/item.tscn" id="3_7xff7"]
 [ext_resource type="PackedScene" uid="uid://dopcw51dsysn0" path="res://Scenes/hide_parent_on_ready.tscn" id="4_7tcya"]
 [ext_resource type="Script" path="res://Scripts/SidePanel.gd" id="5_ocswk"]
+[ext_resource type="Script" path="res://Scenes/ItemsCardResizer.gd" id="5_qhtmi"]
 [ext_resource type="PackedScene" uid="uid://c76mmn8b6ppi1" path="res://Scenes/tag.tscn" id="6_4ewky"]
 [ext_resource type="Texture2D" uid="uid://cca3if7yufh3t" path="res://Graphics/Delta01__#Delta01_white_RIGHT__48p.png" id="8_kmmnn"]
 [ext_resource type="PackedScene" uid="uid://dscteyb1pwi2l" path="res://Scenes/editable_label.tscn" id="8_mce1d"]
@@ -128,11 +129,12 @@ follow_focus = true
 horizontal_scroll_mode = 0
 script = SubResource("GDScript_lvsl8")
 
-[node name="Items" type="HFlowContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="Items" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 1
+columns = 2
+script = ExtResource("5_qhtmi")
 
 [node name="Item" parent="VBoxContainer/ScrollContainer/Items" instance=ExtResource("3_7xff7")]
 layout_mode = 2

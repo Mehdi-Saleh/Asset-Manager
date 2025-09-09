@@ -4,6 +4,7 @@ extends Node
 var file_importer : FileImporter
 var items_manager : ItemsManager
 var side_panel : SidePanel
+var items_card_resizer : ItemsCardResizer
 
 
 
@@ -24,6 +25,7 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 			if arguements.has( "new_search_text" ):
 				items_manager.search_text.text = arguements["new_search_text"]
 		"reload_items":
+			items_card_resizer.resize_items()
 			items_manager.reload_items( DatabaseManager.redo_search() )
 		"reinitialize_item":
 			items_manager.reinitialize_item( arguements["item_id"] )
@@ -31,6 +33,8 @@ func receive_signal( signal_name : StringName, arguements : Dictionary = Diction
 			items_manager.select_item( arguements["item_id"] )
 		"deselect_item":
 			items_manager.deselect_item( arguements["item_id"] )
+		"update_card_sizes":
+			items_card_resizer.resize_items()
 		
 		# Side Panel
 		"open_side_panel":

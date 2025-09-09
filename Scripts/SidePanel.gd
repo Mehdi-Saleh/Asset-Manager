@@ -30,6 +30,7 @@ func open_panel():
 	show()
 	#open_panel_button.hide()
 	main_split_container.dragger_visibility = SplitContainer.DRAGGER_VISIBLE
+	SignalBus.receive_signal( "update_card_sizes" )
 
 
 func close_panel():
@@ -38,6 +39,7 @@ func close_panel():
 	if current_item.has( "id" ):
 		SignalBus.receive_signal( "deselect_item", { "item_id":current_item["id"] } )
 	main_split_container.dragger_visibility = SplitContainer.DRAGGER_HIDDEN
+	SignalBus.receive_signal( "update_card_sizes" )
 
 
 func show_item( item_id : int):

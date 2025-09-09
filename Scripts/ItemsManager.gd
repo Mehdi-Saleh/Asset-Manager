@@ -9,7 +9,7 @@ const NUM_OF_ITEMS_TO_LOAD := 100
 const LOAD_MORE_ON_SCROLL_VALUE := 0.9
 
 @export var item_scene : PackedScene
-@export var items_parent : FlowContainer
+@export var items_parent : GridContainer
 @export var items_scroll_container : ScrollContainer
 @export var search_text : LineEdit
 
@@ -203,7 +203,7 @@ func set_scroll_value( value : float ) -> void:
 
 ## Change scroll value an container size change to always stay on the same item.
 func update_scroll_relative():
-	var line_count := items_parent.get_line_count()
+	var line_count := get_lines_count()
 	#val last_visible_item : int = 
 	#if last_line_count != 0 and last_line_count != line_count:
 	set_scroll_value( float( first_visible_item ) / ( float( items_parent.get_child_count() ) ) )
@@ -216,7 +216,7 @@ func update_scroll_relative():
 func scroll_to_item( item_id : int ):
 	if not item_id_to_item.has( item_id ):
 		return
-	var line_count := items_parent.get_line_count()
+	var line_count := get_lines_count()
 	var items_per_line : int = roundf( float( items_parent.get_child_count() ) / line_count )
 	var item_index := _get_item_id_to_list_index( item_id )
 	var item_line := item_index / ( items_parent.get_child_count() / line_count )
@@ -229,7 +229,7 @@ func scroll_to_item( item_id : int ):
 
 
 func scroll_to_line( line : int ):
-	var line_count := items_parent.get_line_count()
+	var line_count := get_lines_count()
 	var value := ( float( line ) ) / ( float( line_count ) )
 	value += ( float( line ) ) / ( float( line_count ) ) * 2.0 / float( line_count )
 	set_scroll_value( value )
@@ -240,6 +240,10 @@ func set_should_update():
 	#last_scroll_value = scroll_value
 	first_visible_item = items_parent.get_child_count() * get_scroll_value()
 	should_update = SHOULD_UPDATE_AFTER
+
+
+func get_lines_count() -> int:
+	return items_parent.get_child_count() / items_parent.columns
 
 
 func _get_item_id_to_list_index( item_id : int ) -> int:
